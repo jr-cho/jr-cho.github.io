@@ -1,14 +1,14 @@
 [
+    {
+    "title": "Embedded Rust: Building IoT Projects with Raspberry Pi and ESP32",
+    "date": "2025-07-01",
+    "description": "The embedded systems landscape has been traditionally dominated by C and C++, but Rust has emerged as a compelling alternative that promises memory safety without sacrificing performance. This article explores how to leverage Rust's strengths in embedded development using a Raspberry Pi as your development platform and an ESP32 microcontroller as your deployment target.",
+    "filename": "Embedded Rust.md"
+  },
   {
     "title": "Embedded C: Building IoT Projects with Raspberry Pi and ESP32",
     "date": "2025-07-01",
     "description": "Embedded C programming remains the backbone of the embedded systems world, powering everything from simple microcontrollers to complex IoT devices. This article explores how to leverage C's strengths in embedded development using a Raspberry Pi as your development platform and an ESP32 microcontroller as your deployment target.",
     "filename": "Embedded C.md"
-  },
-  {
-    "title": "Embedded Rust: Building IoT Projects with Raspberry Pi and ESP32",
-    "date": "2025-07-01",
-    "description": "The embedded systems landscape has been traditionally dominated by C and C++, but Rust has emerged as a compelling alternative that promises memory safety without sacrificing performance. This article explores how to leverage Rust's strengths in embedded development using a Raspberry Pi as your development platform and an ESP32 microcontroller as your deployment target.",
-    "filename": "Embedded Rust.md"
   }
 ]
