@@ -1,457 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Joshua Gottus - Systems Architect</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Joshua Gottus</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Fonts -->
-    <!-- Inter font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Font Awesome CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
+    <!-- Martian Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
     <style>
       body {
-        font-family: "Inter", sans-serif;
+        font-family: 'Martian Mono', monospace;
+        margin: 0;
+        padding: 0;
+        background-color: #0f0f11;
       }
 
-      .modal-overlay {
+      canvas#bgCanvas {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-      }
-      .modal-content {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 0.75rem;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        max-width: 90%;
-        max-height: 90%;
-        overflow-y: auto;
-        position: relative;
-      }
-      .close-button {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: #4a5568;
+        z-index: -1;
       }
 
-      .prose h1 {
-        font-size: 2.25rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-      .prose h2 {
-        font-size: 1.75rem;
-        font-weight: bold;
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-      }
-      .prose p {
-        margin-bottom: 1rem;
-        line-height: 1.6;
-      }
-      .prose ul {
-        list-style: disc;
-        padding-left: 1.25rem;
-        margin-bottom: 1rem;
-      }
-      .prose ol {
-        list-style: decimal;
-        padding-left: 1.25rem;
-        margin-bottom: 1rem;
-      }
-      .prose li {
-        margin-bottom: 0.5rem;
-      }
-      .prose a {
-        color: #3b82f6;
-        text-decoration: underline;
-      }
-      .prose pre {
-        background-color: #1e293b;
-        color: #e2e8f0;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        overflow-x: auto;
-        font-family: "Roboto Mono", monospace;
-        font-size: 0.875rem;
-        line-height: 1.5;
-        border: none;
-        box-shadow: none;
-        text-shadow: none;
+      .gradient-text {
+        background: linear-gradient(90deg, #a855f7 0%, #fb923c 85%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
-      .prose pre code {
-        text-shadow: none !important;
-        color: inherit;
-        background: none;
-        -webkit-font-smoothing: antialiased;
-        font-weight: normal;
-        border: none;
+      .gradient-text-header {
+        background: linear-gradient(90deg, #a855f7 0%, #d946ef 20%, #f97316 60%, #fb923c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
-      .prose code {
-        background-color: #f1f5f9;
-        color: #1e293b;
-        font-family: "Roboto Mono", monospace;
-        padding: 0.2em 0.4em;
-        border-radius: 0.25rem;
-        font-size: 0.875rem;
+      .gradient-about {
+        background: linear-gradient(90deg, #f97316 0%, #d946ef 20%, #a855f7 100% );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .gradient-experience {
+        background: linear-gradient(90deg, #a855f7 0%, #d946ef 5%, #f97316 60%, #fb923c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .gradient-education {
+        background: linear-gradient(90deg, #f97316 0%, #d946ef 20%, #a855f7 100% );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
     </style>
   </head>
-  <body class="bg-gray-50">
-    <div
-      class="max-w-4xl mx-auto p-8 bg-white min-h-screen rounded-lg shadow-md my-8"
-    >
-      <!-- Header Section -->
-      <div class="flex flex-col md:flex-row justify-between items-start mb-12">
-        <div class="flex-1 mb-8 md:mb-0">
-          <h1
-            class="text-4xl font-bold text-gray-900 mb-2 inline-block border-b-4 border-blue-600 pb-1"
-          >
-            Joshua Gottus
-          </h1>
+  <body class="text-white">
+    <canvas id="bgCanvas"></canvas>
 
-          <p class="text-lg text-gray-600 mb-2 max-w-md">
-            Systems Architect · Computer Science
-          </p>
-          <p class="text-sm text-gray-500 mb-6">Florida, USA, EST</p>
-
-          <!-- Contact Icons -->
-          <div class="flex gap-4">
-            <a
-              href="mailto:joshua.gottus@proton.me"
-              class="p-2 text-blue-500 hover:text-gray-900 transition-colors rounded-full hover:bg-blue-100"
-            >
-              <!-- Mail icon (Font Awesome) -->
-              <i class="fa-solid fa-envelope text-xl"></i>
-            </a>
-            <a
-              href="https://github.com/jr-cho"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="p-2 text-blue-500 hover:text-gray-900 transition-colors rounded-full hover:bg-blue-100"
-            >
-              <!-- Github icon (Font Awesome) -->
-              <i class="fa-brands fa-github text-xl"></i>
-            </a>
-            <a
-              href="https://linkedin.com/in/jr-cho"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="p-2 text-blue-500 hover:text-gray-900 transition-colors rounded-full hover:bg-blue-100"
-            >
-              <!-- Linkedin icon (Font Awesome) -->
-              <i class="fa-brands fa-linkedin text-xl"></i>
-            </a>
-            <a
-              href="https://x.com/jr_cho_"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="p-2 text-blue-500 hover:text-gray-900 transition-colors rounded-full hover:bg-blue-100"
-            >
-              <!-- Twitter/X icon (Font Awesome) -->
-              <i class="fa-brands fa-x-twitter text-xl"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Profile Image -->
-        <div class="ml-0 md:ml-8 flex-shrink-0">
-          <img
-            src="https://github.com/jr-cho.png"
-            alt="Joshua Gottus' Profile"
-            class="w-32 h-32 rounded-2xl object-cover shadow-lg"
-            onerror="this.onerror=null;this.src='https://placehold.co/128x128/e0e0e0/555555?text=Profile';"
-          />
-        </div>
-      </div>
-
-      <!-- About Section -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold text-grey-700 mb-4">About</h2>
-        <p class="text-gray-700 leading-relaxed">
-          I'm a <b>Computer Science</b> student passionate about designing and
-          building efficient, scalable, and secure server systems. I specialize
-          in crafting both physical and virtual server architectures, developing
-          robust backend APIs, and automating infrastructure using a powerful
-          toolkit that includes <b>Rust, Python, C, Bash, and Express.js</b>. My
-          projects span hardware-based systems like bare metal setups to
-          software-driven solutions like containerized environments, all
-          optimized for performance and security. I also enjoy integrating
-          lightweight frontends to deliver seamless UI endpoints, bridging the
-          gap between backend power and user experience.
+    <!-- Hero Card -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-4">
+      <div class="bg-[#1a1a1d] border border-[#2a2a2d] shadow-xl rounded-3xl p-8 max-w-md w-full backdrop-blur-md">
+        <img src="https://github.com/jr-cho.png" alt="Profile" onerror="this.src='https://placehold.co/96x96';" class="w-20 h-20 mx-auto mb-6 rounded-full shadow-md border-2 border-[#4a4a4d] p-1" />
+        <p class="text-xs tracking-widest mb-6 font-light px-4 py-1 gradient-text">
+          SYSTEMS ARCHITECT · BACKEND ENGINEER
         </p>
-      </section>
+        <h1 class="text-3xl sm:text-4xl font-light text-white-100 px-4 py-1">
+          Joshua Gottus
+        </h1>
+        <p class="mt-3 text-gray-400 text-sm sm:text-base font-light px-4 py-1">Bridging technology with physical infrastructure.</p>
 
-      <!-- Work Experience Section -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold text-grey-700 mb-4">Work Experience</h2>
-
-        <div class="space-y-8">
-          <!-- Experience 1 -->
-          <div>
-            <div
-              class="flex flex-col sm:flex-row justify-between items-start mb-2"
-            >
-              <div>
-                <h3 class="text-xl font-semibold text-gray-900">
-                  IT Help Desk Student Worker
-                </h3>
-                <p class="text-gray-600">
-                  Florida Polytechnic University · Part-time
-                </p>
-              </div>
-              <div class="text-left sm:text-right mt-2 sm:mt-0">
-                <span
-                  class="inline-block px-2 py-1 text-xs bg-blue-100 text-gray-600 rounded-md mb-1"
-                  >In Person</span
-                >
-                <p class="text-sm text-gray-500">2025 - Present</p>
-              </div>
-            </div>
-            <p class="text-gray-700 text-sm leading-relaxed">
-              At Florida Polytechnic University, I'm part of the Help Desk team,
-              where we collectively address a diverse array of technical
-              challenges for students, faculty, and staff. My role involves
-              collaborating with my colleagues to quickly diagnose and resolve
-              software, hardware, and network issues often under tight
-              deadlines. Together, we deliver efficient solutions that minimize
-              disruptions and keep the university running smoothly.
-            </p>
-          </div>
-
-          <!-- Experience 2 -->
-          <div>
-            <div
-              class="flex flex-col sm:flex-row justify-between items-start mb-2"
-            >
-              <div>
-                <h3 class="text-xl font-semibold text-gray-900">
-                  IT Help Desk Full-Time Intern
-                </h3>
-                <p class="text-gray-600">
-                  Highlands Clerk of Courts · Full-time
-                </p>
-              </div>
-              <div class="text-left sm:text-right mt-2 sm:mt-0">
-                <span
-                  class="inline-block px-2 py-1 text-xs bg-blue-100 text-gray-600 rounded-md mb-1"
-                  >In Person</span
-                >
-                <p class="text-sm text-gray-500">2023 - 2023</p>
-              </div>
-            </div>
-            <p class="text-gray-700 text-sm leading-relaxed">
-              During my time at the Highlands County Clerk of Courts, I worked
-              at the help desk, where I tackled a diverse array of technical
-              challenges for end-users. My role involved quickly diagnosing and
-              resolving software, hardware, and network issues often under tight
-              deadlines delivering efficient solutions that minimized
-              disruptions. Beyond the help desk, I collaborated with the
-              cybersecurity team to design and configure secure servers,
-              ensuring adherence to industry standards and strengthening the
-              organization’s security framework. As well I created an IT website
-              using Microsoft Sharepoint. I interviewed each member of the IT
-              team to ask what would they like to see in the website. I was able
-              to take their ideas to make a well design and functional website.
-            </p>
-          </div>
+        <div class="mt-6">
+          <a href="mailto:joshua.gottus@proton.me" class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-400 to-purple-500 px-5 py-2 rounded-full shadow-md hover:opacity-90 transition font-normal">
+            Email <i class="fa-solid fa-envelope text-sm"></i>
+          </a>
         </div>
-      </section>
 
-      <!-- Education Section -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold text-grey-700 mb-4">Education</h2>
-        <div class="space-y-8">
-          <div>
-            <div
-              class="flex flex-col sm:flex-row justify-between items-start mb-2"
-            >
-              <div>
-                <h3 class="text-xl font-semibold text-gray-900">
-                  Florida Polytechnic University
-                </h3>
-                <p class="text-gray-600">
-                  Bachelor of Science - BS, Computer Science
-                </p>
-              </div>
-              <div class="text-left sm:text-right mt-2 sm:mt-0">
-                <p class="text-sm text-gray-500">2024 - 2027</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div
-              class="flex flex-col sm:flex-row justify-between items-start mb-2"
-            >
-              <div>
-                <h3 class="text-xl font-semibold text-gray-900">
-                  South Florida State College
-                </h3>
-                <p class="text-gray-600">Associates of Arts Degree - AA</p>
-              </div>
-              <div class="text-left sm:text-right mt-2 sm:mt-0">
-                <p class="text-sm text-gray-500">2022 - 2024</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Articles Section -->
-      <section>
-        <h2 class="text-2xl font-bold text-grey-700 mb-4">Articles</h2>
-        <div id="articles-list" class="space-y-6">
-          <p id="loading-articles" class="text-gray-500 text-center">
-            Loading articles...
-          </p>
-          <p id="no-articles" class="text-gray-500 text-center hidden">
-            No articles found.
-          </p>
-        </div>
-      </section>
-    </div>
-
-    <!-- Article Viewer Modal -->
-    <div id="articleModal" class="modal-overlay hidden">
-      <div class="modal-content">
-        <button id="closeArticleModal" class="close-button">&times;</button>
-        <h3
-          id="articleTitle"
-          class="text-3xl font-bold text-gray-900 mb-4"
-        ></h3>
-        <div id="articleContent" class="prose max-w-none">
-          <!-- Markdown content will be rendered here -->
+        <div class="flex justify-center space-x-4 mt-5 text-lg text-gray-400">
+          <a href="https://github.com/jr-cho" target="_blank" class="hover:text-white"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/jr-cho" target="_blank" class="hover:text-white"><i class="fab fa-linkedin"></i></a>
         </div>
       </div>
-    </div>
 
-    <!-- Marked.js for Markdown to HTML conversion -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+      <div class="mt-10 animate-bounce text-gray-500">
+        <a href="#about" aria-label="Scroll down">
+          <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="max-w-3xl mx-auto px-4 my-16 sm:my-24">
+      <h2 class="text-2xl font-bold gradient-about mb-4">About Me</h2>
+      <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+        I'm a <b>Computer Science</b> student passionate about designing and building efficient, scalable, and secure server systems. I specialize in crafting both physical and virtual server architectures, developing robust backend APIs, and automating infrastructure using <b>Rust, Python, C, Bash, and Express.js</b>. My projects span hardware-based systems like bare metal setups to containerized environments, all optimized for performance and security. I enjoy integrating lightweight frontends to bridge backend power with seamless UI.
+      </p>
+    </section>
+
+    <!-- Experience -->
+    <section class="max-w-3xl mx-auto px-4 my-16 sm:my-24">
+      <h2 class="text-2xl font-bold gradient-experience mb-4">Work Experience</h2>
+      <div class="space-y-6">
+        <div class="bg-[#1a1a1d] p-5 rounded-xl border border-gray-700 shadow-sm">
+          <h3 class="text-xl font-semibold">IT Help Desk Student Worker</h3>
+          <p class="text-sm text-gray-400 mb-1">Florida Polytechnic University · Part-time · 2025 - Present</p>
+          <p class="text-gray-300 text-sm">Supporting faculty and students with technical issues. Diagnosing and resolving hardware, software, and network problems efficiently while maintaining a high uptime environment.</p>
+        </div>
+
+        <div class="bg-[#1a1a1d] p-5 rounded-xl border border-gray-700 shadow-sm">
+          <h3 class="text-xl font-semibold">IT Help Desk Intern</h3>
+          <p class="text-sm text-gray-400 mb-1">Highlands Clerk of Courts · Full-time · 2023</p>
+          <p class="text-gray-300 text-sm">Delivered full-stack IT support while working closely with the cybersecurity team to configure secure servers. Designed the IT SharePoint website through user research and internal feedback.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="max-w-3xl mx-auto px-4 my-16 sm:my-24">
+      <h2 class="text-2xl font-bold gradient-education mb-4">Education</h2>
+      <div class="space-y-6">
+        <div class="bg-[#1a1a1d] p-5 rounded-xl border border-gray-700 shadow-sm">
+          <h3 class="text-xl font-semibold">Florida Polytechnic University</h3>
+          <p class="text-sm text-gray-400">Bachelor of Science - Computer Science · 2024–PRESENT</p>
+        </div>
+        <div class="bg-[#1a1a1d] p-5 rounded-xl border border-gray-700 shadow-sm">
+          <h3 class="text-xl font-semibold">South Florida State College</h3>
+          <p class="text-sm text-gray-400">Associate of Arts Degree · 2022–2024</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center text-sm text-gray-600 py-12 px-4">
+      <p>© Joshua Gottus — jr-cho</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-orange-400 to-purple-500 p-3 rounded-full shadow-lg hover:opacity-90 transition-all duration-300 opacity-0 pointer-events-none z-50">
+      <i class="fa-solid fa-arrow-up text-white text-lg"></i>
+    </button>
+
+    <!-- Geometric Background Script -->
     <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const response = await fetch("articles/index.json");
-        const metadataList = await response.json();
+      const canvas = document.getElementById('bgCanvas');
+      const ctx = canvas.getContext('2d');
+      let shapes = [];
 
-        const articlesListDiv = document.getElementById("articles-list");
-        const loadingArticles = document.getElementById("loading-articles");
-        const noArticles = document.getElementById("no-articles");
-        const articleModal = document.getElementById("articleModal");
-        const closeArticleModalBtn =
-          document.getElementById("closeArticleModal");
-        const articleTitleElem = document.getElementById("articleTitle");
-        const articleContentElem = document.getElementById("articleContent");
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
 
-        let fetchedArticlesData = {};
-
-        const fetchPromises = metadataList.map(
-          async ({ filename, title, description, date }) => {
-            try {
-              const response = await fetch(`articles/${filename}`);
-              if (!response.ok) {
-                console.error(
-                  `Failed to fetch ${filename}: ${response.statusText}`
-                );
-                return null;
-              }
-              const content = await response.text();
-              fetchedArticlesData[filename] = {
-                title,
-                date,
-                description,
-                content,
-              };
-              return { filename, title, date, description, content };
-            } catch (error) {
-              console.error(`Error fetching ${filename}:`, error);
-              return null;
-            }
-          }
-        );
-
-        loadingArticles.classList.remove("hidden");
-        articlesListDiv.innerHTML = "";
-
-        const articles = (await Promise.all(fetchPromises)).filter(
-          (article) => article !== null
-        );
-
-        loadingArticles.classList.add("hidden");
-
-        if (articles.length === 0) {
-          noArticles.classList.remove("hidden");
-          return;
-        }
-        noArticles.classList.add("hidden");
-
-        articles.forEach((article) => {
-          const articleHtml = `
-                <article class="border-l-4 border-blue-400 pl-4 rounded-md shadow-sm p-4 hover:shadow-md transition-shadow duration-200 cursor-pointer" data-filename="${article.filename}">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-1">
-                        <a href="#" class="hover:text-gray-700 transition-colors text-left block" onclick="event.preventDefault();">${article.title}</a>
-                    </h3>
-                    <p class="text-sm text-gray-500 mb-2">${article.date}</p>
-                    <p class="text-gray-700 text-sm">
-                        ${article.description}
-                    </p>
-                </article>
-            `;
-          articlesListDiv.insertAdjacentHTML("beforeend", articleHtml);
-        });
-
-        articlesListDiv.querySelectorAll("article").forEach((articleElem) => {
-          articleElem.addEventListener("click", () => {
-            const filename = articleElem.dataset.filename;
-            const article = fetchedArticlesData[filename];
-
-            if (article) {
-              articleTitleElem.textContent = article.title;
-              articleContentElem.innerHTML = marked.parse(article.content);
-              articleModal.classList.remove("hidden");
-            } else {
-              console.error("Article data not found for:", filename);
-            }
+      function initShapes(count = 30) {
+        shapes = [];
+        for (let i = 0; i < count; i++) {
+          shapes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: 2 + Math.random() * 4,
+            dx: (Math.random() - 0.5) * 0.5,
+            dy: (Math.random() - 0.5) * 0.5,
+            color: `rgba(255,255,255,${Math.random() * 0.2})`
           });
-        });
+        }
+      }
 
-        closeArticleModalBtn.addEventListener("click", () => {
-          articleModal.classList.add("hidden");
-        });
-
-        articleModal.addEventListener("click", (e) => {
-          if (e.target === articleModal) {
-            articleModal.classList.add("hidden");
+      function drawLines() {
+        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+        ctx.lineWidth = 0.5;
+        
+        for (let i = 0; i < shapes.length; i++) {
+          for (let j = i + 1; j < shapes.length; j++) {
+            const dx = shapes[i].x - shapes[j].x;
+            const dy = shapes[i].y - shapes[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 150) {
+              const opacity = (150 - distance) / 150 * 0.1;
+              ctx.strokeStyle = `rgba(255,255,255,${opacity})`;
+              ctx.beginPath();
+              ctx.moveTo(shapes[i].x, shapes[i].y);
+              ctx.lineTo(shapes[j].x, shapes[j].y);
+              ctx.stroke();
+            }
           }
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw connecting lines first
+        drawLines();
+        
+        // Then draw the dots
+        for (let shape of shapes) {
+          ctx.beginPath();
+          ctx.arc(shape.x, shape.y, shape.r, 0, Math.PI * 2);
+          ctx.fillStyle = shape.color;
+          ctx.fill();
+
+          shape.x += shape.dx;
+          shape.y += shape.dy;
+
+          if (shape.x < 0 || shape.x > canvas.width) shape.dx *= -1;
+          if (shape.y < 0 || shape.y > canvas.height) shape.dy *= -1;
+        }
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initShapes();
+      });
+
+      // Back to Top functionality
+      const backToTopBtn = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.style.opacity = '1';
+          backToTopBtn.style.pointerEvents = 'auto';
+        } else {
+          backToTopBtn.style.opacity = '0';
+          backToTopBtn.style.pointerEvents = 'none';
+        }
+      });
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
         });
       });
+
+      resizeCanvas();
+      initShapes();
+      animate();
     </script>
   </body>
 </html>
