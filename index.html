@@ -124,42 +124,14 @@
         transform: translateY(-1px);
       }
 
-      .experience-timeline {
+      .experience-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .experience-item {
         position: relative;
-        padding-left: 0;
-      }
-
-      .timeline-item {
-        position: relative;
-        padding-left: 40px;
-        margin-bottom: 32px;
-      }
-
-      .timeline-item::before {
-        content: "";
-        position: absolute;
-        left: 16px;
-        top: 0;
-        bottom: -32px;
-        width: 2px;
-        background: linear-gradient(180deg, #a855f7, #f97316);
-        opacity: 0.3;
-      }
-
-      .timeline-item:last-child::before {
-        display: none;
-      }
-
-      .timeline-dot {
-        position: absolute;
-        left: 8px;
-        top: 24px;
-        width: 16px;
-        height: 16px;
-        background: linear-gradient(135deg, #a855f7, #f97316);
-        border-radius: 50%;
-        box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
-        z-index: 1;
       }
 
       .fade-in {
@@ -513,63 +485,60 @@
           </p>
         </div>
 
-        <div class="experience-timeline">
-          <div class="timeline-item fade-in">
-            <div class="timeline-dot"></div>
-            <div class="glass-card mobile-card">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <h3 class="text-lg font-semibold">
-                    IT Help Desk Student Worker
-                  </h3>
-                  <p class="text-purple-400 font-medium">
-                    Florida Polytechnic University
-                  </p>
-                </div>
-                <span
-                  class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full"
-                  >Current</span
-                >
-              </div>
-              <p class="text-sm text-gray-400 mb-3">
-                Part-time · 2025 - Present
-              </p>
-              <p class="text-gray-300 leading-relaxed">
-                Supporting faculty and students with technical issues.
-                Diagnosing and resolving hardware, software, and network
-                problems efficiently while maintaining a high uptime
-                environment.
-              </p>
-            </div>
-          </div>
-
-          <div class="timeline-item fade-in">
-            <div class="timeline-dot"></div>
-            <div class="glass-card mobile-card">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <h3 class="text-lg font-semibold">IT Help Desk Intern</h3>
-                  <p class="text-orange-400 font-medium">
-                    Highlands Clerk of Courts
-                  </p>
-                </div>
-                <span
-                  class="text-xs bg-gray-500/20 text-gray-400 px-2 py-1 rounded-full"
-                  >2023</span
-                >
-              </div>
-              <p class="text-sm text-gray-400 mb-3">Full-time · 2023</p>
-              <p class="text-gray-300 leading-relaxed">
-                Delivered full-stack IT support while working closely with the
-                cybersecurity team to configure secure servers. Designed the IT
-                SharePoint website through user research and internal feedback.
-              </p>
-            </div>
-          </div>
+        <div class="experience-container">
+  <div class="experience-item fade-in">
+    <div class="glass-card mobile-card">
+      <div class="flex justify-between items-start mb-3">
+        <div>
+          <h3 class="text-lg font-semibold">
+            IT Help Desk Student Worker
+          </h3>
+          <p class="text-purple-400 font-medium">
+            Florida Polytechnic University
+          </p>
         </div>
+        <span
+          class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full"
+          >Current</span
+        >
       </div>
-    </section>
+      <p class="text-sm text-gray-400 mb-3">
+        Part-time · 2025 - Present
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        Supporting faculty and students with technical issues.
+        Diagnosing and resolving hardware, software, and network
+        problems efficiently while maintaining a high uptime
+        environment.
+      </p>
+    </div>
+  </div>
 
+  <div class="experience-item fade-in">
+    <div class="glass-card mobile-card">
+      <div class="flex justify-between items-start mb-3">
+        <div>
+          <h3 class="text-lg font-semibold">IT Help Desk Intern</h3>
+          <p class="text-orange-400 font-medium">
+            Highlands Clerk of Courts
+          </p>
+        </div>
+        <span
+          class="text-xs bg-gray-500/20 text-gray-400 px-2 py-1 rounded-full"
+          >2023</span
+        >
+      </div>
+      <p class="text-sm text-gray-400 mb-3">Full-time · 2023</p>
+      <p class="text-gray-300 leading-relaxed">
+        Delivered full-stack IT support while working closely with the
+        cybersecurity team to configure secure servers. Designed the IT
+        SharePoint website through user research and internal feedback.
+      </p>
+    </div>
+  </div>
+</div>
+    </section>
+    
     <!-- Education Section -->
     <section id="education" class="mobile-section">
       <div class="max-w-4xl mx-auto">
