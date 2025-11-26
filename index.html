@@ -46,6 +46,10 @@
         --ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       * {
         box-sizing: border-box;
       }
@@ -227,6 +231,60 @@
       .animate-scroll {
         animation: scrollPulse 1.4s infinite ease-out;
       }
+
+      .project-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: linear-gradient(150deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+        box-shadow: 0 22px 65px rgba(0, 0, 0, 0.55);
+        transition: transform 260ms var(--ease-soft), border-color 260ms var(--ease-soft), box-shadow 260ms var(--ease-soft), background 260ms var(--ease-soft);
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 20% 20%, rgba(59, 92, 255, 0.16), transparent 45%);
+        opacity: 0;
+        transition: opacity 320ms var(--ease-soft);
+      }
+
+      .project-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(59, 92, 255, 0.45);
+        box-shadow: 0 28px 85px rgba(59, 92, 255, 0.25);
+        background: linear-gradient(150deg, rgba(59, 92, 255, 0.07), rgba(255, 255, 255, 0.03));
+      }
+
+      .project-card:hover::before {
+        opacity: 1;
+      }
+
+      .project-card-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+      }
+
+      .project-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.2rem 0.55rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.04);
+        color: #cdd7ff;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
     </style>
   </head>
 
@@ -252,7 +310,7 @@
       class="site-nav fixed top-0 inset-x-0 z-30 border-b border-transparent"
     >
       <div
-        class="mx-auto max-w-5xl px-6 lg:px-8 py-4 flex items-center justify-between gap-6"
+        class="mx-auto w-full px-4 lg:px-6 py-4 flex items-center justify-between gap-10"
       >
         <div class="flex items-center gap-3">
           <div
@@ -270,7 +328,7 @@
           </div>
         </div>
 
-        <nav class="hidden md:flex items-center gap-8 text-xs text-slate-300">
+        <nav class="hidden md:flex items-center gap-10 text-xs text-slate-300">
           <a href="#about" class="nav-link hover:text-slate-50">About</a>
           <a href="#stack" class="nav-link hover:text-slate-50">Stack</a>
           <a href="#projects" class="nav-link hover:text-slate-50">Projects</a>
@@ -465,7 +523,8 @@
       <h3 class="font-semibold text-slate-50 text-[0.95rem]">Runtime & Language</h3>
       <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
         <li>C for systems engineering</li>
-        <li>Python for automation</li>
+        <li>Python for tooling and automation</li>
+        <li>Bash for scripting</li>
       </ul>
     </div>
 
@@ -474,7 +533,7 @@
       <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
         <li>Structured logging</li>
         <li>Metrics pipelines</li>
-        <li>Trace-first debugging</li>
+        <li>Trace first debugging</li>
       </ul>
     </div>
   </div>
@@ -570,36 +629,50 @@
 
     <div class="grid gap-8 grid-cols-1 md:grid-cols-2" data-animate>
 
-      <div class="group relative rounded-[20px] p-6 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300 flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-semibold text-slate-50 mb-2">Trac3r</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">A fraud detection engine built with C and graph algorithms for efficient pattern recognition and anomaly detection in complex datasets.</p>
+      <div class="project-card group p-6 flex flex-col gap-4">
+        <div class="project-card-content space-y-3">
+          <div class="project-tags">
+            <span class="project-tag">C</span>
+            <span class="project-tag">Graph Algorithms</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-50">Trac3r</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Fraud detection engine applying graph algorithms in C for pattern recognition and anomaly detection across complex datasets.</p>
         </div>
-        <div class="mt-4 text-xs text-indigo-400 uppercase tracking-wide">C · Graph Algorithms</div>
       </div>
 
-      <div class="group relative rounded-[20px] p-6 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300 flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-semibold text-slate-50 mb-2">LocalBin</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Secure file distribution system leveraging C and Python for robust networking and encryption protocols.</p>
+      <div class="project-card group p-6 flex flex-col gap-4">
+        <div class="project-card-content space-y-3">
+          <div class="project-tags">
+            <span class="project-tag">C</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Networking</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-50">LocalBin</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Secure file distribution system combining C and Python to ship encrypted artifacts reliably across constrained networks.</p>
         </div>
-        <div class="mt-4 text-xs text-indigo-400 uppercase tracking-wide">C + Python · Networking</div>
       </div>
 
-      <div class="group relative rounded-[20px] p-6 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300 flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-semibold text-slate-50 mb-2">Kyber</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Prototype graph database implemented in C, focusing on optimized storage systems and query performance.</p>
+      <div class="project-card group p-6 flex flex-col gap-4">
+        <div class="project-card-content space-y-3">
+          <div class="project-tags">
+            <span class="project-tag">C</span>
+            <span class="project-tag">Storage</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-50">Kyber</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Prototype graph database in C optimized for storage layout and traversal performance.</p>
         </div>
-        <div class="mt-4 text-xs text-indigo-400 uppercase tracking-wide">C · Storage Systems</div>
       </div>
 
-      <div class="group relative rounded-[20px] p-6 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300 flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-semibold text-slate-50 mb-2">Homelab</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Homelab platform utilizing Podman for containerization, with integrated networking and observability features.</p>
+      <div class="project-card group p-6 flex flex-col gap-4">
+        <div class="project-card-content space-y-3">
+          <div class="project-tags">
+            <span class="project-tag">Podman</span>
+            <span class="project-tag">Networking</span>
+            <span class="project-tag">Observability</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-50">Homelab</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Homelab platform built on rootless containers with segmented networking and built-in observability.</p>
         </div>
-        <div class="mt-4 text-xs text-indigo-400 uppercase tracking-wide">Podman · Networking · Observability</div>
       </div>
 
     </div>
@@ -800,19 +873,19 @@
               Contact
             </h4>
 
-            <div class="flex items-center gap-3 text-slate-300 hover:text-accent transition">
+            <div class="flex items-center gap-3 text-slate-300">
               <i class="fa-solid fa-envelope text-lg"></i>
               <span class="text-sm">joshua.gottus@proton.me</span>
             </div>
 
             <div class="flex items-center gap-3 text-slate-300 hover:text-accent transition">
               <i class="fa-brands fa-github text-lg"></i>
-              <span class="text-sm">github.com/jr-cho</span>
+              <span class="text-sm"><a href="http://github.com/jr-cho">github.com/jr-cho</a></span>
             </div>
 
             <div class="flex items-center gap-3 text-slate-300 hover:text-accent transition">
               <i class="fa-brands fa-linkedin text-lg"></i>
-              <span class="text-sm">linkedin.com/in/jr-cho</span>
+              <span class="text-sm"><a href="http://linkedin.com/in/jr-cho">linkedin.com/in/jr-cho</a></span>
             </div>
           </div>
 
@@ -862,7 +935,7 @@
         class="mx-auto max-w-5xl px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[0.78rem] text-slate-500"
       >
         <span
-          >© <span id="footer-year"></span> Joshua. All rights reserved.</span
+          >© <span id="footer-year"></span> Joshua Gottus. All rights reserved.</span
         >
         <span class="text-slate-500/90">
           Built with a focus on clarity, security, and simplicity.
