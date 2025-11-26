@@ -57,6 +57,7 @@
       body {
         margin: 0;
         min-height: 100vh;
+        overflow-x: hidden;
         background-color: var(--bg);
         color: var(--fg);
         font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
@@ -285,6 +286,54 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
+
+      .stack-summary {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 1rem 1.25rem;
+        border-radius: 18px;
+        border: 1px solid var(--border-softer);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .stack-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.04);
+        color: #dfe3ff;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .mobile-nav {
+        background: var(--nav-bg-solid);
+        border-bottom: 1px solid var(--border-subtle);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(18px);
+      }
+
+      .mobile-nav a {
+        display: block;
+        padding: 0.85rem 1rem;
+        color: #d8d8df;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 0.75rem;
+        border-top: 1px solid var(--border-softer);
+        transition: background-color 180ms var(--ease-soft),
+          color 180ms var(--ease-soft);
+      }
+
+      .mobile-nav a:hover {
+        background-color: rgba(255, 255, 255, 0.04);
+        color: #e5e7ff;
+      }
     </style>
   </head>
 
@@ -328,20 +377,39 @@
           </div>
         </div>
 
-        <nav class="hidden md:flex items-center gap-10 text-xs text-slate-300">
-          <a href="#about" class="nav-link hover:text-slate-50">About</a>
-          <a href="#stack" class="nav-link hover:text-slate-50">Stack</a>
-          <a href="#projects" class="nav-link hover:text-slate-50">Projects</a>
-          <a href="#experience" class="nav-link hover:text-slate-50"
-            >Experience</a
+        <div class="flex items-center gap-4">
+          <button
+            id="mobile-menu-toggle"
+            class="md:hidden h-10 w-10 rounded-full border border-white/15 bg-white/5 text-slate-100/90 flex items-center justify-center transition hover:border-white/25 hover:bg-white/10"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
           >
-          <a href="#contact" class="nav-link hover:text-slate-50">Contact</a>
-        </nav>
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+
+          <nav class="hidden md:flex items-center gap-10 text-xs text-slate-300">
+            <a href="#about" class="nav-link hover:text-slate-50">About</a>
+            <a href="#stack" class="nav-link hover:text-slate-50">Stack</a>
+            <a href="#projects" class="nav-link hover:text-slate-50">Projects</a>
+            <a href="#experience" class="nav-link hover:text-slate-50"
+              >Experience</a
+            >
+            <a href="#contact" class="nav-link hover:text-slate-50">Contact</a>
+          </nav>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="mobile-nav md:hidden hidden absolute left-0 right-0 top-full z-20">
+        <a href="#about">About</a>
+        <a href="#stack">Stack</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
       </div>
     </header>
 
     <main class="relative">
-<section id="hero" class="relative h-screen w-full overflow-hidden flex items-center justify-center">
+<section id="hero" class="relative min-h-screen w-full overflow-hidden flex items-center justify-center pt-24 pb-16 sm:pb-20">
 
   <div class="absolute inset-0 pointer-events-none opacity-[0.08]">
     <svg viewBox="0 0 1440 600" preserveAspectRatio="none"
@@ -355,7 +423,7 @@
     </svg>
   </div>
 
-  <div class="text-center px-6 max-w-3xl" data-animate>
+  <div class="text-center px-6 max-w-3xl mx-auto" data-animate>
     <h1
       class="text-[2.1rem] leading-tight md:text-[2.7rem] md:leading-tight lg:text-[3rem] lg:leading-snug font-semibold text-slate-50"
     >
@@ -391,11 +459,11 @@
     </div>
   </div>
 
-  <div class="absolute bottom-8 left-8 text-[0.8rem] tracking-[0.18em] text-slate-500 uppercase">
+  <div class="hidden sm:block absolute bottom-8 left-8 text-[0.8rem] tracking-[0.18em] text-slate-500 uppercase">
     Jericho
   </div>
 
-  <div class="absolute bottom-8 right-8 flex items-center gap-6 text-slate-400 text-[1.15rem]">
+  <div class="hidden sm:flex absolute bottom-8 right-8 items-center gap-6 text-slate-400 text-[1.15rem]">
     <a href="mailto:joshua.gottus@proton.me" class="hover:text-indigo-300 transition">
       <i class="fa-solid fa-envelope"></i>
     </a>
@@ -407,7 +475,7 @@
     </a>
   </div>
 
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-80">
+  <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 opacity-80">
     <div class="flex flex-col items-center gap-2">
       <div class="h-8 w-[2px] bg-slate-500/30 relative overflow-hidden rounded-full">
         <div class="absolute top-0 left-0 h-3 w-full bg-indigo-300/70 animate-scroll"></div>
@@ -477,7 +545,7 @@
 
       <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
 
-      <section id="stack" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-24">
+      <section id="stack" class="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-24">
 
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
     <span class="text-[22vw] md:text-[15vw] font-semibold text-slate-50/5 tracking-tight uppercase">
@@ -515,8 +583,27 @@
       <div class="h-px w-24 bg-white/10"></div>
     </div>
 
-    <div class="w-full flex justify-center">
-      <div class="grid w-fit mx-auto grid-cols-1 md:grid-cols-3 gap-12 text-left">
+    <div class="md:hidden w-full space-y-4">
+      <div class="stack-summary">
+        <span class="stack-pill">Runtime</span>
+        <span class="stack-pill">Observability</span>
+        <span class="stack-pill">Infrastructure</span>
+        <span class="stack-pill">Tooling</span>
+        <span class="stack-pill">Networking</span>
+        <span class="stack-pill">Data</span>
+      </div>
+      <button
+        id="stack-toggle"
+        class="w-full inline-flex items-center justify-center rounded-[18px] border border-white/15 bg-white/5 px-6 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-slate-200/90 transition hover:border-white/25 hover:bg-white/10"
+        type="button"
+        aria-expanded="false"
+      >
+        View full stack
+      </button>
+    </div>
+
+    <div class="w-full flex justify-center mt-2">
+      <div id="stack-grid" class="hidden grid w-fit mx-auto grid-cols-1 md:grid-cols-3 gap-12 text-left md:grid">
 
   <div class="space-y-8">
     <div class="space-y-3">
@@ -596,7 +683,7 @@
 
       <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
 
-    <section id="projects" class="relative min-h-screen flex items-center justify-center py-24 overflow-hidden">
+    <section id="projects" class="relative min-h-screen flex items-center justify-center py-20 sm:py-24 overflow-hidden">
 
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
     <span class="text-[22vw] md:text-[15vw] font-semibold text-slate-50/5 tracking-tight uppercase">
@@ -691,7 +778,7 @@
 
       <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
 
-     <section id="experience" class="relative min-h-screen flex items-center py-24 overflow-hidden">
+     <section id="experience" class="relative min-h-screen flex items-center py-20 sm:py-24 overflow-hidden">
 
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
     <span class="text-[22vw] md:text-[15vw] font-semibold text-slate-50/5 tracking-tight uppercase">
@@ -818,7 +905,7 @@
 
       <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
 
-<section id="contact" class="py-24 md:py-32">
+<section id="contact" class="py-24 md:py-32 min-h-screen flex items-center">
 
   <div class="absolute bottom-0 left-0 right-0 opacity-[0.12] pointer-events-none">
     <svg viewBox="0 0 1440 150" fill="none" class="w-full">
@@ -849,7 +936,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-14">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-14 w-full">
 
       <div class="space-y-8" data-animate data-delay="120">
 
@@ -1062,6 +1149,81 @@
         window.addEventListener("scroll", updateNav, { passive: true });
       }
 
+      function setupMobileNav() {
+        const toggle = document.getElementById("mobile-menu-toggle");
+        const menu = document.getElementById("mobile-menu");
+        if (!toggle || !menu) return;
+
+        const icon = toggle.querySelector("i");
+
+        const setOpenState = (open) => {
+          if (open) {
+            menu.classList.remove("hidden");
+            toggle.setAttribute("aria-expanded", "true");
+            if (icon) {
+              icon.classList.remove("fa-bars");
+              icon.classList.add("fa-xmark");
+            }
+          } else {
+            menu.classList.add("hidden");
+            toggle.setAttribute("aria-expanded", "false");
+            if (icon) {
+              icon.classList.remove("fa-xmark");
+              icon.classList.add("fa-bars");
+            }
+          }
+        };
+
+        toggle.addEventListener("click", () => {
+          const shouldOpen = menu.classList.contains("hidden");
+          setOpenState(shouldOpen);
+        });
+
+        menu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => setOpenState(false));
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 768) {
+            setOpenState(false);
+          }
+        });
+      }
+
+      function setupStackToggle() {
+        const toggle = document.getElementById("stack-toggle");
+        const grid = document.getElementById("stack-grid");
+        if (!toggle || !grid) return;
+
+        const openLabel = "Hide full stack";
+        const closedLabel = "View full stack";
+
+        const setState = (open) => {
+          grid.classList.toggle("hidden", !open);
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          toggle.textContent = open ? openLabel : closedLabel;
+        };
+
+        if (window.innerWidth >= 768) {
+          grid.classList.remove("hidden");
+        } else {
+          setState(false);
+        }
+
+        toggle.addEventListener("click", () => {
+          const shouldOpen = grid.classList.contains("hidden");
+          setState(shouldOpen);
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 768) {
+            grid.classList.remove("hidden");
+          } else {
+            setState(false);
+          }
+        });
+      }
+
       function setFooterYear() {
         const yearSpan = document.getElementById("footer-year");
         if (yearSpan) {
@@ -1073,6 +1235,8 @@
         runIntroAnimation();
         setupScrollAnimations();
         setupNavBehavior();
+        setupMobileNav();
+        setupStackToggle();
         setFooterYear();
       });
     </script>
