@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Joshua · Systems Portfolio</title>
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- SF Pro Display -->
     <link
       rel="stylesheet"
       href="https://fonts.cdnfonts.com/css/sf-pro-display"
     />
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -63,7 +60,6 @@
         -webkit-font-smoothing: antialiased;
       }
 
-      /* Intro animation overlay */
       #intro-overlay {
         background: radial-gradient(
           circle at top,
@@ -120,7 +116,6 @@
         opacity: 1;
       }
 
-      /* Reusable motion utility */
       [data-animate] {
         opacity: 0;
         transform: translateY(18px);
@@ -134,9 +129,6 @@
         transform: translateY(0);
       }
 
-      /* Stagger utility (optional: extra delays via data-delay attribute) */
-
-      /* Navigation */
       .site-nav {
         background-color: var(--nav-bg);
         backdrop-filter: blur(22px);
@@ -170,7 +162,6 @@
         width: 100%;
       }
 
-      /* Card surface utility */
       .card-surface {
         background: radial-gradient(
           circle at top left,
@@ -197,32 +188,6 @@
         );
       }
 
-      /* Primary button utility */
-      .btn-primary {
-        transition: transform 260ms var(--ease-soft),
-          filter 260ms var(--ease-soft), box-shadow 260ms var(--ease-soft);
-      }
-
-      .btn-primary:hover {
-        transform: scale(1.02) translateY(-0.5px);
-        filter: brightness(1.06);
-        box-shadow: 0 18px 45px rgba(59, 92, 255, 0.35);
-      }
-
-      .btn-secondary {
-        transition: transform 260ms var(--ease-soft),
-          filter 260ms var(--ease-soft), background-color 260ms var(--ease-soft),
-          border-color 260ms var(--ease-soft);
-      }
-
-      .btn-secondary:hover {
-        transform: scale(1.015) translateY(-0.5px);
-        filter: brightness(1.03);
-        background-color: rgba(255, 255, 255, 0.02);
-        border-color: rgba(255, 255, 255, 0.25);
-      }
-
-      /* Section separators */
       .section-separator {
         height: 1px;
         background: linear-gradient(
@@ -233,7 +198,6 @@
         );
       }
 
-      /* Timeline */
       .timeline-line {
         position: absolute;
         left: 0.875rem;
@@ -255,26 +219,6 @@
         box-shadow: 0 0 0 3px rgba(59, 92, 255, 0.35);
       }
 
-      /* Hero glow */
-      .hero-glow {
-        position: absolute;
-        inset: -280px -140px auto;
-        background: radial-gradient(
-          circle at center,
-          rgba(59, 92, 255, 0.3) 0,
-          transparent 58%
-        );
-        opacity: 0.6;
-        filter: blur(46px);
-        pointer-events: none;
-      }
-
-      @media (min-width: 768px) {
-        .hero-glow {
-          inset: -260px -80px auto;
-        }
-      }
-
       @keyframes scrollPulse {
         0% { transform: translateY(0); opacity: 1; }
         100% { transform: translateY(16px); opacity: 0; }
@@ -287,7 +231,6 @@
   </head>
 
   <body class="bg-surface text-foreground">
-    <!-- Intro Animation Overlay -->
     <div
       id="intro-overlay"
       class="fixed inset-0 z-40 flex items-center justify-center pointer-events-auto transition-opacity duration-700 ease-[var(--ease-soft)]"
@@ -304,7 +247,6 @@
       </div>
     </div>
 
-    <!-- Navigation -->
     <header
       id="site-nav"
       class="site-nav fixed top-0 inset-x-0 z-30 border-b border-transparent"
@@ -343,7 +285,6 @@
     <main class="relative">
 <section id="hero" class="relative h-screen w-full overflow-hidden flex items-center justify-center">
 
-  <!-- WAVY BACKGROUND LINES -->
   <div class="absolute inset-0 pointer-events-none opacity-[0.08]">
     <svg viewBox="0 0 1440 600" preserveAspectRatio="none"
          class="w-full h-full absolute bottom-0">
@@ -356,7 +297,6 @@
     </svg>
   </div>
 
-  <!-- CENTER CONTENT -->
   <div class="text-center px-6 max-w-3xl" data-animate>
     <h1
       class="text-[2.1rem] leading-tight md:text-[2.7rem] md:leading-tight lg:text-[3rem] lg:leading-snug font-semibold text-slate-50"
@@ -374,7 +314,6 @@
       infrastructure to production services that support demanding engineering teams.
     </p>
 
-    <!-- Subtext -->
     <div
       class="mt-6 flex flex-wrap items-center justify-center gap-4 text-[11px] text-slate-400/90"
       data-animate
@@ -394,12 +333,10 @@
     </div>
   </div>
 
-  <!-- BOTTOM LEFT LABEL -->
   <div class="absolute bottom-8 left-8 text-[0.8rem] tracking-[0.18em] text-slate-500 uppercase">
     Jericho
   </div>
 
-  <!-- BOTTOM RIGHT ICONS -->
   <div class="absolute bottom-8 right-8 flex items-center gap-6 text-slate-400 text-[1.15rem]">
     <a href="mailto:joshua.gottus@proton.me" class="hover:text-indigo-300 transition">
       <i class="fa-solid fa-envelope"></i>
@@ -412,7 +349,6 @@
     </a>
   </div>
 
-  <!-- SCROLL INDICATOR -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-80">
     <div class="flex flex-col items-center gap-2">
       <div class="h-8 w-[2px] bg-slate-500/30 relative overflow-hidden rounded-full">
@@ -427,7 +363,6 @@
       <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
 
 <section id="about" class="relative min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-20">
-  <!-- BACKGROUND WAVE LINES -->
   <div class="absolute inset-x-0 bottom-4 md:bottom-8 opacity-[0.12] pointer-events-none select-none">
     <svg viewBox="0 0 1440 320" class="w-full h-40 md:h-48">
       <path fill="none" stroke="currentColor" stroke-width="0.4"
@@ -442,14 +377,12 @@
     </svg>
   </div>
 
-  <!-- LARGE BACKGROUND TITLE -->
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none -mt-10 md:-mt-14">
     <span class="text-[22vw] md:text-[15vw] font-semibold text-slate-50/5 tracking-tight uppercase">
       ABOUT
     </span>
   </div>
 
-  <!-- FOREGROUND CONTENT -->
   <div class="relative mx-auto max-w-4xl px-6 text-center space-y-4 md:space-y-5" data-animate>
     
     <h5 class="uppercase tracking-[0.22em] text-slate-400 text-xs mb-2">
@@ -471,7 +404,6 @@
       running in a rack.
     </p>
 
-    <!-- SCROLL DOWN INDICATOR -->
     <footer class="pt-6 flex flex-col items-center justify-center">
       <div class="h-7 w-[2px] bg-slate-500/30 relative overflow-hidden rounded-full opacity-70">
         <div class="absolute top-0 left-0 h-3 w-full bg-indigo-300/70 animate-scroll"></div>
@@ -489,14 +421,12 @@
 
       <section id="stack" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-24">
 
-  <!-- BACKGROUND WORD -->
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
     <span class="text-[22vw] md:text-[15vw] font-semibold text-slate-50/5 tracking-tight uppercase">
       STACK
     </span>
   </div>
 
-<!-- Bottom Waves -->
 <div class="absolute bottom-0 left-0 right-0 opacity-[0.12] pointer-events-none">
   <svg viewBox="0 0 1440 150" fill="none" class="w-full">
     <path d="M0 80 C 300 150, 600 20, 900 90 C 1200 160, 1350 40, 1440 110"
@@ -508,8 +438,7 @@
   </svg>
 </div>
 
-  <!-- CONTENT -->
-  <div class="relative mx-auto max-w-5xl px-6 text-center space-y-8" data-animate>
+  <div class="relative mx-auto max-w-5xl w-full px-6 flex flex-col items-center text-center space-y-8" data-animate>
 
     <h5 class="uppercase tracking-[0.22em] text-slate-400 text-xs">
       Tech Stack
@@ -524,79 +453,76 @@
       The result: systems that are easy to reason about and fast to evolve without surprises.
     </p>
 
-    <!-- Divider -->
     <div class="flex justify-center py-4">
       <div class="h-px w-24 bg-white/10"></div>
     </div>
 
-    <!-- **TRUE THREE-COLUMN LAYOUT** -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mx-auto max-w-5xl text-left">
+    <div class="w-full flex justify-center">
+      <div class="grid w-fit mx-auto grid-cols-1 md:grid-cols-3 gap-12 text-left">
 
-      <!-- Column 1 -->
-      <div class="space-y-8">
-        <div class="space-y-3">
-          <h3 class="font-semibold text-slate-50 text-[0.95rem]">Runtime & Language</h3>
-          <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
-            <li>C for systems engineering</li>
-            <li>Python for automation</li>
-          </ul>
-        </div>
+  <div class="space-y-8">
+    <div class="space-y-3">
+      <h3 class="font-semibold text-slate-50 text-[0.95rem]">Runtime & Language</h3>
+      <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
+        <li>C for systems engineering</li>
+        <li>Python for automation</li>
+      </ul>
+    </div>
 
-        <div class="space-y-3">
-          <h3 class="font-semibold text-slate-50 text-[0.95rem]">Observability</h3>
-          <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
-            <li>Structured logging</li>
-            <li>Metrics pipelines</li>
-            <li>Trace-first debugging</li>
-          </ul>
-        </div>
-      </div>
+    <div class="space-y-3">
+      <h3 class="font-semibold text-slate-50 text-[0.95rem]">Observability</h3>
+      <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
+        <li>Structured logging</li>
+        <li>Metrics pipelines</li>
+        <li>Trace-first debugging</li>
+      </ul>
+    </div>
+  </div>
 
-      <!-- Column 2 -->
-      <div class="space-y-8">
-        <div class="space-y-3">
-          <h3 class="font-semibold text-slate-50 text-[0.95rem]">Infrastructure</h3>
-          <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
-            <li>Linux (Debian / Arch)</li>
-            <li>Rootless Podman containers</li>
-            <li>Proxmox & KVM virtualization</li>
-          </ul>
-        </div>
+  <div class="space-y-8">
+    <div class="space-y-3">
+      <h3 class="font-semibold text-slate-50 text-[0.95rem]">Infrastructure</h3>
+      <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
+        <li>Linux (Debian / Arch)</li>
+        <li>Rootless Podman containers</li>
+        <li>Proxmox & KVM virtualization</li>
+      </ul>
+    </div>
 
-        <div class="space-y-3">
-          <h3 class="font-semibold text-slate-50 text-[0.95rem]">Tooling</h3>
-          <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
-            <li>Neovim / tmux workflows</li>
-            <li>Versioned environments & CI</li>
-            <li>Minimal operator dashboards</li>
-          </ul>
-        </div>
-      </div>
+    <div class="space-y-3">
+      <h3 class="font-semibold text-slate-50 text-[0.95rem]">Tooling</h3>
+      <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
+        <li>Neovim / tmux workflows</li>
+        <li>Versioned environments & CI</li>
+        <li>Minimal operator dashboards</li>
+      </ul>
+    </div>
+  </div>
 
-      <!-- Column 3 -->
-      <div class="space-y-8">
-        <div class="space-y-3">
-          <h3 class="font-semibold text-slate-50 text-[0.95rem]">Networking & Security</h3>
-          <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
-            <li>WireGuard / Tailscale overlays</li>
-            <li>Segmented VLANs</li>
-            <li>Zero trust access patterns</li>
-          </ul>
-        </div>
+  <div class="space-y-8">
+    <div class="space-y-3">
+      <h3 class="font-semibold text-slate-50 text-[0.95rem]">Networking & Security</h3>
+      <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
+        <li>WireGuard / Tailscale overlays</li>
+        <li>Segmented VLANs</li>
+        <li>Zero trust access patterns</li>
+      </ul>
+    </div>
 
-        <div class="space-y-3">
-          <h3 class="font-semibold text-slate-50 text-[0.95rem]">Data & Services</h3>
-          <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
-            <li>PostgreSQL relational workloads</li>
-            <li>Graph backends in C</li>
-            <li>Object storage for artifacts</li>
-          </ul>
-        </div>
-      </div>
+    <div class="space-y-3">
+      <h3 class="font-semibold text-slate-50 text-[0.95rem]">Data & Services</h3>
+      <ul class="space-y-1.5 text-slate-300/90 text-[0.86rem]">
+        <li>PostgreSQL relational workloads</li>
+        <li>Graph backends in C</li>
+        <li>Object storage for artifacts</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
 
     </div>
 
-    <!-- SCROLL DOWN INDICATOR -->
     <footer class="pt-6 flex flex-col items-center justify-center">
       <div class="h-7 w-[2px] bg-slate-500/30 relative overflow-hidden rounded-full opacity-70">
         <div class="absolute top-0 left-0 h-3 w-full bg-indigo-300/70 animate-scroll"></div>
@@ -613,27 +539,25 @@
 
     <section id="projects" class="relative min-h-screen flex items-center justify-center py-24 overflow-hidden">
 
-  <!-- Background Word -->
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
     <span class="text-[22vw] md:text-[15vw] font-semibold text-slate-50/5 tracking-tight uppercase">
       PROJECTS
     </span>
   </div>
 
-<div class="absolute bottom-0 left-0 right-0 opacity-[0.12] pointer-events-none">
-  <svg viewBox="0 0 1440 150" fill="none" class="w-full">
-    <path d="M0 80 C 300 150, 600 20, 900 90 C 1200 160, 1350 40, 1440 110"
-          stroke="white" stroke-width="1" stroke-opacity="0.16"/>
-    <path d="M0 110 C 320 180, 650 40, 950 120 C 1220 190, 1380 70, 1440 150"
-          stroke="white" stroke-width="1" stroke-opacity="0.14"/>
-    <path d="M0 50 C 260 120, 580 -10, 880 70 C 1180 150, 1360 20, 1440 80"
-          stroke="white" stroke-width="1" stroke-opacity="0.18"/>
-  </svg>
-</div>
+  <div class="absolute bottom-0 left-0 right-0 opacity-[0.12] pointer-events-none">
+    <svg viewBox="0 0 1440 150" fill="none" class="w-full">
+      <path d="M0 80 C 300 150, 600 20, 900 90 C 1200 160, 1350 40, 1440 110"
+            stroke="white" stroke-width="1" stroke-opacity="0.16"/>
+      <path d="M0 110 C 320 180, 650 40, 950 120 C 1220 190, 1380 70, 1440 150"
+            stroke="white" stroke-width="1" stroke-opacity="0.14"/>
+      <path d="M0 50 C 260 120, 580 -10, 880 70 C 1180 150, 1360 20, 1440 80"
+            stroke="white" stroke-width="1" stroke-opacity="0.18"/>
+    </svg>
+  </div>
 
   <div class="relative mx-auto max-w-6xl px-6 lg:px-8 w-full">
 
-    <!-- Title -->
     <div class="text-center space-y-3 mb-14" data-animate>
       <h5 class="uppercase tracking-[0.22em] text-slate-400 text-xs">Projects</h5>
       <h2 class="text-[1.9rem] md:text-[2.3rem] font-semibold text-slate-50 leading-snug">
@@ -644,45 +568,42 @@
       </p>
     </div>
 
-    <!-- Project Grid -->
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" data-animate>
 
-      <!-- Project Card -->
-      <div class="group relative rounded-[20px] p-5 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300">
-        <div class="h-48 overflow-hidden rounded-xl mb-4">
-          <img src="/img/trac3r.jpg" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-500">
+      <div class="group relative rounded-[20px] p-6 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-slate-50 mb-2">Trac3r</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">A fraud detection engine built with C and graph algorithms for efficient pattern recognition and anomaly detection in complex datasets.</p>
         </div>
-        <h3 class="text-lg font-semibold text-slate-50">Trac3r</h3>
-        <p class="text-slate-400 text-sm mt-1">Fraud detection engine · C · Graph algorithms</p>
+        <div class="mt-4 text-xs text-indigo-400 uppercase tracking-wide">C · Graph Algorithms</div>
       </div>
 
-      <div class="group relative rounded-[20px] p-5 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300">
-        <div class="h-48 overflow-hidden rounded-xl mb-4">
-          <img src="/img/localbin.jpg" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-500">
+      <div class="group relative rounded-[20px] p-6 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-slate-50 mb-2">LocalBin</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Secure file distribution system leveraging C and Python for robust networking and encryption protocols.</p>
         </div>
-        <h3 class="text-lg font-semibold text-slate-50">LocalBin</h3>
-        <p class="text-slate-400 text-sm mt-1">Secure file distribution · C + Python · Networking</p>
+        <div class="mt-4 text-xs text-indigo-400 uppercase tracking-wide">C + Python · Networking</div>
       </div>
 
-      <div class="group relative rounded-[20px] p-5 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300">
-        <div class="h-48 overflow-hidden rounded-xl mb-4">
-          <img src="/img/kyber.jpg" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-500">
+      <div class="group relative rounded-[20px] p-6 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-slate-50 mb-2">Kyber</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Prototype graph database implemented in C, focusing on optimized storage systems and query performance.</p>
         </div>
-        <h3 class="text-lg font-semibold text-slate-50">Kyber</h3>
-        <p class="text-slate-400 text-sm mt-1">Graph database prototype · C · Storage systems</p>
+        <div class="mt-4 text-xs text-indigo-400 uppercase tracking-wide">C · Storage Systems</div>
       </div>
 
-      <div class="group relative rounded-[20px] p-5 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300">
-        <div class="h-48 overflow-hidden rounded-xl mb-4">
-          <img src="/img/jericho.jpg" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-500">
+      <div class="group relative rounded-[20px] p-6 bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-slate-50 mb-2">Jericho</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Homelab platform utilizing Podman for containerization, with integrated networking and observability features.</p>
         </div>
-        <h3 class="text-lg font-semibold text-slate-50">Jericho</h3>
-        <p class="text-slate-400 text-sm mt-1">Homelab platform · Podman · Networking · Observability</p>
+        <div class="mt-4 text-xs text-indigo-400 uppercase tracking-wide">Podman · Networking · Observability</div>
       </div>
 
     </div>
 
-        <!-- SCROLL DOWN INDICATOR -->
     <footer class="pt-6 flex flex-col items-center justify-center">
       <div class="h-7 w-[2px] bg-slate-500/30 relative overflow-hidden rounded-full opacity-70">
         <div class="absolute top-0 left-0 h-3 w-full bg-indigo-300/70 animate-scroll"></div>
@@ -699,14 +620,12 @@
 
      <section id="experience" class="relative min-h-screen flex items-center py-24 overflow-hidden">
 
-  <!-- Background Word -->
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
     <span class="text-[22vw] md:text-[15vw] font-semibold text-slate-50/5 tracking-tight uppercase">
       EXPERIENCE
     </span>
   </div>
 
-  <!-- Bottom Waves-->
   <div class="absolute bottom-0 left-0 right-0 opacity-[0.12] pointer-events-none">
     <svg viewBox="0 0 1440 150" fill="none" class="w-full">
       <path d="M0 80 C 300 150, 600 20, 900 90 C 1200 160, 1350 40, 1440 110"
@@ -722,7 +641,6 @@
 
     <div class="flex flex-col gap-14">
 
-      <!-- Header -->
       <div class="max-w-xl text-center mx-auto" data-animate>
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
           Experience
@@ -738,14 +656,12 @@
         </p>
       </div>
 
-      <!-- Timeline -->
       <div class="relative pl-8 max-w-3xl mx-auto" data-animate data-delay="160">
 
         <div class="timeline-line absolute left-[6px] top-0 bottom-0 w-px bg-white/10"></div>
 
         <ol class="space-y-10 text-sm">
           
-          <!-- Item 1 -->
           <li class="relative flex gap-4">
             <div class="mt-1 flex flex-col items-center">
               <div class="timeline-dot h-[9px] w-[9px] rounded-full bg-accent shadow-[0_0_0_3px_rgba(59,92,255,0.35)]"></div>
@@ -766,7 +682,6 @@
             </div>
           </li>
 
-          <!-- Item 2 -->
           <li class="relative flex gap-4">
             <div class="mt-1 flex flex-col items-center">
               <div class="timeline-dot h-[9px] w-[9px] rounded-full bg-accent shadow-[0_0_0_3px_rgba(59,92,255,0.35)]"></div>
@@ -788,7 +703,6 @@
             </div>
           </li>
 
-          <!-- Item 3 -->
           <li class="relative flex gap-4">
             <div class="mt-1 flex flex-col items-center">
               <div class="timeline-dot h-[9px] w-[9px] rounded-full bg-accent shadow-[0_0_0_3px_rgba(59,92,255,0.35)]"></div>
@@ -817,8 +731,7 @@
 
     </div>
 
-            <!-- SCROLL DOWN INDICATOR -->
-    <footer class="pt-6 flex flex-col items-center justify-center">
+            <footer class="pt-6 flex flex-col items-center justify-center">
       <div class="h-7 w-[2px] bg-slate-500/30 relative overflow-hidden rounded-full opacity-70">
         <div class="absolute top-0 left-0 h-3 w-full bg-indigo-300/70 animate-scroll"></div>
       </div>
@@ -834,7 +747,6 @@
 
 <section id="contact" class="py-24 md:py-32">
 
-  <!-- Bottom Waves-->
   <div class="absolute bottom-0 left-0 right-0 opacity-[0.12] pointer-events-none">
     <svg viewBox="0 0 1440 150" fill="none" class="w-full">
       <path d="M0 80 C 300 150, 600 20, 900 90 C 1200 160, 1350 40, 1440 110"
@@ -851,7 +763,6 @@
 
   <div class="mx-auto max-w-5xl px-6 lg:px-8">
 
-    <!-- Header -->
     <div class="text-center mb-16" data-animate>
       <h5 class="text-xs tracking-[0.22em] uppercase text-slate-400">
         Contact
@@ -865,13 +776,10 @@
       </p>
     </div>
 
-    <!-- Two Column Layout -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-14">
 
-      <!-- LEFT COLUMN -->
       <div class="space-y-8" data-animate data-delay="120">
 
-        <!-- Section Title -->
         <div class="space-y-2">
           <h5 class="text-[0.72rem] uppercase tracking-[0.20em] text-slate-400">
             Information
@@ -885,10 +793,8 @@
           </p>
         </div>
 
-        <!-- Contact Section -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
 
-          <!-- CONTACT LIST -->
           <div class="space-y-4">
             <h4 class="text-[0.9rem] font-medium text-slate-200 mb-1">
               Contact
@@ -910,7 +816,6 @@
             </div>
           </div>
 
-          <!-- AVAILABILITY -->
           <div class="space-y-2">
             <h4 class="text-[0.9rem] font-medium text-slate-200 mb-1">
               Availability
@@ -925,7 +830,6 @@
         </div>
       </div>
 
-      <!-- RIGHT COLUMN -->
       <div data-animate data-delay="180">
         <div class="card-surface rounded-[22px] p-8 md:p-10 h-full flex flex-col justify-center">
 
@@ -953,7 +857,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-white/5">
       <div
         class="mx-auto max-w-5xl px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[0.78rem] text-slate-500"
@@ -968,7 +871,6 @@
     </footer>
 
     <script>
-      // Intro animation logic
       function runIntroAnimation() {
         const overlay = document.getElementById("intro-overlay");
         const wordEl = document.getElementById("intro-word");
@@ -988,12 +890,10 @@
           return span;
         });
 
-        // Step 1: subtle fade-in of the full word
         requestAnimationFrame(() => {
           wordEl.classList.add("ready");
         });
 
-        // Step 2: start removing letters from right to left
         const startRemovalDelay = 850;
         const intervalDelay = 120;
 
@@ -1008,7 +908,6 @@
               if (finalSpan) {
                 finalSpan.classList.add("final");
 
-                // Activate glow ring
                 overlay.classList.add("glow-active");
 
                 setTimeout(() => {
@@ -1016,7 +915,6 @@
                 }, 80);
               }
 
-              // Fade out overlay and reveal site
               setTimeout(() => {
                 overlay.style.opacity = "0";
                 overlay.style.pointerEvents = "none";
@@ -1045,7 +943,6 @@
         }, startRemovalDelay);
       }
 
-      // IntersectionObserver-based scroll animations
       function setupScrollAnimations() {
         const animatedNodes = document.querySelectorAll("[data-animate]");
         if (!animatedNodes.length) return;
@@ -1073,13 +970,9 @@
         animatedNodes.forEach((node) => observer.observe(node));
       }
 
-      // Trigger any animations that should run once intro is finished
       function triggerInitialAnimations() {
-        // If sections are already in view, IntersectionObserver will handle them.
-        // This function exists mainly for clarity / potential future hooks.
       }
 
-      // Navigation scroll behavior
       function setupNavBehavior() {
         const nav = document.getElementById("site-nav");
         if (!nav) return;
@@ -1096,7 +989,6 @@
         window.addEventListener("scroll", updateNav, { passive: true });
       }
 
-      // Footer year helper
       function setFooterYear() {
         const yearSpan = document.getElementById("footer-year");
         if (yearSpan) {
