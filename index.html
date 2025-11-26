@@ -449,84 +449,71 @@
       <!-- About Section -->
       <section id="about" class="py-16 md:py-20">
         <div class="mx-auto max-w-5xl px-6 lg:px-8">
-          <div
-            class="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-start"
-          >
-            <div class="space-y-4" data-animate>
-              <p
-                class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400"
-              >
+          <div class="grid gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-start">
+
+            <!-- Left Column: About Text -->
+            <div class="space-y-5" data-animate>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                 About
               </p>
-              <h2 class="text-xl md:text-[1.55rem] font-semibold text-slate-50">
+
+              <h2 class="text-xl md:text-[1.55rem] font-semibold text-slate-50 leading-snug">
                 Systems engineer with a security first perspective.
               </h2>
-              <p class="text-sm md:text-[0.95rem] text-slate-300/85">
-                I work with systems engineering, cybersecurity, and backend
-                architecture. My focus is on designing infrastructure that is
-                observable, resilient to failure, and easy for teams to operate
-                over time.
+
+              <p class="text-sm md:text-[0.95rem] text-slate-300/85 leading-relaxed">
+                I work with systems engineering, cybersecurity, and backend architecture. 
+                My focus is on designing infrastructure that is observable, resilient to failure, 
+                and easy for teams to operate over time.
               </p>
-              <p class="text-sm md:text-[0.95rem] text-slate-300/85">
-                From homelab clusters and containerized developer images to
-                network topologies and secure access patterns, I build systems
-                that feel as polished as product experiences not just servers in
-                a rack.
+
+              <p class="text-sm md:text-[0.95rem] text-slate-300/85 leading-relaxed">
+                From homelab clusters and containerized developer images to network 
+                topologies and secure access patterns, I build systems that feel 
+                as polished as product experiences not just servers in a rack.
               </p>
             </div>
 
+            <!-- Right Column: Focus Areas -->
             <div data-animate data-delay="120">
-              <div class="card-surface p-5 md:p-6">
-                <p
-                  class="text-[0.78rem] uppercase tracking-[0.22em] text-slate-400 mb-4"
-                >
-                  Focus areas
-                </p>
-                <dl class="space-y-3 text-[0.9rem] text-slate-200/90">
-                  <div class="flex items-start gap-3">
-                    <dt
-                      class="mt-[2px] h-[6px] w-[6px] rounded-full bg-accent/80"
-                    ></dt>
-                    <dd>
-                      <span class="font-medium">Secure infrastructure</span>
-                      <span class="block text-slate-300/80 text-[0.83rem] mt-1"
-                        >Network segmentation, least privilege access, and
-                        hardened entrypoints across on-prem and remote
-                        environments.</span
-                      >
-                    </dd>
-                  </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-10 backdrop-blur-xl">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 mb-6">
+                Focus areas
+              </p>
 
-                  <div class="flex items-start gap-3">
-                    <dt
-                      class="mt-[2px] h-[6px] w-[6px] rounded-full bg-accent/80"
-                    ></dt>
-                    <dd>
-                      <span class="font-medium">Developer platforms</span>
-                      <span class="block text-slate-300/80 text-[0.83rem] mt-1"
-                        >Golden images, reproducible environments, and
-                        containerized toolchains tailored for engineering
-                        workflows.</span
-                      >
-                    </dd>
+              <ul class="space-y-7">
+                <li class="flex items-start gap-4">
+                  <span class="mt-2 h-1.5 w-1.5 rounded-full bg-accent"></span>
+                  <div>
+                    <p class="font-semibold text-slate-100 mb-1">Secure infrastructure</p>
+                    <p class="text-slate-300/85 text-[0.95rem] leading-relaxed">
+                      Network segmentation, least privilege access, and hardened entrypoints.
+                    </p>
                   </div>
+                </li>
 
-                  <div class="flex items-start gap-3">
-                    <dt
-                      class="mt-[2px] h-[6px] w-[6px] rounded-full bg-accent/80"
-                    ></dt>
-                    <dd>
-                      <span class="font-medium">Observability by design</span>
-                      <span class="block text-slate-300/80 text-[0.83rem] mt-1"
-                        >Metrics, tracing, and log pipelines that give clear
-                        insight into system behavior before incidents
-                        occur.</span
-                      >
-                    </dd>
+                <li class="flex items-start gap-4">
+                  <span class="mt-2 h-1.5 w-1.5 rounded-full bg-accent"></span>
+                  <div>
+                    <p class="font-semibold text-slate-100 mb-1">Developer platforms</p>
+                    <p class="text-slate-300/85 text-[0.95rem] leading-relaxed">
+                      Golden images, reproducible environments, and containerized toolchains.
+                    </p>
                   </div>
-                </dl>
-              </div>
+                </li>
+
+                <li class="flex items-start gap-4">
+                  <span class="mt-2 h-1.5 w-1.5 rounded-full bg-accent"></span>
+                  <div>
+                    <p class="font-semibold text-slate-100 mb-1">Observability by design</p>
+                    <p class="text-slate-300/85 text-[0.95rem] leading-relaxed">
+                      Metrics, tracing, and log pipelines with deep system visibility.
+                    </p>
+                  </div>
+                </li>
+              </ul>
             </div>
+
           </div>
         </div>
       </section>
