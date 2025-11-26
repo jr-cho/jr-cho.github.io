@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joshua · Systems Portfolio</title>
+
+    <!-- SF Pro Display (unofficial web build) -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.cdnfonts.com/css/sf-pro-display"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              surface: "#0b0d12",
+              foreground: "#d8d8df",
+              accent: "#3b5cff",
+            },
+            boxShadow: {
+              "soft-card": "0 18px 60px rgba(0, 0, 0, 0.65)",
+            },
+            borderRadius: {
+              xl2: "18px",
+              xl3: "24px",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        --bg: #0b0d12;
+        --fg: #d8d8df;
+        --accent: #3b5cff;
+        --border-subtle: rgba(255, 255, 255, 0.08);
+        --border-softer: rgba(255, 255, 255, 0.04);
+        --nav-bg: rgba(11, 13, 18, 0.05);
+        --nav-bg-solid: rgba(11, 13, 18, 0.92);
+        --ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background-color: var(--bg);
+        color: var(--fg);
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          system-ui, "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Intro animation overlay */
+      #intro-overlay {
+        background: radial-gradient(
+          circle at top,
+          #3b5cff22 0,
+          #05060a 40%,
+          #020308 80%
+        );
+      }
+
+      #intro-word span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 580ms var(--ease-soft),
+          transform 580ms var(--ease-soft), filter 580ms var(--ease-soft);
+      }
+
+      #intro-word.ready span {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #intro-word span.removed {
+        opacity: 0;
+        transform: translateY(-14px) scale(1.03);
+        filter: blur(3px);
+      }
+
+      #intro-word span.final {
+        letter-spacing: 0.14em;
+      }
+
+      #intro-word span.final-glow {
+        transform: scale(1.15) translateY(0);
+        text-shadow: 0 0 18px rgba(59, 92, 255, 0.55),
+          0 0 42px rgba(59, 92, 255, 0.35);
+        color: #e5e7ff;
+      }
+
+      #intro-overlay .intro-glow-ring {
+        position: absolute;
+        inset: -120px;
+        opacity: 0;
+        background: radial-gradient(
+          circle at center,
+          #3b5cff33 0,
+          transparent 60%
+        );
+        filter: blur(40px);
+        transition: opacity 880ms var(--ease-soft);
+      }
+
+      #intro-overlay.glow-active .intro-glow-ring {
+        opacity: 1;
+      }
+
+      /* Reusable motion utility */
+      [data-animate] {
+        opacity: 0;
+        transform: translateY(18px);
+        transition-property: opacity, transform;
+        transition-duration: 650ms;
+        transition-timing-function: var(--ease-soft);
+      }
+
+      [data-animate].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Stagger utility (optional: extra delays via data-delay attribute) */
+
+      /* Navigation */
+      .site-nav {
+        background-color: var(--nav-bg);
+        backdrop-filter: blur(22px);
+        transition: background-color 480ms var(--ease-soft),
+          border-color 480ms var(--ease-soft), box-shadow 480ms var(--ease-soft);
+      }
+
+      .site-nav-scrolled {
+        background-color: var(--nav-bg-solid);
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+      }
+
+      .nav-link {
+        position: relative;
+        padding-bottom: 2px;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, #6475ff, #9ea9ff);
+        transition: width 320ms var(--ease-soft);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Card surface utility */
+      .card-surface {
+        background: radial-gradient(
+          circle at top left,
+          #ffffff08 0,
+          #0b0d12 55%
+        );
+        border-radius: 20px;
+        border: 1px solid var(--border-softer);
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(24px);
+        transition: border-color 380ms var(--ease-soft),
+          box-shadow 380ms var(--ease-soft), transform 380ms var(--ease-soft),
+          background 380ms var(--ease-soft);
+      }
+
+      .card-surface:hover {
+        transform: translateY(-4px);
+        border-color: rgba(59, 92, 255, 0.55);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.9);
+        background: radial-gradient(
+          circle at top left,
+          #3b5cff22 0,
+          #0b0d12 60%
+        );
+      }
+
+      /* Primary button utility */
+      .btn-primary {
+        transition: transform 260ms var(--ease-soft),
+          filter 260ms var(--ease-soft), box-shadow 260ms var(--ease-soft);
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.02) translateY(-0.5px);
+        filter: brightness(1.06);
+        box-shadow: 0 18px 45px rgba(59, 92, 255, 0.35);
+      }
+
+      .btn-secondary {
+        transition: transform 260ms var(--ease-soft),
+          filter 260ms var(--ease-soft), background-color 260ms var(--ease-soft),
+          border-color 260ms var(--ease-soft);
+      }
+
+      .btn-secondary:hover {
+        transform: scale(1.015) translateY(-0.5px);
+        filter: brightness(1.03);
+        background-color: rgba(255, 255, 255, 0.02);
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+
+      /* Section separators */
+      .section-separator {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+      }
+
+      /* Timeline */
+      .timeline-line {
+        position: absolute;
+        left: 0.875rem;
+        top: 0.5rem;
+        bottom: 0.5rem;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.03)
+        );
+      }
+
+      .timeline-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: #e5e7ff;
+        box-shadow: 0 0 0 3px rgba(59, 92, 255, 0.35);
+      }
+
+      /* Hero glow */
+      .hero-glow {
+        position: absolute;
+        inset: -280px -140px auto;
+        background: radial-gradient(
+          circle at center,
+          rgba(59, 92, 255, 0.3) 0,
+          transparent 58%
+        );
+        opacity: 0.6;
+        filter: blur(46px);
+        pointer-events: none;
+      }
+
+      @media (min-width: 768px) {
+        .hero-glow {
+          inset: -260px -80px auto;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-surface text-foreground">
+    <!-- Intro Animation Overlay -->
+    <div
+      id="intro-overlay"
+      class="fixed inset-0 z-40 flex items-center justify-center pointer-events-auto transition-opacity duration-700 ease-[var(--ease-soft)]"
+    >
+      <div class="relative flex items-center justify-center">
+        <div class="intro-glow-ring"></div>
+        <div
+          id="intro-word"
+          data-word="JERICHO"
+          class="tracking-[0.26em] text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-100/95"
+        >
+          JERICHO
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <header
+      id="site-nav"
+      class="site-nav fixed top-0 inset-x-0 z-30 border-b border-transparent"
+    >
+      <div
+        class="mx-auto max-w-5xl px-6 lg:px-8 py-4 flex items-center justify-between gap-6"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="h-8 w-8 rounded-[20px] border border-white/15 bg-white/5 flex items-center justify-center backdrop-blur-xl"
+          >
+            <span class="text-xs font-semibold tracking-tight text-slate-100">
+              J
+            </span>
+          </div>
+          <div class="flex flex-col leading-tight">
+            <span class="text-xs uppercase tracking-[0.18em] text-slate-400">
+              Systems &amp; Infrastructure
+            </span>
+            <span class="text-sm text-slate-200">Jericho</span>
+          </div>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-8 text-xs text-slate-300">
+          <a href="#about" class="nav-link hover:text-slate-50">About</a>
+          <a href="#stack" class="nav-link hover:text-slate-50">Stack</a>
+          <a href="#projects" class="nav-link hover:text-slate-50">Projects</a>
+          <a href="#experience" class="nav-link hover:text-slate-50"
+            >Experience</a
+          >
+          <a href="#contact" class="nav-link hover:text-slate-50">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="relative">
+      <!-- Hero Section -->
+      <section
+        id="hero"
+        class="relative overflow-hidden pt-28 pb-20 md:pt-32 md:pb-24"
+      >
+        <div class="hero-glow -z-10"></div>
+
+        <div class="mx-auto max-w-5xl px-6 lg:px-8">
+          <div class="flex flex-col items-center text-center gap-8 md:gap-10">
+            <div class="space-y-4 md:space-y-5" data-animate data-delay="80">
+              <p
+                class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-[11px] uppercase tracking-[0.22em] text-slate-300/90 backdrop-blur-xl"
+              >
+                <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+                Systems engineering · Cybersecurity · Backend
+              </p>
+              <h1
+                class="text-[2.1rem] leading-tight md:text-[2.7rem] md:leading-tight lg:text-[3rem] lg:leading-snug font-semibold"
+              >
+                Designing
+                <span
+                  class="bg-gradient-to-r from-indigo-300 via-sky-300 to-indigo-400 bg-clip-text text-transparent"
+                  >secure systems</span
+                ><br class="hidden md:block" />
+                for real world workloads.
+              </h1>
+              <p
+                class="max-w-2xl mx-auto text-sm md:text-[0.95rem] text-slate-300/80"
+              >
+                I build secure, observable, and maintainable backends from
+                homelab scale infrastructure to production services that
+                support demanding engineering teams.
+              </p>
+            </div>
+
+            <div
+              class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4"
+              data-animate
+              data-delay="220"
+            >
+              <a
+                href="#projects"
+                class="btn-primary inline-flex items-center justify-center rounded-[22px] bg-accent px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-50 shadow-soft-card"
+              >
+                View projects
+              </a>
+              <a
+                href="#contact"
+                class="btn-secondary inline-flex items-center justify-center rounded-[22px] border border-white/15 bg-white/5 px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-200/90"
+              >
+                Get in touch
+              </a>
+            </div>
+
+            <div
+              class="mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-4 text-[11px] text-slate-400/90"
+              data-animate
+              data-delay="360"
+            >
+              <div class="flex items-center gap-2">
+                <span>Linux first workflows</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-px w-6 bg-white/20"></span>
+                <span>Rootless containers</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-px w-6 bg-white/20"></span>
+                <span>Secure network design</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
+
+      <!-- About Section -->
+      <section id="about" class="py-16 md:py-20">
+        <div class="mx-auto max-w-5xl px-6 lg:px-8">
+          <div
+            class="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-start"
+          >
+            <div class="space-y-4" data-animate>
+              <p
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400"
+              >
+                About
+              </p>
+              <h2 class="text-xl md:text-[1.55rem] font-semibold text-slate-50">
+                Systems engineer with a security first perspective.
+              </h2>
+              <p class="text-sm md:text-[0.95rem] text-slate-300/85">
+                I work with systems engineering,
+                cybersecurity, and backend architecture. My focus is on
+                designing infrastructure that is observable, resilient to
+                failure, and easy for teams to operate over time.
+              </p>
+              <p class="text-sm md:text-[0.95rem] text-slate-300/85">
+                From homelab clusters and containerized developer images to
+                network topologies and secure access patterns, I build systems
+                that feel as polished as product experiences not just servers in
+                a rack.
+              </p>
+            </div>
+
+            <div data-animate data-delay="120">
+              <div class="card-surface p-5 md:p-6">
+                <p
+                  class="text-[0.78rem] uppercase tracking-[0.22em] text-slate-400 mb-4"
+                >
+                  Focus areas
+                </p>
+                <dl class="space-y-3 text-[0.9rem] text-slate-200/90">
+                  <div class="flex items-start gap-3">
+                    <dt
+                      class="mt-[2px] h-[6px] w-[6px] rounded-full bg-accent/80"
+                    ></dt>
+                    <dd>
+                      <span class="font-medium">Secure infrastructure</span>
+                      <span class="block text-slate-300/80 text-[0.83rem] mt-1"
+                        >Network segmentation, least privilege access, and
+                        hardened entrypoints across on-prem and remote
+                        environments.</span
+                      >
+                    </dd>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <dt
+                      class="mt-[2px] h-[6px] w-[6px] rounded-full bg-accent/80"
+                    ></dt>
+                    <dd>
+                      <span class="font-medium">Developer platforms</span>
+                      <span class="block text-slate-300/80 text-[0.83rem] mt-1"
+                        >Golden images, reproducible environments, and
+                        containerized toolchains tailored for engineering
+                        workflows.</span
+                      >
+                    </dd>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <dt
+                      class="mt-[2px] h-[6px] w-[6px] rounded-full bg-accent/80"
+                    ></dt>
+                    <dd>
+                      <span class="font-medium">Observability by design</span>
+                      <span class="block text-slate-300/80 text-[0.83rem] mt-1"
+                        >Metrics, tracing, and log pipelines that give clear
+                        insight into system behavior before incidents
+                        occur.</span
+                      >
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
+
+      <!-- Tech Stack Section -->
+      <section id="stack" class="py-16 md:py-20">
+        <div class="mx-auto max-w-5xl px-6 lg:px-8">
+          <div class="flex flex-col gap-10">
+            <div class="max-w-xl" data-animate>
+              <p
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400"
+              >
+                Tech stack
+              </p>
+              <h2
+                class="mt-3 text-xl md:text-[1.55rem] font-semibold text-slate-50"
+              >
+                Tools that feel invisible when they are working.
+              </h2>
+              <p class="mt-3 text-sm md:text-[0.95rem] text-slate-300/85">
+                I favor boring, proven technologies in the core and experiment
+                at the edges. The result: systems that are easy to reason about
+                and fast to evolve.
+              </p>
+            </div>
+
+            <div
+              class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 text-sm"
+              data-animate
+              data-delay="160"
+            >
+              <!-- Column 1 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Runtime &amp; language
+                </h3>
+                <ul class="space-y-1.5 text-[0.86rem] text-slate-300/90">
+                  <li>C for systems &amp; embedded work</li>
+                  <li>Python for automation &amp; data flows</li>
+                  <li>Rust exploration for safety critical paths</li>
+                </ul>
+              </article>
+
+              <!-- Column 2 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Infrastructure
+                </h3>
+                <ul class="space-y-1.5 text-[0.86rem] text-slate-300/90">
+                  <li>Linux (Debian / Arch) as a baseline</li>
+                  <li>Rootless containers with Podman</li>
+                  <li>Proxmox &amp; KVM for virtualization</li>
+                </ul>
+              </article>
+
+              <!-- Column 3 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Networking &amp; security
+                </h3>
+                <ul class="space-y-1.5 text-[0.86rem] text-slate-300/90">
+                  <li>WireGuard / Tailscale overlays</li>
+                  <li>Segmented VLAN topologies</li>
+                  <li>Zero trust oriented access patterns</li>
+                </ul>
+              </article>
+
+              <!-- Column 4 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Data &amp; services
+                </h3>
+                <ul class="space-y-1.5 text-[0.86rem] text-slate-300/90">
+                  <li>PostgreSQL for relational workloads</li>
+                  <li>Lightweight graph backends in C</li>
+                  <li>Object storage for artifacts &amp; backups</li>
+                </ul>
+              </article>
+
+              <!-- Column 5 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Observability
+                </h3>
+                <ul class="space-y-1.5 text-[0.86rem] text-slate-300/90">
+                  <li>Structured logging by default</li>
+                  <li>Metrics pipelines into dashboards</li>
+                  <li>Trace- irst debugging mindsets</li>
+                </ul>
+              </article>
+
+              <!-- Column 6 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Tooling
+                </h3>
+                <ul class="space-y-1.5 text-[0.86rem] text-slate-300/90">
+                  <li>Neovim / tmux driven workflows</li>
+                  <li>Git-driven environments &amp; CI hooks</li>
+                  <li>Minimal dashboards for operators</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
+
+      <!-- Projects Section -->
+      <section id="projects" class="py-16 md:py-20">
+        <div class="mx-auto max-w-5xl px-6 lg:px-8">
+          <div class="flex flex-col gap-8 md:gap-10">
+            <div
+              class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+            >
+              <div data-animate>
+                <p
+                  class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400"
+                >
+                  Projects
+                </p>
+                <h2
+                  class="mt-3 text-xl md:text-[1.55rem] font-semibold text-slate-50"
+                >
+                  Infrastructure that behaves like a product.
+                </h2>
+              </div>
+              <p
+                class="max-w-sm text-[0.86rem] text-slate-300/85"
+                data-animate
+                data-delay="130"
+              >
+                A sample of the systems work I do from fraud detection engines
+                to golden images and homelab grade platforms.
+              </p>
+            </div>
+
+            <div
+              class="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+              data-animate
+              data-delay="180"
+            >
+              <!-- Card 1 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Trac3r · Fraud graph engine
+                </h3>
+                <p class="text-[0.86rem] text-slate-300/90">
+                  A C-based fraud detection network that models transactions as
+                  graphs, using Tarjan’s algorithm to surface cyclical patterns
+                  in real time.
+                </p>
+                <p class="text-[0.8rem] text-slate-400">
+                  C · Graph algorithms · Performance tuning
+                </p>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  LocalBin · Secure file fabric
+                </h3>
+                <p class="text-[0.86rem] text-slate-300/90">
+                  A local file sharing platform in C with a Python FFI,
+                  designed for low friction collaboration across a trusted
+                  network.
+                </p>
+                <p class="text-[0.8rem] text-slate-400">
+                  C · Python · Sockets · Security
+                </p>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  KYBER · Lightweight graph store
+                </h3>
+                <p class="text-[0.86rem] text-slate-300/90">
+                  A compact graph database engine focused on property graphs for
+                  fast experimentation with relationships and traversal logic.
+                </p>
+                <p class="text-[0.8rem] text-slate-400">
+                  C · Storage engines · Graph modeling
+                </p>
+              </article>
+
+              <!-- Card 4 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Jericho · Homelab platform
+                </h3>
+                <p class="text-[0.86rem] text-slate-300/90">
+                  A multi node homelab with golden Arch images, Debian hosts,
+                  and rootless Podman containers orchestrating developer
+                  environments.
+                </p>
+                <p class="text-[0.8rem] text-slate-400">
+                  Linux · Podman · Networking · Storage
+                </p>
+              </article>
+
+              <!-- Card 5 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  CMAN · C project manager
+                </h3>
+                <p class="text-[0.86rem] text-slate-300/90">
+                  A build orchestration tool for C that standardizes project
+                  scaffolding, compilation targets, and cross platform builds.
+                </p>
+                <p class="text-[0.8rem] text-slate-400">
+                  Bash · Build systems · DX
+                </p>
+              </article>
+
+              <!-- Card 6 -->
+              <article class="card-surface p-5 flex flex-col gap-3">
+                <h3 class="text-[0.95rem] font-semibold text-slate-50">
+                  Arch golden images
+                </h3>
+                <p class="text-[0.86rem] text-slate-300/90">
+                  Standardized container images for repeatable development
+                  environments, optimized for security, ergonomics, and
+                  performance.
+                </p>
+                <p class="text-[0.8rem] text-slate-400">
+                  Arch Linux · Podman · Automation
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
+
+      <!-- Experience Section -->
+      <section id="experience" class="py-16 md:py-20">
+        <div class="mx-auto max-w-5xl px-6 lg:px-8">
+          <div class="flex flex-col gap-10">
+            <div class="max-w-xl" data-animate>
+              <p
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400"
+              >
+                Experience
+              </p>
+              <h2
+                class="mt-3 text-xl md:text-[1.55rem] font-semibold text-slate-50"
+              >
+                Building systems around people, not the other way around.
+              </h2>
+              <p class="mt-3 text-sm md:text-[0.95rem] text-slate-300/85">
+                Highlights from roles where I designed infrastructure,
+                established practices, and supported engineering teams.
+              </p>
+            </div>
+
+            <div class="relative pl-8" data-animate data-delay="160">
+              <div class="timeline-line"></div>
+
+              <ol class="space-y-7 text-sm">
+                <li class="relative flex gap-4">
+                  <div class="mt-1 flex flex-col items-center">
+                    <div class="timeline-dot"></div>
+                  </div>
+                  <div class="space-y-1">
+                    <div
+                      class="flex flex-wrap items-baseline gap-2 text-[0.9rem]"
+                    >
+                      <span class="font-semibold text-slate-50">
+                        Systems Architect · Independent
+                      </span>
+                      <span class="text-[0.78rem] text-slate-400">
+                        2024 – Present
+                      </span>
+                    </div>
+                    <p class="text-[0.86rem] text-slate-300/90">
+                      Design homelab based platforms that mirror small
+                      production environments, including golden images, secure
+                      remote access, and segmented networks.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="relative flex gap-4">
+                  <div class="mt-1 flex flex-col items-center">
+                    <div class="timeline-dot"></div>
+                  </div>
+                  <div class="space-y-1">
+                    <div
+                      class="flex flex-wrap items-baseline gap-2 text-[0.9rem]"
+                    >
+                      <span class="font-semibold text-slate-50">
+                        IT Help Desk · Campus
+                      </span>
+                      <span class="text-[0.78rem] text-slate-400">
+                        2024 – Present
+                      </span>
+                    </div>
+                    <p class="text-[0.86rem] text-slate-300/90">
+                      Support students and staff with endpoint management,
+                      network issues, and access patterns, translating incidents
+                      into better guardrails and documentation.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="relative flex gap-4">
+                  <div class="mt-1 flex flex-col items-center">
+                    <div class="timeline-dot"></div>
+                  </div>
+                  <div class="space-y-1">
+                    <div
+                      class="flex flex-wrap items-baseline gap-2 text-[0.9rem]"
+                    >
+                      <span class="font-semibold text-slate-50">
+                        Technical leadership · Student orgs
+                      </span>
+                      <span class="text-[0.78rem] text-slate-400">
+                        Ongoing
+                      </span>
+                    </div>
+                    <p class="text-[0.86rem] text-slate-300/90">
+                      Run Linux, networking, and tooling workshops; design
+                      hands-on projects that bring infrastructure concepts into
+                      real environments.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-separator mx-auto max-w-5xl px-6 lg:px-8"></div>
+
+      <!-- Contact Section -->
+      <section id="contact" class="py-16 md:py-20">
+        <div class="mx-auto max-w-5xl px-6 lg:px-8">
+          <div
+            class="flex flex-col items-center text-center gap-4 max-w-lg mx-auto"
+            data-animate
+          >
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400"
+            >
+              Contact
+            </p>
+            <h2 class="text-xl md:text-[1.55rem] font-semibold text-slate-50">
+              Let’s talk about systems.
+            </h2>
+            <p class="text-sm md:text-[0.95rem] text-slate-300/85">
+              Whether you’re thinking about a small lab, a new platform, or a
+              specific reliability problem, I’m always interested in thoughtful
+              infrastructure work.
+            </p>
+
+            <div class="mt-2 flex flex-col gap-2 text-sm">
+              <a
+                href="mailto:joshua.gottus@proton.me"
+                class="text-accent hover:text-indigo-300 transition-colors duration-200"
+              >
+                joshua.gottus@proton.me
+              </a>
+              <a
+                href="https://github.com/jr-cho"
+                class="text-slate-300/90 hover:text-slate-50 transition-colors duration-200"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/jr-cho"
+                class="text-slate-300/90 hover:text-slate-50 transition-colors duration-200"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5">
+      <div
+        class="mx-auto max-w-5xl px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[0.78rem] text-slate-500"
+      >
+        <span
+          >© <span id="footer-year"></span> Joshua. All rights reserved.</span
+        >
+        <span class="text-slate-500/90">
+          Built with a focus on clarity, security, and simplicity.
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      // Intro animation logic
+      function runIntroAnimation() {
+        const overlay = document.getElementById("intro-overlay");
+        const wordEl = document.getElementById("intro-word");
+        if (!overlay || !wordEl) return;
+
+        const rawWord = (wordEl.dataset.word || wordEl.textContent || "JERICHO")
+          .trim()
+          .toUpperCase();
+
+        wordEl.textContent = "";
+
+        const letters = rawWord.split("");
+        const spans = letters.map((ch) => {
+          const span = document.createElement("span");
+          span.textContent = ch;
+          wordEl.appendChild(span);
+          return span;
+        });
+
+        // Step 1: subtle fade-in of the full word
+        requestAnimationFrame(() => {
+          wordEl.classList.add("ready");
+        });
+
+        // Step 2: start removing letters from right to left
+        const startRemovalDelay = 850;
+        const intervalDelay = 120;
+
+        setTimeout(() => {
+          let index = spans.length - 1;
+
+          const intervalId = setInterval(() => {
+            if (index <= 0) {
+              clearInterval(intervalId);
+
+              const finalSpan = spans[0];
+              if (finalSpan) {
+                finalSpan.classList.add("final");
+
+                // Activate glow ring
+                overlay.classList.add("glow-active");
+
+                setTimeout(() => {
+                  finalSpan.classList.add("final-glow");
+                }, 80);
+              }
+
+              // Fade out overlay and reveal site
+              setTimeout(() => {
+                overlay.style.opacity = "0";
+                overlay.style.pointerEvents = "none";
+
+                setTimeout(() => {
+                  overlay.remove();
+                  document.documentElement.classList.add("app-ready");
+                  triggerInitialAnimations();
+                }, 680);
+              }, 850);
+
+              return;
+            }
+
+            const span = spans[index];
+            if (span) {
+              span.classList.add("removed");
+
+              setTimeout(() => {
+                span.style.display = "none";
+              }, 260);
+            }
+
+            index -= 1;
+          }, intervalDelay);
+        }, startRemovalDelay);
+      }
+
+      // IntersectionObserver-based scroll animations
+      function setupScrollAnimations() {
+        const animatedNodes = document.querySelectorAll("[data-animate]");
+        if (!animatedNodes.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+                const delay = el.getAttribute("data-delay");
+                if (delay) {
+                  el.style.transitionDelay = `${parseInt(delay, 10)}ms`;
+                }
+                el.classList.add("is-visible");
+                observer.unobserve(el);
+              }
+            });
+          },
+          {
+            rootMargin: "0px 0px -12% 0px",
+            threshold: 0.18,
+          }
+        );
+
+        animatedNodes.forEach((node) => observer.observe(node));
+      }
+
+      // Trigger any animations that should run once intro is finished
+      function triggerInitialAnimations() {
+        // If sections are already in view, IntersectionObserver will handle them.
+        // This function exists mainly for clarity / potential future hooks.
+      }
+
+      // Navigation scroll behavior
+      function setupNavBehavior() {
+        const nav = document.getElementById("site-nav");
+        if (!nav) return;
+
+        const updateNav = () => {
+          if (window.scrollY > 10) {
+            nav.classList.add("site-nav-scrolled");
+          } else {
+            nav.classList.remove("site-nav-scrolled");
+          }
+        };
+
+        updateNav();
+        window.addEventListener("scroll", updateNav, { passive: true });
+      }
+
+      // Footer year helper
+      function setFooterYear() {
+        const yearSpan = document.getElementById("footer-year");
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        runIntroAnimation();
+        setupScrollAnimations();
+        setupNavBehavior();
+        setFooterYear();
+      });
+    </script>
+  </body>
+</html>
