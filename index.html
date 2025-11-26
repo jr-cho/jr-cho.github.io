@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Joshua · Systems Portfolio</title>
 
-    <!-- SF Pro Display (unofficial web build) -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- SF Pro Display -->
     <link
       rel="stylesheet"
       href="https://fonts.cdnfonts.com/css/sf-pro-display"
@@ -338,6 +341,7 @@
 
         <div class="mx-auto max-w-5xl px-6 lg:px-8">
           <div class="flex flex-col items-center text-center gap-8 md:gap-10">
+
             <div class="space-y-4 md:space-y-5" data-animate data-delay="80">
               <p
                 class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-[11px] uppercase tracking-[0.22em] text-slate-300/90 backdrop-blur-xl"
@@ -345,6 +349,7 @@
                 <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
                 Systems engineering · Cybersecurity · Backend
               </p>
+
               <h1
                 class="text-[2.1rem] leading-tight md:text-[2.7rem] md:leading-tight lg:text-[3rem] lg:leading-snug font-semibold"
               >
@@ -355,15 +360,15 @@
                 ><br class="hidden md:block" />
                 for real world workloads.
               </h1>
+
               <p
                 class="max-w-2xl mx-auto text-sm md:text-[0.95rem] text-slate-300/80"
               >
-                I build secure, observable, and maintainable backends from
-                homelab scale infrastructure to production services that support
-                demanding engineering teams.
+                I build secure, observable, and maintainable backends from homelab scale infrastructure to production services that support demanding engineering teams.
               </p>
             </div>
 
+            <!-- CTA Buttons -->
             <div
               class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4"
               data-animate
@@ -375,60 +380,49 @@
               >
                 View projects
               </a>
-            <div class="relative group mx-auto w-[160px] h-[44px] overflow-hidden">
-              <!-- Default Button State -->
-              <a
-                href="#contact"
-                class="btn-secondary absolute inset-0 inline-flex items-center justify-center
-                      rounded-[22px] border border-white/15 bg-white/5 px-6 py-3 text-xs 
-                      font-semibold uppercase tracking-[0.16em] text-slate-200/90
-                      transition-all duration-300 ease-[var(--ease-soft)]
-                      group-hover:opacity-0 group-hover:scale-95"
-              >
-                Get in touch
-              </a>
 
-              <!-- Hover Icon State -->
-              <div
-                class="absolute inset-0 flex items-center justify-center gap-5
-                      opacity-0 scale-95 pointer-events-none
-                      transition-all duration-300 ease-[var(--ease-soft)]
-                      group-hover:opacity-100 group-hover:scale-100"
-              >
-                <!-- Email -->
+              <!-- Contact Hover-Reveal Button -->
+              <div class="relative group">
+                <!-- Default Button -->
                 <a
-                  href="mailto:joshua.gottus@proton.me"
-                  class="text-accent hover:text-indigo-300 pointer-events-auto"
+                  href="#contact"
+                  class="btn-secondary inline-flex items-center justify-center rounded-[22px] border border-white/15 bg-white/5 px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-200/90 transition-all duration-300 ease-[var(--ease-soft)] group-hover:opacity-0 group-hover:scale-95"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                    <polyline points="3 7 12 13 21 7"></polyline>
-                  </svg>
+                  Get in touch
                 </a>
 
-                <!-- GitHub -->
-                <a
-                  href="https://github.com/jr-cho"
-                  class="text-accent hover:text-indigo-300 pointer-events-auto"
+                <!-- Icons on Hover -->
+                <div
+                  class="pointer-events-none absolute inset-0 flex items-center justify-center gap-5 opacity-0 scale-95 transition-all duration-300 ease-[var(--ease-soft)] group-hover:opacity-100 group-hover:scale-100"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="opacity-80">
-                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.45 7.9 10.98.58.1.8-.24.8-.56v-2.1c-3.22.7-3.9-1.56-3.9-1.56-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.22 1.78 1.22 1.05 1.8 2.75 1.28 3.42.98.1-.76.41-1.28.74-1.57-2.57-.29-5.28-1.32-5.28-5.86 0-1.29.46-2.34 1.22-3.16-.12-.3-.53-1.5.12-3.13 0 0 1-.32 3.3 1.21a11.4 11.4 0 0 1 6 0C17 5.5 18 5.82 18 5.82c.66 1.63.24 2.83.12 3.13.76.82 1.22 1.87 1.22 3.16 0 4.56-2.72 5.56-5.31 5.86.42.36.8 1.07.8 2.18v3.24c0 .32.2.68.8.56A10.99 10.99 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
-                  </svg>
-                </a>
+                  <!-- Email -->
+                  <a
+                    href="mailto:joshua.gottus@proton.me"
+                    class="pointer-events-auto text-slate-300 hover:text-accent transition duration-300"
+                  >
+                    <i class="fa-solid fa-envelope text-xl drop-shadow-[0_0_12px_rgba(59,92,255,0.55)]"></i>
+                  </a>
 
-                <!-- LinkedIn -->
-                <a
-                  href="https://www.linkedin.com/in/jr-cho"
-                  class="text-accent hover:text-indigo-300 pointer-events-auto"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="opacity-80">
-                    <path d="M4.98 3.5c0 1.38-1.14 2.5-2.49 2.5C1.14 6 0 4.88 0 3.5S1.14 1 2.49 1c1.35 0 2.49 1.12 2.49 2.5zM.24 8h4.5v14h-4.5V8zM8 8h4.3v1.9h.06c.6-1.1 2.07-2.2 4.26-2.2C21.2 7.7 22 10.7 22 14.7V22h-4.5v-6.3c0-1.5-.03-3.5-2.14-3.5-2.14 0-2.47 1.66-2.47 3.4V22H8V8z"/>
-                  </svg>
-                </a>
+                  <!-- GitHub -->
+                  <a
+                    href="https://github.com/jr-cho"
+                    class="pointer-events-auto text-slate-300 hover:text-accent transition duration-300"
+                  >
+                    <i class="fa-brands fa-github text-xl drop-shadow-[0_0_12px_rgba(59,92,255,0.55)]"></i>
+                  </a>
+
+                  <!-- LinkedIn -->
+                  <a
+                    href="https://www.linkedin.com/in/jr-cho"
+                    class="pointer-events-auto text-slate-300 hover:text-accent transition duration-300"
+                  >
+                    <i class="fa-brands fa-linkedin text-xl drop-shadow-[0_0_12px_rgba(59,92,255,0.55)]"></i>
+                  </a>
+                </div>
               </div>
             </div>
 
+            <!-- Subtext -->
             <div
               class="mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-4 text-[11px] text-slate-400/90"
               data-animate
@@ -887,60 +881,47 @@
             >
               Contact
             </p>
+
             <h2 class="text-xl md:text-[1.55rem] font-semibold text-slate-50">
               Let’s talk about systems.
             </h2>
+
             <p class="text-sm md:text-[0.95rem] text-slate-300/85">
-              Whether you’re thinking about a small lab, a new platform, or a
-              specific reliability problem, I’m always interested in thoughtful
-              infrastructure work.
+              Whether you’re thinking about a small lab, a new platform, or a specific reliability problem, I’m always interested in thoughtful infrastructure work.
             </p>
 
-<div class="flex items-center justify-center gap-6 mt-3">
+            <!-- Inline Icon Row -->
+            <div class="mt-5 flex items-center justify-center gap-6 text-2xl">
 
-  <!-- Email -->
-  <a
-    href="mailto:joshua.gottus@proton.me"
-    class="hover:text-indigo-300 transition-colors duration-200 text-accent"
-    aria-label="Email"
-  >
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-      stroke-linejoin="round">
-      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-      <polyline points="3 7 12 13 21 7"></polyline>
-    </svg>
-  </a>
+              <!-- Email -->
+              <a
+                href="mailto:joshua.gottus@proton.me"
+                class="text-slate-300 hover:text-accent transition duration-300"
+              >
+                <i class="fa-solid fa-envelope drop-shadow-[0_0_14px_rgba(59,92,255,0.55)]"></i>
+              </a>
 
-  <!-- GitHub -->
-  <a
-    href="https://github.com/jr-cho"
-    class="hover:text-indigo-300 transition-colors duration-200 text-accent"
-    aria-label="GitHub"
-  >
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"
-      class="opacity-80">
-      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.45 7.9 10.98.58.1.8-.24.8-.56v-2.1c-3.22.7-3.9-1.56-3.9-1.56-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.22 1.78 1.22 1.05 1.8 2.75 1.28 3.42.98.1-.76.41-1.28.74-1.57-2.57-.29-5.28-1.32-5.28-5.86 0-1.29.46-2.34 1.22-3.16-.12-.3-.53-1.5.12-3.13 0 0 1-.32 3.3 1.21a11.4 11.4 0 0 1 6 0C17 5.5 18 5.82 18 5.82c.66 1.63.24 2.83.12 3.13.76.82 1.22 1.87 1.22 3.16 0 4.56-2.72 5.56-5.31 5.86.42.36.8 1.07.8 2.18v3.24c0 .32.2.68.8.56A10.99 10.99 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
-    </svg>
-  </a>
+              <!-- GitHub -->
+              <a
+                href="https://github.com/jr-cho"
+                class="text-slate-300 hover:text-accent transition duration-300"
+              >
+                <i class="fa-brands fa-github drop-shadow-[0_0_14px_rgba(59,92,255,0.55)]"></i>
+              </a>
 
-  <!-- LinkedIn -->
-  <a
-    href="https://www.linkedin.com/in/jr-cho"
-    class="hover:text-indigo-300 transition-colors duration-200 text-accent"
-    aria-label="LinkedIn"
-  >
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"
-      class="opacity-80">
-      <path d="M4.98 3.5c0 1.38-1.14 2.5-2.49 2.5C1.14 6 0 4.88 0 3.5S1.14 1 2.49 1c1.35 0 2.49 1.12 2.49 2.5zM.24 8h4.5v14h-4.5V8zM8 8h4.3v1.9h.06c.6-1.1 2.07-2.2 4.26-2.2C21.2 7.7 22 10.7 22 14.7V22h-4.5v-6.3c0-1.5-.03-3.5-2.14-3.5-2.14 0-2.47 1.66-2.47 3.4V22H8V8z"/>
-    </svg>
-  </a>
+              <!-- LinkedIn -->
+              <a
+                href="https://www.linkedin.com/in/jr-cho"
+                class="text-slate-300 hover:text-accent transition duration-300"
+              >
+                <i class="fa-brands fa-linkedin drop-shadow-[0_0_14px_rgba(59,92,255,0.55)]"></i>
+              </a>
 
-</div>
-
+            </div>
           </div>
         </div>
       </section>
+
     </main>
 
     <!-- Footer -->
@@ -949,7 +930,7 @@
         class="mx-auto max-w-5xl px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[0.78rem] text-slate-500"
       >
         <span
-          >© <span id="footer-year"></span> Joshua Gottus. All rights reserved.</span
+          >© <span id="footer-year"></span> Joshua. All rights reserved.</span
         >
         <span class="text-slate-500/90">
           Built with a focus on clarity, security, and simplicity.
