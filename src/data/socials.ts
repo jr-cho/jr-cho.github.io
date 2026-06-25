@@ -13,6 +13,12 @@ export const socials: SocialLink[] = [
     href: "https://github.com/jr-cho",
   },
   {
+    name: "X",
+    icon: "/social/x.svg",
+    darkIcon: "/social/x-dark.svg",
+    href: "https://x.com/jr_cho_",
+  },
+  {
     name: "Linkedin",
     icon: "/social/linkedin.svg",
     darkIcon: "/social/linkedin-dark.svg",
