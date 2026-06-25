@@ -10,28 +10,17 @@ export const socials: SocialLink[] = [
     name: "Github",
     icon: "/social/github.svg",
     darkIcon: "/social/github-dark.svg",
-    href: "https://github.com/CharanMunur",
-  },
-  {
-    name: "X",
-    icon: "/social/x.svg",
-    darkIcon: "/social/x-dark.svg",
-    href: "https://x.com/CharanMunur",
+    href: "https://github.com/jr-cho",
   },
   {
     name: "Linkedin",
     icon: "/social/linkedin.svg",
     darkIcon: "/social/linkedin-dark.svg",
-    href: "https://linkedin.com/in/sai-charan-munur-614623352",
+    href: "https://linkedin.com/in/jr-cho",
   },
   {
     name: "Gmail",
     icon: "/social/gmail.svg",
-    href: "mailto:charanmunur@gmail.com",
-  },
-  {
-    name: "Leetcode",
-    icon: "/social/leetcode.svg",
-    href: "https://leetcode.com/u/CharanMunur/",
+    href: "mailto:joshmg427@gmail.com",
   },
 ];
