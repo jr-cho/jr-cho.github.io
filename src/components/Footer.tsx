@@ -7,7 +7,7 @@ const Footer = () => {
         <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
           <span className="text-base text-muted-foreground">Designed & Developed by</span>
           <span className="text-base font-light tracking-tight text-foreground">
-            Charan Munur
+            Joshua Gottus
           </span>
         </p>
         <div className="sm:shrink-0">

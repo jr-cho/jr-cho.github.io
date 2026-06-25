@@ -31,7 +31,7 @@ const Navbar = () => {
           onClick={() => setIsOpen(false)}
           className="shrink-0 text-lg font-light tracking-normal text-foreground sm:text-xl hover:opacity-80 transition-opacity"
         >
-          @charanmunur
+          @jr_cho_
         </Link>
 
         {/* Desktop Nav */}

@@ -81,7 +81,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
 
         const apiYear = year === currentYear ? "last" : year;
         const res = await fetch(
-          `https://github-contributions-api.jogruber.de/v4/charanmunur?y=${apiYear}`,
+          `https://github-contributions-api.jogruber.de/v4/jr-cho?y=${apiYear}`,
           { signal: controller.signal },
         );
 
