@@ -1,4 +1,3 @@
-import { projectTech } from "@/data/tech";
 import type { TechItem } from "@/data/tech";
 
 export interface Project {
@@ -14,84 +13,64 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: "SuperTodo",
-    imgSrc: "/projects/supertodo.png",
+    name: "Homelab",
+    imgSrc: "/projects/homelab.png",
     description:
-      "A full-featured todo app with priorities, due dates, subtasks, and date-grouped views. Animated with Framer Motion and styled with shadcn/ui for a polished experience.",
+      "Personal homelab for development and service hosting with full GitOps pipeline via Forgejo and Docker Compose.",
     about:
-      "A personal productivity app built to go beyond a basic todo list. It supports subtasks, priority levels, due dates, and groups tasks by date for a cleaner overview. Built with React, shadcn/ui, and Framer Motion, with a heavy focus on animations and a polished user experience.",
+      "A self-hosted development environment built on Proxmox. Uses Forgejo as the Git forge and CI/CD runner, with Docker Compose managing all services. Infrastructure changes are version-controlled and applied via GitHub Actions workflows.",
     features: [
-      "Create, edit, and delete tasks with subtask support and completion tracking",
-      "Priority levels (High, Medium, Low) with visual indicators",
-      "Due date picker with date-grouped task views",
-      "Filter by All, Pending, and Completed — sort by status, priority, or date",
-      "Smooth Framer Motion animations on task add, complete, and delete",
-      "Dark and light theme toggle with persistent preference",
-      "Data persisted via localStorage — survives page refresh",
+      "GitOps pipeline with Forgejo CI/CD — all infra changes tracked in Git",
+      "Docker Compose service orchestration for self-hosted apps",
+      "GitHub Actions integration for automated deployments",
+      "Proxmox hypervisor managing isolated VMs and containers",
     ],
     techStack: [
-      projectTech.react,
-      projectTech.javascript,
-      projectTech.tailwindcss,
-      projectTech.vite,
-      projectTech.motion,
-      projectTech.shadcnui,
+      { name: "Docker", icon: "/tech/docker.svg" },
+      { name: "Linux", icon: "/tech/linux.svg" },
+      { name: "Git", icon: "/tech/git.svg" },
+      { name: "Proxmox", icon: "/tech/proxmox.svg" },
     ],
-    liveLink: "https://supertodo-v1.netlify.app/",
-    githubLink: "https://github.com/CharanMunur/supertodo",
+    liveLink: "#",
+    githubLink: "https://github.com/jr-cho/homelab",
   },
   {
-    name: "Markdown Editor",
-    imgSrc: "/projects/markdowneditor.png",
+    name: "Fraud Detection Algorithm",
+    imgSrc: "/projects/fraud-detection.png",
     description:
-      "A Monaco-powered markdown editor with live GitHub-style preview, PDF export via Print.js, theme toggle, and optional sync scroll to keep both panes aligned.",
+      "Transaction graph system in C modeling user accounts and finances. Detects money-laundering rings via cycle detection.",
     about:
-      "A dual-pane workbench built for writing and previewing markdown in real time. It leverages Monaco Editor for syntax highlighting and code completion, with a live GitHub-styled preview on the right. Shipped with useful features like instant PDF export and synchronized scrolling.",
+      "Designed and implemented a directed graph system in C representing financial transactions between accounts. Applies cycle detection algorithms to identify money-laundering rings — closed loops of transfers used to obscure the origin of funds.",
     features: [
-      "Monaco Editor with syntax highlighting and code completion",
-      "Live GitHub-styled markdown preview in the right pane",
-      "Sync scroll — preview stays aligned with the editor as you type",
-      "PDF export via Print.js with a single click",
-      "Copy entire content to clipboard",
-      "Dark and light theme toggle",
-      "Content persisted via localStorage across sessions",
-      "Bundled default markdown file for instant demo",
+      "Directed graph representation of accounts and transactions in C",
+      "Cycle detection to flag potential money-laundering rings",
+      "Efficient traversal over large transaction datasets",
+      "Modular design separating graph construction, traversal, and reporting",
     ],
     techStack: [
-      projectTech.react,
-      projectTech.javascript,
-      projectTech.tailwindcss,
-      projectTech.vite,
-      projectTech.monaco,
+      { name: "C", icon: "/tech/c.svg" },
     ],
-    liveLink: "https://markdown-editor-v1.netlify.app/",
-    githubLink: "https://github.com/CharanMunur/markdown-editor",
+    liveLink: "#",
+    githubLink: "https://github.com/jr-cho/fraud-detection",
   },
   {
-    name: "Shadcn Scaffold",
-    imgSrc: "/projects/shadcn-scaffold.png",
+    name: "Ground Robot + UAV",
+    imgSrc: "/projects/ground-uav.png",
     description:
-      "An automated CLI tool that instantly bootstraps production-ready React applications with Vite, TypeScript, Tailwind CSS v4, and shadcn/ui.",
+      "Custom embedded C library for ground robot hardware abstraction. Competition system with UAV-to-ground-robot communication.",
     about:
-      "Built to eliminate boilerplate fatigue. shadcn-scaffold is an interactive command-line interface that completely automates modern React project setups. From configuring complex path aliases and injecting dark mode providers, to orchestrating heavy dependencies—this tool condenses hours of manual configuration into a single, lightning-fast terminal command.",
+      "Developed a custom embedded C hardware abstraction library for a competition ground robot, enabling clean driver interfaces for sensors and actuators. Integrated communication between a UAV and ground robot to satisfy competition requirements for coordinated autonomous operation.",
     features: [
-      "Interactive terminal UI built with React Ink for dynamic package selection",
-      "Zero-config integration of Tailwind CSS v4 and shadcn/ui base components",
-      "Injects fully functional Theme Providers and custom Mode Toggles",
-      "Dynamically patches tsconfig.json and Vite settings to fix path aliasing bugs",
-      "Orchestrates child processes (Execa) for reliable dependency resolution",
-      "Published globally to NPM for instant execution via npx or bunx",
+      "Custom embedded C HAL for ground robot sensors and actuators",
+      "UAV-to-ground-robot communication protocol",
+      "Hardware abstraction enabling portable driver code across platforms",
+      "Designed and managed for competition use under real-time constraints",
     ],
     techStack: [
-      projectTech.nodejs,
-      projectTech.typescript,
-      projectTech.ink,
-      projectTech.commander,
-      projectTech.execa,
+      { name: "C", icon: "/tech/c.svg" },
+      { name: "C++", icon: "/tech/cpp.svg" },
     ],
-    liveLink: "https://www.npmjs.com/package/shadcn-scaffold",
-    githubLink: "https://github.com/CharanMunur/shadcn-scaffold",
+    liveLink: "#",
+    githubLink: "https://github.com/jr-cho/ground-uav",
   },
 ];
-
-// End of projects data
