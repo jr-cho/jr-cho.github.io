@@ -73,7 +73,7 @@ const Hero = () => {
               {skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-2 py-1 text-xs text-foreground sm:px-2.5 sm:text-sm transition-colors hover:border-foreground/30"
+                  className="ml-1 inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-white/40 backdrop-blur-sm dark:bg-white/5 px-2 py-1 text-xs text-foreground sm:px-2.5 sm:text-sm transition-colors hover:border-border"
                 >
                   <TechIcon
                     item={skill}
