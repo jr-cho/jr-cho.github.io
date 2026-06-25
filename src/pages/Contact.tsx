@@ -3,13 +3,21 @@ import { socials } from "@/data/socials";
 import { useTheme } from "next-themes";
 import { ArrowUpRight, ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { pageVariants } from "@/lib/motionVariants";
 
 const Contact = () => {
   const { resolvedTheme } = useTheme();
   const navigate = useNavigate();
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-col px-6 pb-8 pt-6 sm:pt-12 sm:pb-24 space-y-8">
+    <motion.main
+      className="mx-auto flex w-full max-w-3xl flex-col px-6 pb-8 pt-6 sm:pt-12 sm:pb-24 space-y-8"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <FadeIn yOffset={10} duration={0.4}>
         <button
           onClick={() => navigate("/")}
@@ -46,7 +54,7 @@ const Contact = () => {
                 rel={
                   social.href.startsWith("mailto") ? undefined : "noreferrer"
                 }
-                className="group flex items-center justify-between rounded-xl border border-dashed border-border/80 bg-card p-4 transition-all hover:border-foreground/30 hover:bg-muted/20"
+                className="group glass-card flex items-center justify-between p-4 transition-all hover:shadow-[0_8px_24px_rgba(249,115,22,0.12)]"
               >
                 <div className="flex items-center gap-4">
                   <img
@@ -68,7 +76,7 @@ const Contact = () => {
           ))}
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 };
 

@@ -6,6 +6,8 @@ import { BiLink } from "react-icons/bi";
 import TechIcon from "@/components/helpers/TechIcon";
 import { useNavigate, useParams } from "react-router-dom";
 import { FadeIn } from "@/components/helpers/FadeIn";
+import { motion } from "framer-motion";
+import { pageVariants } from "@/lib/motionVariants";
 
 const ProjectDetail = () => {
   const navigate = useNavigate();
@@ -23,7 +25,13 @@ const ProjectDetail = () => {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-24 space-y-6">
+    <motion.main
+      className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-24 space-y-6"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <FadeIn yOffset={10} duration={0.4}>
         <button
           onClick={() => navigate("/projects")}
@@ -102,7 +110,7 @@ const ProjectDetail = () => {
           </ul>
         </FadeIn>
       </div>
-    </main>
+    </motion.main>
   );
 };
 

@@ -3,12 +3,20 @@ import { blogs } from "@/data/blog";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { FadeIn } from "@/components/helpers/FadeIn";
+import { motion } from "framer-motion";
+import { pageVariants } from "@/lib/motionVariants";
 
 const Blog = () => {
   const navigate = useNavigate();
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-12 space-y-6">
+    <motion.main
+      className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-12 space-y-6"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <FadeIn yOffset={10} duration={0.4}>
         <button
           onClick={() => navigate("/")}
@@ -17,18 +25,10 @@ const Blog = () => {
           <ChevronLeft size={20} strokeWidth={2.25} /> Back to Home
         </button>
       </FadeIn>
-      <FadeIn
-        delay={0.1}
-        yOffset={15}
-        duration={0.5}
-        className="flex flex-col gap-2"
-      >
-        <h1 className="text-2xl font-light tracking-tight sm:text-3xl">
-          All Blogs
-        </h1>
+      <FadeIn delay={0.1} yOffset={15} duration={0.5} className="flex flex-col gap-2">
+        <h1 className="text-2xl font-light tracking-tight sm:text-3xl">All Blogs</h1>
         <p className="text-muted-foreground font-light text-lg">
-          Thoughts, write-ups, and explorations on design, development, and
-          everything in between.
+          Thoughts, write-ups, and explorations on design, development, and everything in between.
         </p>
       </FadeIn>
       <div className="flex flex-col gap-4 mt-6">
@@ -38,7 +38,7 @@ const Blog = () => {
           </FadeIn>
         ))}
       </div>
-    </main>
+    </motion.main>
   );
 };
 
