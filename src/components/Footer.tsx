@@ -1,5 +1,3 @@
-import VisitorCount from "./VisitorCount";
-
 const Footer = () => {
   return (
     <div className="mx-auto w-full max-w-3xl px-6 pb-12 sm:pb-14">
@@ -10,9 +8,6 @@ const Footer = () => {
             Joshua Gottus
           </span>
         </p>
-        <div className="sm:shrink-0">
-          <VisitorCount />
-        </div>
       </footer>
     </div>
   );

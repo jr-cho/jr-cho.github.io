@@ -31,7 +31,7 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
             className="shrink-0 text-lg font-light tracking-normal text-foreground sm:text-xl hover:opacity-80 transition-opacity"
           >
-            @jr_cho_
+            @jr-cho
           </Link>
 
           {/* Desktop Nav */}
@@ -42,11 +42,10 @@ const Navbar = () => {
                 <Link
                   key={label}
                   to={href}
-                  className={`rounded-md px-3 py-2 text-base font-light transition-colors ${
-                    isActive
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-                  }`}
+                  className={`rounded-md px-3 py-2 text-base font-light transition-colors ${isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    }`}
                 >
                   {label}
                 </Link>
@@ -122,11 +121,10 @@ const Navbar = () => {
                         <Link
                           to={href}
                           onClick={() => setIsOpen(false)}
-                          className={`block rounded-md px-3 py-2.5 text-base font-light tracking-tight transition-colors ${
-                            isActive
-                              ? "bg-primary/10 text-primary"
-                              : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-                          }`}
+                          className={`block rounded-md px-3 py-2.5 text-base font-light tracking-tight transition-colors ${isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                            }`}
                         >
                           {label}
                         </Link>
