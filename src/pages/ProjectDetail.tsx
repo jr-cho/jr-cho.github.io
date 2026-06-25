@@ -18,9 +18,15 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-xl text-muted-foreground">
+      <motion.div
+        className="flex min-h-screen items-center justify-center text-xl text-muted-foreground"
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
         Project not found
-      </div>
+      </motion.div>
     );
   }
 

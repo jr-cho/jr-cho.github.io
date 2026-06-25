@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const BlogCard = ({ title, description, tags, date, readTime }: Blog) => {
   return (
-    <div className="flex flex-col gap-3 bg-card border border-dashed border-border/80 p-4 sm:p-5 rounded-xl w-full overflow-hidden">
+    <div className="glass-card flex flex-col gap-3 p-4 sm:p-5 w-full">
       <div className="flex items-center justify-between">
         <div className="font-mono text-[10px] sm:text-xs tracking-widest text-muted-foreground uppercase">
           {new Date(date).toLocaleDateString("en-US", {
@@ -34,7 +34,7 @@ const BlogCard = ({ title, description, tags, date, readTime }: Blog) => {
         {tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-md border border-dashed border-border/70 bg-background px-2 py-0.5 font-mono text-[10px] sm:text-xs text-muted-foreground"
+            className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] sm:text-xs text-muted-foreground"
           >
             {tag}
           </span>

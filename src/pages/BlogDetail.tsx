@@ -16,9 +16,15 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-xl text-muted-foreground">
+      <motion.div
+        className="flex min-h-screen items-center justify-center text-xl text-muted-foreground"
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
         Blog not found
-      </div>
+      </motion.div>
     );
   }
 
