@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import ComingSoonCard from "./ComingSoonCard";
+import { motion } from "framer-motion";
+import { staggerGrid, cardReveal } from "@/lib/motionVariants";
 
 const ProjectSection = () => {
   return (
@@ -13,13 +15,22 @@ const ProjectSection = () => {
           Projects
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+      <motion.div
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8"
+        variants={staggerGrid}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+      >
         {projects.map((project) => (
-          <ProjectCard key={project.name} {...project} />
+          <motion.div key={project.name} variants={cardReveal}>
+            <ProjectCard {...project} />
+          </motion.div>
         ))}
-
-        <ComingSoonCard />
-      </div>
+        <motion.div variants={cardReveal}>
+          <ComingSoonCard />
+        </motion.div>
+      </motion.div>
       <div className="flex justify-center pt-6">
         <Button asChild size="lg" className="text-base">
           <Link to="/projects">

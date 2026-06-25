@@ -4,12 +4,20 @@ import { projects } from "@/data/projects";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { FadeIn } from "@/components/helpers/FadeIn";
+import { motion } from "framer-motion";
+import { staggerGrid, cardReveal, pageVariants } from "@/lib/motionVariants";
 
 const Projects = () => {
   const navigate = useNavigate();
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-12 space-y-6">
+    <motion.main
+      className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-12 space-y-6"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <FadeIn yOffset={10} duration={0.4}>
         <button
           onClick={() => navigate("/")}
@@ -28,21 +36,26 @@ const Projects = () => {
           All Projects
         </h1>
         <p className="text-muted-foreground font-light text-lg">
-          A collection of my recent work, side projects, and experiments. Built
-          from scratch with a focus on clean code and great user experiences.
+          A collection of things I've built — from embedded systems to cloud infrastructure.
         </p>
       </FadeIn>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 mt-6">
-        {projects.map((project, idx) => (
-          <FadeIn key={project.name} delay={0.15 + idx * 0.05} yOffset={20}>
+      <motion.div
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8"
+        variants={staggerGrid}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-40px" }}
+      >
+        {projects.map((project) => (
+          <motion.div key={project.name} variants={cardReveal}>
             <ProjectCard {...project} />
-          </FadeIn>
+          </motion.div>
         ))}
-        <FadeIn delay={0.15 + projects.length * 0.05} yOffset={20}>
+        <motion.div variants={cardReveal}>
           <ComingSoonCard />
-        </FadeIn>
-      </div>
-    </main>
+        </motion.div>
+      </motion.div>
+    </motion.main>
   );
 };
 

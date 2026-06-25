@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useTheme } from "next-themes";
 import { ActivityCalendar, type Activity } from "react-activity-calendar";
 import { cn } from "@/lib/utils";
+import { useMotionValue, useSpring } from "framer-motion";
 
 type StatsProps = {
   year?: "last" | "all" | number;
@@ -12,28 +13,32 @@ type ContributionResponse = {
 };
 
 const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
 
 const formatActivityDate = (date: string) => {
   const parsed = new Date(date);
-  if (Number.isNaN(parsed.getTime())) {
-    return date;
-  }
-
+  if (Number.isNaN(parsed.getTime())) return date;
   return `${parsed.getDate()} ${monthNames[parsed.getMonth()]} ${parsed.getFullYear()}`;
 };
+
+function AnimatedNumber({ value }: { value: number }) {
+  const motionValue = useMotionValue(0);
+  const spring = useSpring(motionValue, { stiffness: 100, damping: 30 });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    const unsub = spring.on("change", (v) => setDisplay(Math.round(v)));
+    return unsub;
+  }, [spring]);
+
+  useEffect(() => {
+    motionValue.set(value);
+  }, [value, motionValue]);
+
+  return <span>{display.toLocaleString()}</span>;
+}
 
 const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
   const { resolvedTheme } = useTheme();
@@ -51,11 +56,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-
-    setTimeout(() => {
-      el.scrollLeft = el.scrollWidth;
-    }, 10);
-
+    setTimeout(() => { el.scrollLeft = el.scrollWidth; }, 10);
     const onWheel = (e: WheelEvent) => {
       if (e.deltaY !== 0) {
         e.preventDefault();
@@ -63,7 +64,6 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
         el.scrollLeft += e.deltaY;
       }
     };
-
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
   }, [data]);
@@ -75,46 +75,29 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
     const fetchContributions = async () => {
       try {
         if (!active) return;
-
         setLoading(true);
         setError(null);
-
         const apiYear = year === currentYear ? "last" : year;
         const res = await fetch(
           `https://github-contributions-api.jogruber.de/v4/jr-cho?y=${apiYear}`,
           { signal: controller.signal },
         );
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch contribution data");
-        }
-
+        if (!res.ok) throw new Error("Failed to fetch contribution data");
         const json = (await res.json()) as ContributionResponse;
-        if (active) {
-          setData(json.contributions);
-        }
+        if (active) setData(json.contributions);
       } catch (err) {
-        if (err instanceof DOMException && err.name === "AbortError") {
-          return;
-        }
-
-        if (active) {
-          setError(err instanceof Error ? err.message : "Something went wrong");
-        }
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        if (active) setError(err instanceof Error ? err.message : "Something went wrong");
       } finally {
-        if (active) {
-          setLoading(false);
-        }
+        if (active) setLoading(false);
       }
     };
 
     fetchContributions();
-
-    return () => {
-      active = false;
-      controller.abort();
-    };
+    return () => { active = false; controller.abort(); };
   }, [year, currentYear]);
+
+  const total = data.reduce((sum, activity) => sum + activity.count, 0);
 
   return (
     <section id="stats" className="w-full space-y-3">
@@ -126,11 +109,9 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
             </p>
           </div>
         </div>
-
-        <div className="flex flex-wrap items-center gap-2 text-sm ">
+        <div className="flex flex-wrap items-center gap-2 text-sm">
           {yearOptions.map((option) => {
             const isActive = year === option;
-
             return (
               <button
                 key={option}
@@ -149,11 +130,9 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
         </div>
       </div>
 
-      <div className="rounded-2xl border border-dashed border-border/80 bg-card p-4 pb-3 sm:p-6 sm:pb-4">
+      <div className="glass-card p-4 pb-3 sm:p-6 sm:pb-4">
         {loading ? (
-          <p className="text-sm text-muted-foreground">
-            Loading GitHub stats...
-          </p>
+          <p className="text-sm text-muted-foreground">Loading GitHub stats...</p>
         ) : error ? (
           <p className="text-sm text-muted-foreground">{error}</p>
         ) : (
@@ -166,8 +145,8 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
               <div className="min-w-max">
                 <ActivityCalendar
                   data={data}
-                  className="bg-card"
-                  style={{ backgroundColor: "var(--card)" }}
+                  className="bg-transparent"
+                  style={{ backgroundColor: "transparent" }}
                   colorScheme={
                     resolvedTheme === "dark"
                       ? "dark"
@@ -176,20 +155,8 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
                         : undefined
                   }
                   theme={{
-                    light: [
-                      "#ebedf0",
-                      "#9be9a8",
-                      "#40c463",
-                      "#30a14e",
-                      "#216e39",
-                    ],
-                    dark: [
-                      "#212121",
-                      "#0e4429",
-                      "#006d32",
-                      "#26a641",
-                      "#39d353",
-                    ],
+                    light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+                    dark: ["#212121", "#0e4429", "#006d32", "#26a641", "#39d353"],
                   }}
                   blockSize={11}
                   blockMargin={5}
@@ -212,7 +179,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted-foreground">
               <span className="text-xs font-light sm:text-sm">
-                {data.reduce((sum, activity) => sum + activity.count, 0)}{" "}
+                <AnimatedNumber value={total} />{" "}
                 contributions{" "}
                 {year === currentYear ? "in the last year" : `in ${year}`}
               </span>
