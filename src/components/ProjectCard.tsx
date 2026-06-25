@@ -3,6 +3,7 @@ import { BiLink } from "react-icons/bi";
 import TechIcon from "./helpers/TechIcon";
 import type { Project } from "@/data/projects";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ProjectCard = ({
   name,
@@ -13,13 +14,21 @@ const ProjectCard = ({
   githubLink,
 }: Project) => {
   return (
-    <div className="flex flex-col gap-2 bg-card border border-dashed border-border/80 p-2 rounded-xl w-full overflow-hidden">
+    <motion.div
+      className="glass-card flex flex-col gap-2 p-2 w-full"
+      whileHover={{
+        y: -4,
+        boxShadow: "0 12px 40px rgba(249,115,22,0.18)",
+        transition: { type: "spring", stiffness: 280, damping: 22 },
+      }}
+      whileTap={{ scale: 0.98 }}
+    >
       <div className="group/image rounded-lg overflow-hidden">
         <img
           src={imgSrc}
           alt={name}
           loading="lazy"
-          className="rounded-lg border border-border/80 w-full object-cover transition-all duration-500 ease-out group-hover/image:blur-xs"
+          className="rounded-lg border border-white/10 w-full object-cover transition-all duration-500 ease-out group-hover/image:blur-xs"
         />
       </div>
 
@@ -36,9 +45,9 @@ const ProjectCard = ({
         ))}
       </div>
 
-      <div className="w-full h-px bg-border mt-2 mb-1" />
+      <div className="w-full h-px bg-white/10 mt-2 mb-1" />
 
-      <div className="flex items-center justify-between mt-1 px-2 pb-2 ">
+      <div className="flex items-center justify-between mt-1 px-2 pb-2">
         <div className="flex items-center gap-3">
           <a href={liveLink} target="_blank">
             <BiLink className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
@@ -53,7 +62,7 @@ const ProjectCard = ({
           </Link>
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
