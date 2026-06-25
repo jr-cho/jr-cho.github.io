@@ -5,7 +5,6 @@ import { lazy, Suspense } from "react";
 import QuoteSection from "./components/QuoteSection";
 
 const ProjectSection = lazy(() => import("./components/ProjectSection"));
-const BlogSection = lazy(() => import("./components/BlogSection"));
 const Stats = lazy(() => import("./components/Stats"));
 
 const App = () => {
@@ -24,15 +23,6 @@ const App = () => {
           >
             <FadeIn>
               <ProjectSection />
-            </FadeIn>
-          </Suspense>
-          <Suspense
-            fallback={
-              <div className="h-40 animate-pulse bg-muted/20 rounded-xl" />
-            }
-          >
-            <FadeIn>
-              <BlogSection />
             </FadeIn>
           </Suspense>
           <Suspense
