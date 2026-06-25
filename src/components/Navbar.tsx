@@ -8,7 +8,6 @@ import { staggerGrid, cardReveal } from "@/lib/motionVariants";
 
 const navItems = [
   { href: "/projects", label: "Projects" },
-  { href: "/blogs", label: "Blogs" },
 ];
 
 const themes = [
