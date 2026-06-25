@@ -34,7 +34,7 @@ const Hero = () => {
           </div>
           <div className="flex h-full flex-col justify-center gap-2 sm:gap-3">
             <h1 className="flex items-center gap-1 text-right text-2xl font-light tracking-tight sm:text-2xl md:text-3xl">
-              Charan Munur
+              Joshua Gottus
               <span className="text-background">
                 <BadgeCheck color="currentColor" fill="#3b82f6" size={28} />
               </span>
@@ -62,13 +62,13 @@ const Hero = () => {
 
         <motion.div variants={itemVariants} className="space-y-5 sm:space-y-6">
           <h1 className="max-w-full text-[1.7rem] font-normal tracking-tight leading-tight sm:text-[2.05rem] md:text-[2.15rem]">
-            FullStack Developer -{" "}
+            SWE & Platform Engineer -{" "}
             <span className="text-[0.95em] font-light text-muted-foreground sm:text-[0.96em]">
-              Learning Systems, Shipping Clean Interfaces.
+              Building embedded systems, autonomous platforms, and cloud infrastructure.
             </span>
           </h1>
           <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-            I build backend systems and clean interfaces with{" "}
+            I build embedded systems and cloud infrastructure with{" "}
             <span className="inline items-center gap-2 align-middle">
               {skills.map((skill) => (
                 <span
@@ -83,8 +83,7 @@ const Hero = () => {
                 </span>
               ))}
             </span>{" "}
-            — with a keen eye for detail and responsiveness. Also exploring
-            blockchain out of curiosity.
+            — focused on aerospace, autonomous systems, and GitOps infrastructure.
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
