@@ -6,21 +6,24 @@ export interface TechItem {
 
 export const skills: TechItem[] = [
   { name: "C/C++", icon: "/tech/cpp.svg" },
-  { name: "Docker", icon: "/tech/docker.svg" },
+  { name: "Rust", icon: "/tech/rust.svg", darkIcon: "/tech/rust-dark.svg" },
   { name: "Python", icon: "/tech/python.svg" },
+  { name: "Docker", icon: "/tech/docker.svg" },
+  { name: "Kubernetes", icon: "/tech/kubernetes.svg" },
   { name: "TypeScript", icon: "/tech/typescript.svg" },
-  { name: "Node.js", icon: "/tech/nodejs-light.svg", darkIcon: "/tech/nodejs-dark.svg" },
-  { name: "CI/CD", icon: "/tech/git.svg" },
 ];
 
 export const embeddedSkills: TechItem[] = [
   { name: "C", icon: "/tech/c.svg" },
   { name: "C++", icon: "/tech/cpp.svg" },
+  { name: "Rust", icon: "/tech/rust.svg", darkIcon: "/tech/rust-dark.svg" },
   { name: "Python", icon: "/tech/python.svg" },
 ];
 
 export const infraSkills: TechItem[] = [
+  { name: "Kubernetes", icon: "/tech/kubernetes.svg" },
   { name: "Docker", icon: "/tech/docker.svg" },
+  { name: "Terraform", icon: "/tech/terraform.svg" },
   { name: "Proxmox", icon: "/tech/proxmox.svg" },
   { name: "Azure", icon: "/tech/azure.svg" },
   { name: "AWS", icon: "/tech/aws-light.svg", darkIcon: "/tech/aws-dark.svg" },
@@ -29,6 +32,7 @@ export const infraSkills: TechItem[] = [
 
 export const langToolsSkills: TechItem[] = [
   { name: "TypeScript", icon: "/tech/typescript.svg" },
+  { name: "Go", icon: "/tech/go.svg" },
   { name: "Node.js", icon: "/tech/nodejs-light.svg", darkIcon: "/tech/nodejs-dark.svg" },
   { name: "Git", icon: "/tech/git.svg" },
 ];

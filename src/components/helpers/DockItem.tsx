@@ -36,12 +36,19 @@ export function DockItem({ mouseX, to, label, icon: Icon, active }: DockItemProp
       : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
   }`;
 
+  const tooltip = (
+    <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-white/10 bg-card/90 px-2 py-1 text-xs text-foreground opacity-0 shadow-sm backdrop-blur-md transition-opacity duration-150 group-hover:opacity-100">
+      {label}
+    </span>
+  );
+
   if (reduce) {
     return (
-      <div className="flex h-11 w-11 items-center justify-center">
-        <Link to={to} aria-label={label} title={label} className={linkClass}>
+      <div className="group relative flex h-11 w-11 items-center justify-center">
+        <Link to={to} aria-label={label} className={linkClass}>
           <Icon className="size-[20px]" />
         </Link>
+        {tooltip}
       </div>
     );
   }
@@ -50,9 +57,9 @@ export function DockItem({ mouseX, to, label, icon: Icon, active }: DockItemProp
     <motion.div
       ref={ref}
       style={{ width: size, height: size }}
-      className="flex items-center justify-center"
+      className="group relative flex items-center justify-center"
     >
-      <Link to={to} aria-label={label} title={label} className={linkClass}>
+      <Link to={to} aria-label={label} className={linkClass}>
         <motion.span
           style={{ width: iconSize, height: iconSize }}
           className="flex items-center justify-center"
@@ -60,6 +67,7 @@ export function DockItem({ mouseX, to, label, icon: Icon, active }: DockItemProp
           <Icon className="h-full w-full" strokeWidth={1.75} />
         </motion.span>
       </Link>
+      {tooltip}
     </motion.div>
   );
 }
