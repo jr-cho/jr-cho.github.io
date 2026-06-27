@@ -31,7 +31,7 @@ createRoot(document.getElementById("root")!).render(
             <ScrollToTop />
             <IntroSequence />
             <div className="relative flex flex-col min-h-screen bg-background text-foreground">
-              {/* Ambient Apple mesh blob layer — fixed, behind all content */}
+              {/* Ambient instrument grid — fixed, behind all content */}
               <AmbientBackground />
 
               {/* Content layer */}

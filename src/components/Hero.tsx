@@ -32,11 +32,15 @@ const Hero = () => {
             />
           </div>
           <div className="flex h-full flex-col justify-center gap-2 sm:gap-3">
-            <h1 className="text-2xl font-light tracking-tight sm:text-2xl md:text-3xl">
+            <h1 className="text-2xl font-semibold tracking-tight sm:text-2xl md:text-3xl">
               Joshua Gottus
             </h1>
-            <p className="text-sm font-light text-muted-foreground">
+            <p className="flex flex-wrap items-center gap-x-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
               @jr-cho
+              <span className="text-muted-foreground/40">·</span>
+              SWE / PLATFORM
+              <span className="text-muted-foreground/40">·</span>
+              2026
             </p>
             <div className="flex items-start gap-2.5 sm:gap-3">
               {socials.map(({ name, icon, darkIcon, href }) => (
@@ -62,7 +66,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div variants={itemVariants} className="space-y-5 sm:space-y-6">
-          <h1 className="max-w-full text-[1.7rem] font-normal tracking-tight leading-tight sm:text-[2.05rem] md:text-[2.15rem]">
+          <h1 className="max-w-full text-[1.85rem] font-semibold tracking-tight leading-tight sm:text-[2.4rem] md:text-[2.6rem]">
             SWE & Platform Engineer -{" "}
             <span className="text-[0.95em] font-light text-muted-foreground sm:text-[0.96em]">
               Building embedded systems, autonomous platforms, and cloud infrastructure.

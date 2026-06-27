@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useTheme } from "next-themes";
 import { ActivityCalendar, type Activity } from "react-activity-calendar";
 import { cn } from "@/lib/utils";
+import SectionHeader from "./helpers/SectionHeader";
 import { useMotionValue, useSpring } from "framer-motion";
 
 type StatsProps = {
@@ -93,14 +94,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
 
   return (
     <section id="stats" className="w-full space-y-6">
-      <div className="flex flex-col gap-3 pb-3 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-3">
-            <p className="text-2xl font-light tracking-tight sm:text-3xl">
-              GitHub Activity
-            </p>
-          </div>
-        </div>
+      <SectionHeader eyebrow="SOURCE · GITHUB" title="GitHub Activity">
         <div className="flex flex-wrap items-center gap-2 text-sm">
           {yearOptions.map((option) => {
             const isActive = year === option;
@@ -120,7 +114,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
             );
           })}
         </div>
-      </div>
+      </SectionHeader>
 
       <div className="glass-card p-4 pb-3 sm:p-6 sm:pb-4">
         {loading ? (
