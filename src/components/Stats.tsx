@@ -56,16 +56,8 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
+    // Start scrolled to the most recent weeks; let the user scroll natively.
     setTimeout(() => { el.scrollLeft = el.scrollWidth; }, 10);
-    const onWheel = (e: WheelEvent) => {
-      if (e.deltaY !== 0) {
-        e.preventDefault();
-        e.stopPropagation();
-        el.scrollLeft += e.deltaY;
-      }
-    };
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
   }, [data]);
 
   useEffect(() => {
@@ -183,7 +175,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
                 contributions{" "}
                 {year === currentYear ? "in the last year" : `in ${year}`}
               </span>
-              <span>Scroll horizontal to view</span>
+              <span className="hidden sm:inline">Swipe to explore →</span>
             </div>
           </div>
         )}

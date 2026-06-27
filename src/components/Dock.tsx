@@ -1,10 +1,9 @@
 import { House, FolderGit2, Mail, Moon, Sun, TvMinimal } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 import { useTheme } from "next-themes";
 import { motion, useMotionValue } from "framer-motion";
 import { DockItem } from "./helpers/DockItem";
-import Navbar from "./Navbar";
 
 const dockItems = [
   { href: "/", label: "Home", icon: House, match: (p: string) => p === "/" },
@@ -36,10 +35,47 @@ const Dock = () => {
 
   return (
     <>
-      {/* Mobile — keep existing top glass pill */}
-      <div className="sm:hidden">
-        <Navbar />
-      </div>
+      {/* Mobile — top glass pill with full nav + theme */}
+      <nav className="fixed top-3 left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-sm -translate-x-1/2 sm:hidden">
+        <div className="glass-navbar flex items-center justify-between gap-2 px-2 py-1.5">
+          <div className="flex items-center gap-1">
+            {dockItems.map(({ href, label, icon: Icon, match }) => {
+              const isActive = match(location.pathname);
+              return (
+                <Link
+                  key={href}
+                  to={href}
+                  aria-label={label}
+                  className={`flex h-9 w-9 items-center justify-center rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                    isActive
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                  }`}
+                >
+                  <Icon className="size-[18px]" />
+                </Link>
+              );
+            })}
+          </div>
+
+          <Tabs
+            value={currentTheme}
+            onValueChange={(v) => setTheme(v as "light" | "dark" | "system")}
+          >
+            <TabsList className="flex gap-1 rounded-full border border-white/10 bg-white/5 p-1">
+              {themes.map(({ theme, icon: Icon }) => (
+                <TabsTrigger
+                  key={theme}
+                  value={theme}
+                  className="flex h-6 w-6 items-center justify-center rounded-full bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
+                >
+                  <Icon className="size-[15px]" />
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        </div>
+      </nav>
 
       {/* Desktop — floating macOS dock */}
       <nav className="fixed top-4 left-1/2 z-50 hidden -translate-x-1/2 sm:block">

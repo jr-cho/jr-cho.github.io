@@ -54,7 +54,7 @@ const Contact = () => {
                 rel={
                   social.href.startsWith("mailto") ? undefined : "noreferrer"
                 }
-                className="group glass-card flex items-center justify-between p-4 transition-all hover:shadow-[0_8px_24px_rgba(249,115,22,0.12)]"
+                className="group glass-card flex items-center justify-between p-4 transition-all hover:shadow-[0_8px_24px_rgba(0,122,255,0.16)]"
               >
                 <div className="flex items-center gap-4">
                   <img

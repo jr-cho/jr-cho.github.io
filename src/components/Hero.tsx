@@ -1,7 +1,5 @@
-import { BadgeCheck, BookText, ChevronRight } from "lucide-react";
+import { BookText, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
-import TechIcon from "./helpers/TechIcon";
-import { skills } from "@/data/tech";
 import { socials } from "@/data/socials";
 import SocialIcon from "./helpers/SocialIcon";
 import { motion } from "framer-motion";
@@ -12,7 +10,7 @@ import { containerVariants, itemVariants } from "@/lib/motionVariants";
 const Hero = () => {
   return (
     <section
-      className="flex flex-col justify-center pt-32 pb-20 sm:pt-22 sm:pb-12"
+      className="flex flex-col justify-center pt-10 pb-16 sm:pt-12 sm:pb-12"
       id="home"
     >
       <motion.div
@@ -34,12 +32,12 @@ const Hero = () => {
             />
           </div>
           <div className="flex h-full flex-col justify-center gap-2 sm:gap-3">
-            <h1 className="flex items-center gap-1 text-right text-2xl font-light tracking-tight sm:text-2xl md:text-3xl">
+            <h1 className="text-2xl font-light tracking-tight sm:text-2xl md:text-3xl">
               Joshua Gottus
-              <span className="text-background">
-                <BadgeCheck color="currentColor" fill="#3b82f6" size={28} />
-              </span>
             </h1>
+            <p className="text-sm font-light text-muted-foreground">
+              @jr-cho
+            </p>
             <div className="flex items-start gap-2.5 sm:gap-3">
               {socials.map(({ name, icon, darkIcon, href }) => (
                 <a
@@ -71,22 +69,8 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-            I build embedded systems and cloud infrastructure with{" "}
-            <span className="inline items-center gap-2 align-middle">
-              {skills.map((skill) => (
-                <span
-                  key={skill.name}
-                  className="ml-1 inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-white/40 backdrop-blur-sm dark:bg-white/5 px-2 py-1 text-xs text-foreground sm:px-2.5 sm:text-sm transition-all hover:border-border hover:bg-white/60 dark:hover:bg-white/10"
-                >
-                  <TechIcon
-                    item={skill}
-                    className="h-3.5 w-3.5 sm:h-4 sm:w-4"
-                  />
-                  {skill.name}
-                </span>
-              ))}
-            </span>{" "}
-            — focused on aerospace, autonomous systems, and GitOps infrastructure.
+            I build embedded systems, autonomous platforms, and cloud
+            infrastructure — focused on aerospace, real-time control, and GitOps.
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">

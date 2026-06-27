@@ -111,7 +111,7 @@ export const introStagger: Variants = {
   hidden: { opacity: 1 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
   },
 };
 export const introItem: Variants = {
