@@ -8,6 +8,17 @@
 
 **Tech Stack:** Vite 8, React 19, Tailwind CSS v4 (`@tailwindcss/vite`), framer-motion, next-themes, `@fontsource/*` for self-hosted fonts, `react-activity-calendar`.
 
+> **REVISED 2026-06-27 after senior design review.** This plan's original font
+> choice (Space Grotesk/Inter/JetBrains) and several details are superseded. Apply
+> the "Design-review log" in the spec
+> (`docs/superpowers/specs/2026-06-27-ground-station-direction-design.md`):
+> single **Geist** superfamily (`@fontsource-variable/geist` + `-geist-mono`),
+> **real-count eyebrows** (not `FIG.0x`), **no fake `ONLINE` status**, **amber on
+> fills/dot only** (text graphite), **solid lightness amber ramp**, **plain year**
+> (not `REV.`), **hero is largest type**, **stronger card separation**, **dock
+> active = `bg-foreground/10 text-foreground`**, **mono scoped** to readout +
+> eyebrows + data tags.
+
 ## Global Constraints
 
 - Build must stay green: `npm run build` (runs `tsc -b && vite build`) must pass after every task.

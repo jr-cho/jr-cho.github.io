@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 import "react-activity-calendar/tooltips.css";
 import { ThemeProvider } from "./providers/theme-provider.tsx";
 import { BrowserRouter } from "react-router-dom";
