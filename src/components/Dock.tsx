@@ -42,11 +42,11 @@ const Dock = () => {
       </div>
 
       {/* Desktop — floating macOS dock */}
-      <nav className="fixed bottom-5 left-1/2 z-50 hidden -translate-x-1/2 sm:block">
+      <nav className="fixed top-4 left-1/2 z-50 hidden -translate-x-1/2 sm:block">
         <motion.div
-          onMouseMove={(e) => mouseX.set(e.pageX)}
+          onMouseMove={(e) => mouseX.set(e.clientX)}
           onMouseLeave={() => mouseX.set(Infinity)}
-          className="glass-navbar flex items-end gap-2 px-3 py-2"
+          className="glass-navbar flex items-start gap-2 px-3 py-2"
         >
           {dockItems.map(({ href, label, icon: Icon, match }) => {
             const isActive = match(location.pathname);

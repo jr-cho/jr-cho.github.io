@@ -20,8 +20,8 @@ export function DockItem({ mouseX, children }: DockItemProps) {
     const b = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
     return x - b.x - b.width / 2;
   });
-  const sizeSync = useTransform(distance, [-120, 0, 120], [44, 64, 44]);
-  const size = useSpring(sizeSync, { stiffness: 300, damping: 24, mass: 0.2 });
+  const sizeSync = useTransform(distance, [-160, 0, 160], [44, 62, 44]);
+  const size = useSpring(sizeSync, { stiffness: 170, damping: 20, mass: 0.4 });
 
   if (reduce) {
     return (
