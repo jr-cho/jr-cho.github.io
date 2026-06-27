@@ -4,7 +4,7 @@ import "./index.css";
 import "react-activity-calendar/tooltips.css";
 import { ThemeProvider } from "./providers/theme-provider.tsx";
 import { BrowserRouter } from "react-router-dom";
-import Navbar from "./components/Navbar.tsx";
+import Dock from "./components/Dock.tsx";
 import ScrollToTop from "./components/helpers/ScrollToTop.tsx";
 import SmoothScroll from "./components/helpers/SmoothScroll.tsx";
 import Footer from "./components/Footer.tsx";
@@ -27,8 +27,8 @@ createRoot(document.getElementById("root")!).render(
             <AmbientBackground />
 
             {/* Content layer */}
-            <div className="relative z-10 flex flex-col flex-1">
-              <Navbar />
+            <div className="relative z-10 flex flex-col flex-1 pb-24 sm:pb-28">
+              <Dock />
               <div className="flex-1">
                 <AnimatedRoutes />
               </div>
