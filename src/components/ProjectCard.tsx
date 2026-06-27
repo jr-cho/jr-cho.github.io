@@ -49,16 +49,18 @@ const ProjectCard = ({
 
       <div className="flex items-center justify-between mt-1 px-2 pb-2">
         <div className="flex items-center gap-3">
-          <a
-            href={liveLink}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${name} — live site`}
-            title="Live site"
-            className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <BiLink className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-          </a>
+          {liveLink && liveLink !== "#" && (
+            <a
+              href={liveLink}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${name} — live site`}
+              title="Live site"
+              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <BiLink className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
+            </a>
+          )}
           <a
             href={githubLink}
             target="_blank"

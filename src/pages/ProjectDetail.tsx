@@ -67,12 +67,14 @@ const ProjectDetail = () => {
                 View Source
               </Button>
             </a>
-            <a href={project.liveLink} target="_blank" rel="noreferrer">
-              <Button size="lg">
-                <BiLink className="w-4 h-4" />
-                Live Demo
-              </Button>
-            </a>
+            {project.liveLink && project.liveLink !== "#" && (
+              <a href={project.liveLink} target="_blank" rel="noreferrer">
+                <Button size="lg">
+                  <BiLink className="w-4 h-4" />
+                  Live Demo
+                </Button>
+              </a>
+            )}
           </div>
         </Reveal>
         <Reveal delay={0.2}>
