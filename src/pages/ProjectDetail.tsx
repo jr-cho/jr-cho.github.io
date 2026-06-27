@@ -48,7 +48,7 @@ const ProjectDetail = () => {
       </Reveal>
       <div className="flex flex-col gap-6">
         <Reveal delay={0.1}>
-          <h1 className="text-2xl font-light tracking-tight sm:text-4xl">
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">
             {project.name}
           </h1>
           <p className="mt-4 text-lg font-light text-muted-foreground sm:text-xl">
@@ -86,7 +86,7 @@ const ProjectDetail = () => {
           />
         </Reveal>
         <Reveal delay={0.25}>
-          <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
+          <h2 className="mb-4 text-xl font-semibold tracking-tight sm:text-2xl">
             Technologies Used
           </h2>
           <div className="flex flex-wrap items-center gap-2 mt-2">
@@ -102,13 +102,13 @@ const ProjectDetail = () => {
           </div>
         </Reveal>
         <Reveal delay={0.3}>
-          <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
+          <h2 className="mb-4 text-xl font-semibold tracking-tight sm:text-2xl">
             About the Project
           </h2>
           <p className="text-muted-foreground font-light">{project.about}</p>
         </Reveal>
         <Reveal delay={0.35}>
-          <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
+          <h2 className="mb-4 text-xl font-semibold tracking-tight sm:text-2xl">
             Key Features
           </h2>
           <ul className="list-disc pl-5 space-y-2 text-muted-foreground font-light ">

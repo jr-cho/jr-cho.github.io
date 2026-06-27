@@ -32,7 +32,7 @@ export function DockItem({ mouseX, to, label, icon: Icon, active }: DockItemProp
 
   const linkClass = `flex h-full w-full items-center justify-center rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
     active
-      ? "bg-primary/10 text-primary"
+      ? "bg-foreground/10 text-foreground"
       : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
   }`;
 

@@ -57,7 +57,7 @@ export default function IntroSequence() {
 
           <motion.h1
             variants={introItem}
-            className="relative text-4xl font-light tracking-tight text-foreground sm:text-5xl"
+            className="relative text-4xl font-semibold tracking-tight text-foreground sm:text-5xl"
           >
             Joshua Gottus
           </motion.h1>

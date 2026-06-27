@@ -26,7 +26,7 @@ const Projects = () => {
         </button>
       </Reveal>
       <Reveal delay={0.1} className="flex flex-col gap-3">
-        <h1 className="text-2xl font-light tracking-tight sm:text-3xl">
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
           All Projects
         </h1>
         <p className="text-muted-foreground font-light text-lg">

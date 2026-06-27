@@ -11,7 +11,7 @@ const Footer = () => {
           <span className="text-base text-muted-foreground">
             &copy; {year}
           </span>
-          <span className="text-base font-light tracking-tight text-foreground">
+          <span className="text-base font-medium tracking-tight text-foreground">
             Joshua Gottus
           </span>
           <span className="text-base text-muted-foreground">· @jr-cho</span>
