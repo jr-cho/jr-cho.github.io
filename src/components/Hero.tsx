@@ -5,6 +5,7 @@ import { skills } from "@/data/tech";
 import { socials } from "@/data/socials";
 import SocialIcon from "./helpers/SocialIcon";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import { containerVariants, itemVariants } from "@/lib/motionVariants";
 
@@ -46,7 +47,9 @@ const Hero = () => {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="border-0 hover:opacity-80 transition-opacity"
+                  aria-label={name}
+                  title={name}
+                  className="rounded border-0 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <SocialIcon
                     icon={icon}
@@ -73,7 +76,7 @@ const Hero = () => {
               {skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="ml-1 inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-white/40 backdrop-blur-sm dark:bg-white/5 px-2 py-1 text-xs text-foreground sm:px-2.5 sm:text-sm transition-colors hover:border-border"
+                  className="ml-1 inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-white/40 backdrop-blur-sm dark:bg-white/5 px-2 py-1 text-xs text-foreground sm:px-2.5 sm:text-sm transition-all hover:border-border hover:bg-white/60 dark:hover:bg-white/10"
                 >
                   <TechIcon
                     item={skill}
@@ -87,14 +90,12 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
-            <a href="/contact">
-              <Button
-                size="lg"
-              >
+            <Link to="/contact">
+              <Button size="lg">
                 Get in Touch
                 <ChevronRight strokeWidth={2.25} />
               </Button>
-            </a>
+            </Link>
             <a
               href="https://drive.google.com/file/d/1AF0owusJPd1yf1vRwCJcaex04pnEVL_H/view?usp=sharing"
               target="_blank"
