@@ -18,7 +18,7 @@ const ProjectCard = ({
       className="glass-card flex flex-col gap-2 p-3 sm:p-4 w-full"
       whileHover={{
         y: -4,
-        boxShadow: "0 12px 40px rgba(0,122,255,0.20)",
+        boxShadow: "0 12px 40px rgba(28,28,30,0.18)",
         transition: { type: "spring", stiffness: 280, damping: 22 },
       }}
       whileTap={{ scale: 0.98 }}
@@ -33,16 +33,21 @@ const ProjectCard = ({
       </div>
 
       <div className="px-2 mt-4">
-        <div className="text-xl font-light tracking-tight">{name}</div>
+        <div className="text-lg font-semibold tracking-tight">{name}</div>
         <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
           {description}
         </p>
       </div>
 
-      <div className="flex items-center gap-4 px-2 mt-4">
-        {techStack.map((tech) => (
-          <TechIcon key={tech.name} item={tech} className="w-5 h-5" />
-        ))}
+      <div className="flex items-center gap-3 px-2 mt-4">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">
+          stack
+        </span>
+        <div className="flex items-center gap-4">
+          {techStack.map((tech) => (
+            <TechIcon key={tech.name} item={tech} className="w-5 h-5" />
+          ))}
+        </div>
       </div>
 
       <div className="w-full h-px bg-white/10 mt-2 mb-1" />

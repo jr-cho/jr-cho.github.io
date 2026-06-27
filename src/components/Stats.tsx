@@ -123,6 +123,16 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
           <p className="text-sm text-muted-foreground">{error}</p>
         ) : (
           <div className="space-y-3">
+            <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              <span className="flex items-center gap-2">
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ backgroundColor: "var(--accent-amber)" }}
+                />
+                Activity · Signal
+              </span>
+              <span>{year === currentYear ? currentYear : year}</span>
+            </div>
             <div
               ref={scrollRef}
               data-lenis-prevent="true"
@@ -141,8 +151,8 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
                         : undefined
                   }
                   theme={{
-                    light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-                    dark: ["#212121", "#0e4429", "#006d32", "#26a641", "#39d353"],
+                    light: ["#E5E2DB", "#F8D38C", "#F7C25A", "#F6B22F", "#F5A623"],
+                    dark: ["#2A2A2E", "#6E4E12", "#A8741C", "#D49323", "#F5A623"],
                   }}
                   blockSize={11}
                   blockMargin={5}
@@ -163,13 +173,12 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-              <span className="text-xs font-light sm:text-sm">
-                <AnimatedNumber value={total} />{" "}
-                contributions{" "}
-                {year === currentYear ? "in the last year" : `in ${year}`}
+            <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              <span className="text-foreground">
+                <AnimatedNumber value={total} /> contributions ↑{" "}
+                {year === currentYear ? "last 12 mo" : year}
               </span>
-              <span className="hidden sm:inline">Swipe to explore →</span>
+              <span className="hidden sm:inline">swipe to explore →</span>
             </div>
           </div>
         )}
