@@ -2,7 +2,6 @@ import Hero from "./components/Hero";
 import SkillSection from "./components/SkillSection";
 import { Reveal } from "./components/helpers/Reveal";
 import { lazy, Suspense } from "react";
-import QuoteSection from "./components/QuoteSection";
 import { motion } from "framer-motion";
 import { pageDepthVariants } from "./lib/motionVariants";
 
@@ -32,11 +31,6 @@ const App = () => {
           <Suspense fallback={<div className="h-40 animate-pulse bg-white/5 rounded-2xl" />}>
             <Reveal>
               <Stats />
-            </Reveal>
-          </Suspense>
-          <Suspense fallback={<div className="h-24 animate-pulse bg-white/5 rounded-2xl" />}>
-            <Reveal>
-              <QuoteSection />
             </Reveal>
           </Suspense>
         </main>

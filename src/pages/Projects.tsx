@@ -1,5 +1,4 @@
 import ProjectCard from "@/components/ProjectCard";
-import ComingSoonCard from "@/components/ComingSoonCard";
 import { projects } from "@/data/projects";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
@@ -46,9 +45,6 @@ const Projects = () => {
             <ProjectCard {...project} />
           </motion.div>
         ))}
-        <motion.div variants={cardReveal}>
-          <ComingSoonCard />
-        </motion.div>
       </motion.div>
     </motion.main>
   );

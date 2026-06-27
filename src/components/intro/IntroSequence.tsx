@@ -10,7 +10,7 @@ export default function IntroSequence() {
   useEffect(() => {
     if (done) return;
     const dismiss = () => setShow(false);
-    const timer = window.setTimeout(dismiss, 2200);
+    const timer = window.setTimeout(dismiss, 1000);
     window.addEventListener("wheel", dismiss, { passive: true });
     window.addEventListener("touchstart", dismiss, { passive: true });
     window.addEventListener("keydown", dismiss);
@@ -37,9 +37,9 @@ export default function IntroSequence() {
           animate="visible"
           exit={{
             opacity: 0,
-            scale: 1.05,
+            scale: 1.04,
             filter: "blur(8px)",
-            transition: { duration: 0.6, ease: easeOutExpo },
+            transition: { duration: 0.45, ease: easeOutExpo },
           }}
         >
           {/* Apple-Blue blob bloom */}
@@ -52,14 +52,14 @@ export default function IntroSequence() {
             }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.2, ease: easeOutExpo }}
+            transition={{ duration: 0.6, ease: easeOutExpo }}
           />
 
           <motion.h1
             variants={introItem}
             className="relative text-4xl font-light tracking-tight text-foreground sm:text-5xl"
           >
-            @jr-cho
+            Joshua Gottus
           </motion.h1>
         </motion.div>
       )}

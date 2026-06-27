@@ -3,7 +3,6 @@ import { projects } from "@/data/projects";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
-import ComingSoonCard from "./ComingSoonCard";
 import { motion } from "framer-motion";
 import { staggerGrid, cardReveal } from "@/lib/motionVariants";
 
@@ -27,9 +26,6 @@ const ProjectSection = () => {
             <ProjectCard {...project} />
           </motion.div>
         ))}
-        <motion.div variants={cardReveal}>
-          <ComingSoonCard />
-        </motion.div>
       </motion.div>
       <div className="flex justify-center pt-6">
         <Button asChild size="lg" className="text-base">

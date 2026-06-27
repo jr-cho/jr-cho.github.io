@@ -33,7 +33,7 @@ createRoot(document.getElementById("root")!).render(
               <AmbientBackground />
 
               {/* Content layer */}
-              <div className="relative z-10 flex flex-col flex-1 pb-24 sm:pb-28">
+              <div className="relative z-10 flex flex-col flex-1 pt-16 sm:pt-20">
                 <Dock />
                 <div className="flex-1">
                   <AnimatedRoutes />
