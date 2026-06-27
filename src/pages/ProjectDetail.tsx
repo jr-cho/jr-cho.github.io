@@ -5,9 +5,9 @@ import { LuGithub } from "react-icons/lu";
 import { BiLink } from "react-icons/bi";
 import TechIcon from "@/components/helpers/TechIcon";
 import { useNavigate, useParams } from "react-router-dom";
-import { FadeIn } from "@/components/helpers/FadeIn";
+import { Reveal } from "@/components/helpers/Reveal";
 import { motion } from "framer-motion";
-import { pageVariants } from "@/lib/motionVariants";
+import { pageDepthVariants } from "@/lib/motionVariants";
 
 const ProjectDetail = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const ProjectDetail = () => {
     return (
       <motion.div
         className="flex min-h-screen items-center justify-center text-xl text-muted-foreground"
-        variants={pageVariants}
+        variants={pageDepthVariants}
         initial="initial"
         animate="animate"
         exit="exit"
@@ -33,29 +33,29 @@ const ProjectDetail = () => {
   return (
     <motion.main
       className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-24 space-y-6"
-      variants={pageVariants}
+      variants={pageDepthVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
-      <FadeIn yOffset={10} duration={0.4}>
+      <Reveal>
         <button
           onClick={() => navigate("/projects")}
           className="flex w-fit items-center gap-3 text-md font-light tracking-tight text-muted-foreground cursor-pointer duration-200 hover:text-foreground"
         >
           <ChevronLeft size={20} strokeWidth={2.25} /> Back to Projects
         </button>
-      </FadeIn>
+      </Reveal>
       <div className="flex flex-col gap-6">
-        <FadeIn delay={0.1}>
+        <Reveal delay={0.1}>
           <h1 className="text-2xl font-light tracking-tight sm:text-4xl">
             {project.name}
           </h1>
           <p className="mt-4 text-lg font-light text-muted-foreground sm:text-xl">
             {project.description}
           </p>
-        </FadeIn>
-        <FadeIn delay={0.15}>
+        </Reveal>
+        <Reveal delay={0.15}>
           <div className="flex flex-wrap gap-3 sm:gap-4">
             <a href={project.githubLink} target="_blank" rel="noreferrer">
               <Button
@@ -74,16 +74,16 @@ const ProjectDetail = () => {
               </Button>
             </a>
           </div>
-        </FadeIn>
-        <FadeIn delay={0.2}>
+        </Reveal>
+        <Reveal delay={0.2}>
           <img
             className="rounded-lg border border-border border-dashed"
             src={project.imgSrc}
             alt={project.name}
             loading="lazy"
           />
-        </FadeIn>
-        <FadeIn delay={0.25}>
+        </Reveal>
+        <Reveal delay={0.25}>
           <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
             Technologies Used
           </h2>
@@ -98,14 +98,14 @@ const ProjectDetail = () => {
               </span>
             ))}
           </div>
-        </FadeIn>
-        <FadeIn delay={0.3}>
+        </Reveal>
+        <Reveal delay={0.3}>
           <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
             About the Project
           </h2>
           <p className="text-muted-foreground font-light">{project.about}</p>
-        </FadeIn>
-        <FadeIn delay={0.35}>
+        </Reveal>
+        <Reveal delay={0.35}>
           <h2 className="mb-4 text-xl font-light tracking-tight sm:text-2xl">
             Key Features
           </h2>
@@ -114,7 +114,7 @@ const ProjectDetail = () => {
               <li key={idx}>{feature}</li>
             ))}
           </ul>
-        </FadeIn>
+        </Reveal>
       </div>
     </motion.main>
   );
