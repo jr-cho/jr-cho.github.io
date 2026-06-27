@@ -12,6 +12,7 @@ import AnimatedRoutes from "./components/helpers/AnimatedRoutes.tsx";
 import AmbientBackground from "./components/AmbientBackground.tsx";
 import { IntroProvider } from "./providers/intro-provider.tsx";
 import IntroSequence from "./components/intro/IntroSequence.tsx";
+import { MotionConfig } from "framer-motion";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById("root")!).render(
       enableSystem
       disableTransitionOnChange
     >
+      <MotionConfig reducedMotion="user">
       <IntroProvider>
         <SmoothScroll>
           <BrowserRouter>
@@ -42,6 +44,7 @@ createRoot(document.getElementById("root")!).render(
           </BrowserRouter>
         </SmoothScroll>
       </IntroProvider>
+      </MotionConfig>
     </ThemeProvider>
   </StrictMode>,
 );

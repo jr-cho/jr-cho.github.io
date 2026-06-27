@@ -56,7 +56,7 @@ const Dock = () => {
                   to={href}
                   aria-label={label}
                   title={label}
-                  className={`flex h-full w-full items-center justify-center rounded-xl transition-colors ${
+                  className={`flex h-full w-full items-center justify-center rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     isActive
                       ? "bg-primary/10 text-primary"
                       : "text-muted-foreground hover:bg-white/5 hover:text-foreground"

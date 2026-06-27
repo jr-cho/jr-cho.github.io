@@ -1,14 +1,8 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
+import { IntroContext } from "./intro-context";
 
 const KEY = "intro-played";
-
-const Ctx = createContext<{ done: boolean; finish: () => void }>({
-  done: true,
-  finish: () => {},
-});
-
-export const useIntro = () => useContext(Ctx);
 
 export function IntroProvider({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
@@ -26,5 +20,9 @@ export function IntroProvider({ children }: { children: React.ReactNode }) {
     setDone(true);
   };
 
-  return <Ctx.Provider value={{ done, finish }}>{children}</Ctx.Provider>;
+  return (
+    <IntroContext.Provider value={{ done, finish }}>
+      {children}
+    </IntroContext.Provider>
+  );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { introStagger, introItem, easeOutExpo } from "@/lib/motionVariants";
-import { useIntro } from "@/providers/intro-provider";
+import { useIntro } from "@/providers/intro-context";
 
 export default function IntroSequence() {
   const { done, finish } = useIntro();
@@ -30,6 +30,7 @@ export default function IntroSequence() {
     <AnimatePresence onExitComplete={finish}>
       {show && (
         <motion.div
+          aria-hidden="true"
           className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-background"
           variants={introStagger}
           initial="hidden"
