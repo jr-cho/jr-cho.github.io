@@ -10,6 +10,8 @@ import SmoothScroll from "./components/helpers/SmoothScroll.tsx";
 import Footer from "./components/Footer.tsx";
 import AnimatedRoutes from "./components/helpers/AnimatedRoutes.tsx";
 import AmbientBackground from "./components/AmbientBackground.tsx";
+import { IntroProvider } from "./providers/intro-provider.tsx";
+import IntroSequence from "./components/intro/IntroSequence.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,24 +21,27 @@ createRoot(document.getElementById("root")!).render(
       enableSystem
       disableTransitionOnChange
     >
-      <SmoothScroll>
-        <BrowserRouter>
-          <ScrollToTop />
-          <div className="relative flex flex-col min-h-screen bg-background text-foreground">
-            {/* Ambient Apple mesh blob layer — fixed, behind all content */}
-            <AmbientBackground />
+      <IntroProvider>
+        <SmoothScroll>
+          <BrowserRouter>
+            <ScrollToTop />
+            <IntroSequence />
+            <div className="relative flex flex-col min-h-screen bg-background text-foreground">
+              {/* Ambient Apple mesh blob layer — fixed, behind all content */}
+              <AmbientBackground />
 
-            {/* Content layer */}
-            <div className="relative z-10 flex flex-col flex-1 pb-24 sm:pb-28">
-              <Dock />
-              <div className="flex-1">
-                <AnimatedRoutes />
+              {/* Content layer */}
+              <div className="relative z-10 flex flex-col flex-1 pb-24 sm:pb-28">
+                <Dock />
+                <div className="flex-1">
+                  <AnimatedRoutes />
+                </div>
+                <Footer />
               </div>
-              <Footer />
             </div>
-          </div>
-        </BrowserRouter>
-      </SmoothScroll>
+          </BrowserRouter>
+        </SmoothScroll>
+      </IntroProvider>
     </ThemeProvider>
   </StrictMode>,
 );
