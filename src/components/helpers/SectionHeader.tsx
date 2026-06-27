@@ -9,7 +9,7 @@ type SectionHeaderProps = {
 export default function SectionHeader({ eyebrow, title, children }: SectionHeaderProps) {
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-end justify-between gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex flex-col gap-1.5">
           <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
             {eyebrow}
@@ -18,7 +18,7 @@ export default function SectionHeader({ eyebrow, title, children }: SectionHeade
             {title}
           </h2>
         </div>
-        {children}
+        {children && <div className="shrink-0">{children}</div>}
       </div>
       {/* hairline rule with corner ticks */}
       <div className="relative h-px w-full bg-border">
