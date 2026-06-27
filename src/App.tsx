@@ -18,7 +18,7 @@ const App = () => {
       exit="exit"
     >
       <div className="relative z-10 flex flex-col flex-1">
-        <main className="mx-auto flex w-full max-w-3xl flex-col gap-20 px-6 pb-6 sm:gap-20 sm:pb-20 overflow-x-hidden">
+        <main className="mx-auto flex w-full max-w-3xl flex-col gap-24 px-6 pb-12 sm:gap-32 sm:px-8 sm:pb-28 overflow-x-hidden">
           <Hero />
           <Reveal>
             <SkillSection />

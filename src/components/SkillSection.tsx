@@ -8,7 +8,7 @@ const SkillSection = () => {
   const [isInline, setIsInline] = useState(false);
 
   return (
-    <section id="skills" className="w-full space-y-6">
+    <section id="skills" className="w-full space-y-8">
       <div className="flex items-center justify-between">
         <p className="text-2xl font-light tracking-tight sm:text-3xl">
           Technologies

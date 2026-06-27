@@ -10,7 +10,7 @@ import { containerVariants, itemVariants } from "@/lib/motionVariants";
 const Hero = () => {
   return (
     <section
-      className="flex flex-col justify-center pt-10 pb-16 sm:pt-12 sm:pb-12"
+      className="flex flex-col justify-center pt-12 pb-10 sm:pt-20 sm:pb-16"
       id="home"
     >
       <motion.div
@@ -21,7 +21,7 @@ const Hero = () => {
       >
         <motion.div
           variants={itemVariants}
-          className="flex items-center mb-8 gap-[14px] sm:gap-[20px]"
+          className="flex items-center mb-10 gap-[14px] sm:mb-12 sm:gap-[24px]"
         >
           <div className="flex shrink-0 items-center justify-center">
             {/* avatar */}

@@ -15,7 +15,7 @@ const ProjectCard = ({
 }: Project) => {
   return (
     <motion.div
-      className="glass-card flex flex-col gap-2 p-2 w-full"
+      className="glass-card flex flex-col gap-2 p-3 sm:p-4 w-full"
       whileHover={{
         y: -4,
         boxShadow: "0 12px 40px rgba(0,122,255,0.20)",

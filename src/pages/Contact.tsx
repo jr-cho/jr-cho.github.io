@@ -12,7 +12,7 @@ const Contact = () => {
 
   return (
     <motion.main
-      className="mx-auto flex w-full max-w-3xl flex-col px-6 pb-8 pt-6 sm:pt-12 sm:pb-24 space-y-8"
+      className="mx-auto flex w-full max-w-3xl flex-col px-6 pb-12 pt-10 sm:px-8 sm:pt-20 sm:pb-24 space-y-8"
       variants={pageDepthVariants}
       initial="initial"
       animate="animate"

@@ -11,7 +11,7 @@ const Projects = () => {
 
   return (
     <motion.main
-      className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-12 space-y-6"
+      className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-10 pb-12 sm:px-8 sm:pt-20 sm:pb-24 space-y-8"
       variants={pageDepthVariants}
       initial="initial"
       animate="animate"
@@ -25,7 +25,7 @@ const Projects = () => {
           <ChevronLeft size={20} strokeWidth={2.25} /> Back to Home
         </button>
       </Reveal>
-      <Reveal delay={0.1} className="flex flex-col gap-2">
+      <Reveal delay={0.1} className="flex flex-col gap-3">
         <h1 className="text-2xl font-light tracking-tight sm:text-3xl">
           All Projects
         </h1>

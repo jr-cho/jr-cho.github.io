@@ -92,7 +92,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
   const total = data.reduce((sum, activity) => sum + activity.count, 0);
 
   return (
-    <section id="stats" className="w-full space-y-3">
+    <section id="stats" className="w-full space-y-6">
       <div className="flex flex-col gap-3 pb-3 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-3">

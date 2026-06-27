@@ -8,14 +8,14 @@ import { staggerGrid, cardReveal } from "@/lib/motionVariants";
 
 const ProjectSection = () => {
   return (
-    <section id="projects" className="w-full space-y-6">
+    <section id="projects" className="w-full space-y-8">
       <div className="flex gap-3">
         <p className="text-2xl font-light tracking-tight sm:text-3xl">
           Projects
         </p>
       </div>
       <motion.div
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8"
+        className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-8"
         variants={staggerGrid}
         initial="hidden"
         whileInView="visible"
@@ -27,7 +27,7 @@ const ProjectSection = () => {
           </motion.div>
         ))}
       </motion.div>
-      <div className="flex justify-center pt-6">
+      <div className="flex justify-center pt-8">
         <Button asChild size="lg" className="text-base">
           <Link to="/projects">
             View all Projects
