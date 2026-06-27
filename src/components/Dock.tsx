@@ -1,5 +1,5 @@
 import { House, FolderGit2, Mail, Moon, Sun, TvMinimal } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 import { useTheme } from "next-themes";
 import { motion, useMotionValue } from "framer-motion";
@@ -48,25 +48,16 @@ const Dock = () => {
           onMouseLeave={() => mouseX.set(Infinity)}
           className="glass-navbar flex items-start gap-2 px-3 py-2"
         >
-          {dockItems.map(({ href, label, icon: Icon, match }) => {
-            const isActive = match(location.pathname);
-            return (
-              <DockItem key={href} mouseX={mouseX}>
-                <Link
-                  to={href}
-                  aria-label={label}
-                  title={label}
-                  className={`flex h-full w-full items-center justify-center rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                    isActive
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
-                  }`}
-                >
-                  <Icon className="size-[20px]" />
-                </Link>
-              </DockItem>
-            );
-          })}
+          {dockItems.map(({ href, label, icon, match }) => (
+            <DockItem
+              key={href}
+              mouseX={mouseX}
+              to={href}
+              label={label}
+              icon={icon}
+              active={match(location.pathname)}
+            />
+          ))}
 
           <div
             className="mx-1 h-8 w-px self-center bg-white/10"
