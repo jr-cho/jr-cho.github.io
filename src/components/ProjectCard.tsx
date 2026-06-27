@@ -19,16 +19,15 @@ const ProjectCard = ({
       whileHover={{
         y: -4,
         boxShadow: "0 12px 40px rgba(28,28,30,0.18)",
-        transition: { type: "spring", stiffness: 280, damping: 22 },
+        transition: { type: "spring", stiffness: 200, damping: 24 },
       }}
-      whileTap={{ scale: 0.98 }}
     >
       <div className="group/image rounded-lg overflow-hidden">
         <img
           src={imgSrc}
           alt={name}
           loading="lazy"
-          className="rounded-lg border border-white/10 w-full object-cover transition-all duration-500 ease-out group-hover/image:blur-xs"
+          className="rounded-lg border border-white/10 w-full object-cover transition-transform duration-500 ease-out group-hover/image:scale-[1.02]"
         />
       </div>
 

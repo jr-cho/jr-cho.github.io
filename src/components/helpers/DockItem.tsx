@@ -25,9 +25,9 @@ export function DockItem({ mouseX, to, label, icon: Icon, active }: DockItemProp
     const b = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
     return x - b.x - b.width / 2;
   });
-  const sizeSync = useTransform(distance, [-170, 0, 170], [44, 82, 44]);
+  const sizeSync = useTransform(distance, [-170, 0, 170], [44, 62, 44]);
   const size = useSpring(sizeSync, { stiffness: 170, damping: 20, mass: 0.4 });
-  const iconSync = useTransform(distance, [-170, 0, 170], [20, 36, 20]);
+  const iconSync = useTransform(distance, [-170, 0, 170], [20, 30, 20]);
   const iconSize = useSpring(iconSync, { stiffness: 170, damping: 20, mass: 0.4 });
 
   const linkClass = `flex h-full w-full items-center justify-center rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
