@@ -72,3 +72,54 @@ export const cardReveal: Variants = {
     transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
   },
 };
+
+// Cinematic easings
+export const easeOutExpo = [0.16, 1, 0.3, 1] as const;
+export const easeOutBack = [0.34, 1.56, 0.64, 1] as const;
+
+// Section reveal — blur + scale + lift (the "cinematic" feel)
+export const revealVariants: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.965, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: easeOutExpo },
+  },
+};
+
+// Route transition — depth push
+export const pageDepthVariants: Variants = {
+  initial: { opacity: 0, scale: 0.97, filter: "blur(6px)" },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.45, ease: easeOutExpo },
+  },
+  exit: {
+    opacity: 0,
+    scale: 1.02,
+    filter: "blur(6px)",
+    transition: { duration: 0.25, ease: "easeIn" },
+  },
+};
+
+// Intro overlay
+export const introStagger: Variants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
+  },
+};
+export const introItem: Variants = {
+  hidden: { opacity: 0, y: 16, filter: "blur(10px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: easeOutExpo },
+  },
+};
