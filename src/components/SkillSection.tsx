@@ -34,7 +34,7 @@ const SkillSection = () => {
                 {row.items.map((skill) => (
                   <span
                     key={skill.name}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-card px-2.5 py-1.5 text-sm font-light text-foreground transition-colors hover:border-border hover:bg-accent"
+                    className="group inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-card px-2.5 py-1.5 text-sm font-light text-foreground transition-colors hover:border-border hover:bg-accent"
                   >
                     <TechIcon item={skill} className="h-4 w-4" />
                     {skill.name}

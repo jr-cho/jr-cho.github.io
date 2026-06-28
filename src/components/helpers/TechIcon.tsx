@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import type { CSSProperties } from "react";
 import type { TechItem } from "@/data/tech";
 
 type TechIconProps = {
@@ -6,24 +7,20 @@ type TechIconProps = {
   className?: string;
 };
 
+// Mono-graphite at rest, true brand color on hover (own hover or parent `.group`).
 const TechIcon = ({ item, className }: TechIconProps) => {
+  const { Icon } = item;
   return (
-    <span className="relative inline-flex shrink-0">
-      <img
-        src={item.icon}
-        alt={item.name}
-        loading="lazy"
-        className={cn("block", className, item.darkIcon ? "dark:hidden" : "")}
-      />
-      {item.darkIcon ? (
-        <img
-          src={item.darkIcon}
-          alt={item.name}
-          loading="lazy"
-          className={cn("hidden", className, "dark:block")}
-        />
-      ) : null}
-    </span>
+    <Icon
+      aria-label={item.name}
+      role="img"
+      style={{ "--brand": item.brand } as CSSProperties}
+      className={cn(
+        "shrink-0 text-foreground/75 transition-colors duration-300",
+        "hover:text-[var(--brand)] group-hover:text-[var(--brand)]",
+        className
+      )}
+    />
   );
 };
 

@@ -1,4 +1,4 @@
-import type { TechItem } from "@/data/tech";
+import { tech, type TechItem } from "@/data/tech";
 
 export interface Project {
   name: string;
@@ -25,12 +25,7 @@ export const projects: Project[] = [
       "GitHub Actions integration for automated deployments",
       "Proxmox hypervisor managing isolated VMs and containers",
     ],
-    techStack: [
-      { name: "Docker", icon: "/tech/docker.svg" },
-      { name: "Linux", icon: "/tech/linux.svg" },
-      { name: "Git", icon: "/tech/git.svg" },
-      { name: "Proxmox", icon: "/tech/proxmox.svg" },
-    ],
+    techStack: [tech.docker, tech.linux, tech.git, tech.proxmox],
     liveLink: "#",
     githubLink: "https://github.com/jr-cho/homelab",
   },
@@ -47,9 +42,7 @@ export const projects: Project[] = [
       "Efficient traversal over large transaction datasets",
       "Modular design separating graph construction, traversal, and reporting",
     ],
-    techStack: [
-      { name: "C", icon: "/tech/c.svg" },
-    ],
+    techStack: [tech.c],
     liveLink: "#",
     githubLink: "https://github.com/jr-cho/fraud-detection",
   },
@@ -66,10 +59,7 @@ export const projects: Project[] = [
       "Hardware abstraction enabling portable driver code across platforms",
       "Designed and managed for competition use under real-time constraints",
     ],
-    techStack: [
-      { name: "C", icon: "/tech/c.svg" },
-      { name: "C++", icon: "/tech/cpp.svg" },
-    ],
+    techStack: [tech.c, tech.cpp],
     liveLink: "#",
     githubLink: "https://github.com/jr-cho/ground-uav",
   },
