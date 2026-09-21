@@ -2,20 +2,28 @@ import type { IconType } from "react-icons";
 import {
   SiC,
   SiCplusplus,
-  SiRust,
   SiPython,
-  SiKubernetes,
-  SiDocker,
-  SiTerraform,
-  SiProxmox,
-  SiLinux,
   SiTypescript,
-  SiGo,
+  SiRos,
+  SiStmicroelectronics,
+  SiEspressif,
+  SiArduino,
+  SiRaspberrypi,
+  SiNvidia,
+  SiKicad,
+  SiLinux,
+  SiDocker,
+  SiCmake,
   SiGit,
-  SiNodedotjs,
+  SiGitlab,
+  SiGithubactions,
+  SiGnubash,
+  SiMqtt,
+  SiFastapi,
+  SiNextdotjs,
+  SiSqlite,
 } from "react-icons/si";
-import { FaAws } from "react-icons/fa6";
-import { TbBrandAzure } from "react-icons/tb";
+import { TbCpu, TbBrandPowershell, TbDrone } from "react-icons/tb";
 
 export interface TechItem {
   name: string;
@@ -27,49 +35,63 @@ export interface TechItem {
 export const tech = {
   c: { name: "C", Icon: SiC, brand: "#A8B9CC" },
   cpp: { name: "C++", Icon: SiCplusplus, brand: "#00599C" },
-  rust: { name: "Rust", Icon: SiRust, brand: "#F74C00" },
   python: { name: "Python", Icon: SiPython, brand: "#3776AB" },
-  kubernetes: { name: "Kubernetes", Icon: SiKubernetes, brand: "#326CE5" },
-  docker: { name: "Docker", Icon: SiDocker, brand: "#2496ED" },
-  terraform: { name: "Terraform", Icon: SiTerraform, brand: "#7B42BC" },
-  proxmox: { name: "Proxmox", Icon: SiProxmox, brand: "#E57000" },
-  azure: { name: "Azure", Icon: TbBrandAzure, brand: "#0078D4" },
-  aws: { name: "AWS", Icon: FaAws, brand: "#FF9900" },
-  linux: { name: "Linux", Icon: SiLinux, brand: "#FCC624" },
   typescript: { name: "TypeScript", Icon: SiTypescript, brand: "#3178C6" },
-  go: { name: "Go", Icon: SiGo, brand: "#00ADD8" },
-  nodejs: { name: "Node.js", Icon: SiNodedotjs, brand: "#5FA04E" },
+  freertos: { name: "FreeRTOS", Icon: TbCpu, brand: "#7DB700" },
+  ros2: { name: "ROS 2", Icon: SiRos, brand: "#22314E" },
+  ardupilot: { name: "ArduPilot", Icon: TbDrone, brand: "#1F8CE6" },
+  stm32: { name: "STM32", Icon: SiStmicroelectronics, brand: "#03234B" },
+  esp32: { name: "ESP32", Icon: SiEspressif, brand: "#E7352C" },
+  arduino: { name: "Arduino", Icon: SiArduino, brand: "#00878F" },
+  raspberrypi: { name: "Raspberry Pi", Icon: SiRaspberrypi, brand: "#A22846" },
+  jetson: { name: "Jetson Orin", Icon: SiNvidia, brand: "#76B900" },
+  kicad: { name: "KiCad", Icon: SiKicad, brand: "#314CB0" },
+  linux: { name: "Linux", Icon: SiLinux, brand: "#FCC624" },
+  docker: { name: "Docker", Icon: SiDocker, brand: "#2496ED" },
+  cmake: { name: "CMake", Icon: SiCmake, brand: "#064F8C" },
   git: { name: "Git", Icon: SiGit, brand: "#F05032" },
+  gitlab: { name: "GitLab CI/CD", Icon: SiGitlab, brand: "#FC6D26" },
+  githubactions: { name: "GitHub Actions", Icon: SiGithubactions, brand: "#2088FF" },
+  bash: { name: "Bash", Icon: SiGnubash, brand: "#4EAA25" },
+  powershell: { name: "PowerShell", Icon: TbBrandPowershell, brand: "#5391FE" },
+  mqtt: { name: "MQTT", Icon: SiMqtt, brand: "#660066" },
+  fastapi: { name: "FastAPI", Icon: SiFastapi, brand: "#009688" },
+  nextjs: { name: "Next.js", Icon: SiNextdotjs, brand: "#888888" },
+  sqlite: { name: "SQLite", Icon: SiSqlite, brand: "#0F80CC" },
 } satisfies Record<string, TechItem>;
-
-export const embeddedSkills: TechItem[] = [tech.c, tech.cpp, tech.rust, tech.python];
-
-export const infraSkills: TechItem[] = [
-  tech.kubernetes,
-  tech.docker,
-  tech.terraform,
-  tech.proxmox,
-  tech.azure,
-  tech.aws,
-  tech.linux,
-];
-
-export const langToolsSkills: TechItem[] = [tech.typescript, tech.go, tech.nodejs, tech.git];
 
 export const skillRows: { direction: "left" | "right"; category: string; items: TechItem[] }[] = [
   {
     direction: "left",
-    category: "Embedded & Systems",
-    items: embeddedSkills,
+    category: "Languages",
+    items: [tech.c, tech.cpp, tech.python, tech.typescript, tech.bash, tech.powershell],
   },
   {
     direction: "right",
-    category: "Infrastructure",
-    items: infraSkills,
+    category: "Embedded & Robotics",
+    items: [
+      tech.freertos,
+      tech.ros2,
+      tech.ardupilot,
+      tech.stm32,
+      tech.esp32,
+      tech.arduino,
+      tech.raspberrypi,
+      tech.jetson,
+      tech.kicad,
+    ],
   },
   {
     direction: "left",
-    category: "Languages & Tools",
-    items: langToolsSkills,
+    category: "Tools & Infrastructure",
+    items: [
+      tech.linux,
+      tech.docker,
+      tech.cmake,
+      tech.git,
+      tech.gitlab,
+      tech.githubactions,
+      tech.mqtt,
+    ],
   },
 ];

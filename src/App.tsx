@@ -1,5 +1,6 @@
 import Hero from "./components/Hero";
 import SkillSection from "./components/SkillSection";
+import EducationSection from "./components/EducationSection";
 import { Reveal } from "./components/helpers/Reveal";
 import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
@@ -28,6 +29,9 @@ const App = () => {
               <ProjectSection />
             </Reveal>
           </Suspense>
+          <Reveal>
+            <EducationSection />
+          </Reveal>
           <Suspense fallback={<div className="h-40 animate-pulse bg-white/5 rounded-2xl" />}>
             <Reveal>
               <Stats />

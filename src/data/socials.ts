@@ -25,8 +25,9 @@ export const socials: SocialLink[] = [
     href: "https://linkedin.com/in/jr-cho",
   },
   {
-    name: "Gmail",
-    icon: "/social/gmail.svg",
-    href: "mailto:joshmg427@gmail.com",
+    name: "Email",
+    icon: "/social/mail.svg",
+    darkIcon: "/social/mail-dark.svg",
+    href: "mailto:joshua.gottus@proton.me",
   },
 ];

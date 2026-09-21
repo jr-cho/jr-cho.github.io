@@ -38,9 +38,9 @@ const Hero = () => {
             <p className="flex flex-wrap items-center gap-x-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
               @jr-cho
               <span className="text-muted-foreground/40">·</span>
-              SWE / PLATFORM
+              EMBEDDED / ROBOTICS
               <span className="text-muted-foreground/40">·</span>
-              2026
+              Lakeland, FL
             </p>
             <div className="flex items-start gap-2.5 sm:gap-3">
               {socials.map(({ name, icon, darkIcon, href }) => (
@@ -67,14 +67,25 @@ const Hero = () => {
 
         <motion.div variants={itemVariants} className="space-y-5 sm:space-y-6">
           <h1 className="max-w-full text-[1.85rem] font-semibold tracking-tight leading-tight sm:text-[2.4rem] md:text-[2.6rem]">
-            SWE & Platform Engineer -{" "}
+            Embedded Software Engineer.{" "}
             <span className="text-[0.95em] font-light text-muted-foreground sm:text-[0.96em]">
-              Building embedded systems, autonomous platforms, and cloud infrastructure.
+              Firmware, robotics, and autonomy software that runs on real hardware.
             </span>
           </h1>
           <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-            I build embedded systems, autonomous platforms, and cloud
-            infrastructure — focused on aerospace, real-time control, and GitOps.
+            I write C and C++ for microcontrollers, FreeRTOS, and ROS 2. I most
+            recently worked as an embedded software engineering intern at a
+            defense contracting company. I study Computer Science with a
+            Cybersecurity concentration at Florida Polytechnic University.
+          </p>
+          <p className="flex flex-wrap items-center gap-x-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ backgroundColor: "var(--accent-amber)" }}
+            />
+            U.S. Citizen
+            <span className="text-muted-foreground/40">·</span>
+            Security Clearance Eligible
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">

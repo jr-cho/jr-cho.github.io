@@ -37,9 +37,8 @@ const Contact = () => {
           </Reveal>
           <Reveal delay={0.15}>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-              I'm always open to discussing new projects, creative ideas, or
-              opportunities to be part of your visions. Whether you have a
-              question or just want to say hi, feel free to drop a message!
+              I am looking for embedded software and robotics roles after I
+              graduate in May 2027. Email is the fastest way to reach me.
             </p>
           </Reveal>
         </div>

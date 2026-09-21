@@ -30,7 +30,7 @@ const Projects = () => {
           All Projects
         </h1>
         <p className="text-muted-foreground font-light text-lg">
-          A collection of things I've built — from embedded systems to cloud infrastructure.
+          Firmware, robotics, and embedded systems I have built.
         </p>
       </Reveal>
       <motion.div

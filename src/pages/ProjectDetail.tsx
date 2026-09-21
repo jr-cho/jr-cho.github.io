@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { projects } from "@/data/projects";
+import { projects, projectSlug } from "@/data/projects";
 import { ChevronLeft } from "lucide-react";
 import { LuGithub } from "react-icons/lu";
 import { BiLink } from "react-icons/bi";
 import TechIcon from "@/components/helpers/TechIcon";
+import ProjectCover from "@/components/helpers/ProjectCover";
 import { useNavigate, useParams } from "react-router-dom";
 import { Reveal } from "@/components/helpers/Reveal";
 import { motion } from "framer-motion";
@@ -12,9 +13,7 @@ import { pageDepthVariants } from "@/lib/motionVariants";
 const ProjectDetail = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
-  const project = projects.find(
-    (p) => p.name.toLowerCase().replace(/\s+/g, "-") === slug,
-  );
+  const project = projects.find((p) => projectSlug(p.name) === slug);
 
   if (!project) {
     return (
@@ -48,6 +47,21 @@ const ProjectDetail = () => {
       </Reveal>
       <div className="flex flex-col gap-6">
         <Reveal delay={0.1}>
+          <p className="mb-3 flex flex-wrap items-center gap-x-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+            {project.period}
+            {project.role && (
+              <>
+                <span className="text-muted-foreground/40">·</span>
+                {project.role}
+              </>
+            )}
+            {project.status && (
+              <>
+                <span className="text-muted-foreground/40">·</span>
+                {project.status}
+              </>
+            )}
+          </p>
           <h1 className="text-2xl font-semibold tracking-tight sm:text-4xl">
             {project.name}
           </h1>
@@ -57,17 +71,19 @@ const ProjectDetail = () => {
         </Reveal>
         <Reveal delay={0.15}>
           <div className="flex flex-wrap gap-3 sm:gap-4">
-            <a href={project.githubLink} target="_blank" rel="noreferrer">
-              <Button
-                variant="outline"
-                className="border border-border border-dashed"
-                size="lg"
-              >
-                <LuGithub className="w-4 h-4" />
-                View Source
-              </Button>
-            </a>
-            {project.liveLink && project.liveLink !== "#" && (
+            {project.githubLink && (
+              <a href={project.githubLink} target="_blank" rel="noreferrer">
+                <Button
+                  variant="outline"
+                  className="border border-border border-dashed"
+                  size="lg"
+                >
+                  <LuGithub className="w-4 h-4" />
+                  View Source
+                </Button>
+              </a>
+            )}
+            {project.liveLink && (
               <a href={project.liveLink} target="_blank" rel="noreferrer">
                 <Button size="lg">
                   <BiLink className="w-4 h-4" />
@@ -78,12 +94,22 @@ const ProjectDetail = () => {
           </div>
         </Reveal>
         <Reveal delay={0.2}>
-          <img
-            className="rounded-lg border border-border border-dashed"
-            src={project.imgSrc}
-            alt={project.name}
-            loading="lazy"
-          />
+          {project.imgSrc ? (
+            <img
+              className="rounded-lg border border-border border-dashed"
+              src={project.imgSrc}
+              alt={project.name}
+              loading="lazy"
+            />
+          ) : (
+            <ProjectCover
+              name={project.name}
+              period={project.period}
+              status={project.status}
+              highlights={project.highlights}
+              className="border-dashed"
+            />
+          )}
         </Reveal>
         <Reveal delay={0.25}>
           <h2 className="mb-4 text-xl font-semibold tracking-tight sm:text-2xl">
