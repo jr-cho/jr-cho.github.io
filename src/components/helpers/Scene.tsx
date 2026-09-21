@@ -55,7 +55,7 @@ const Scene = ({ children, id, layer, tone = "light", className }: SceneProps) =
         style={{ zIndex: layer }}
         className={cn(
           "relative",
-          tone === "dark" ? "bg-[#0A0A0A] text-white dark:bg-[#171717]" : "bg-background",
+          tone === "dark" ? "bg-[#0A0A0A] text-white" : "bg-background",
         )}
       >
         <motion.div style={{ y, opacity, scale }} className={cn("origin-top", className)}>

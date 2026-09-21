@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Pause, Play } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { MediaSlot } from "@/data/media";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,22 @@ const ParallaxFrame = ({ slot, speed = 10, className, captionClassName }: Parall
   const y = useTransform(scrollYProgress, [0, 1], [`${-speed}%`, `${speed}%`]);
   const src = slot.src ? `${import.meta.env.BASE_URL}${slot.src.replace(/^\//, "")}` : undefined;
   const isVideo = src?.endsWith(".mp4") || src?.endsWith(".webm");
+  // Each video has a still frame beside it with the same name: clip.mp4 → clip.jpg.
+  const poster = isVideo ? src?.replace(/\.(mp4|webm)$/, ".jpg") : undefined;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  // Reduced motion: hold the still frame until the viewer presses play.
+  useEffect(() => {
+    if (reduce) videoRef.current?.pause();
+  }, [reduce]);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) void video.play();
+    else video.pause();
+  };
 
   return (
     <figure className={className}>
@@ -35,13 +52,19 @@ const ParallaxFrame = ({ slot, speed = 10, className, captionClassName }: Parall
         >
           {src && isVideo ? (
             <video
+              ref={videoRef}
               src={src}
-              autoPlay
+              poster={poster}
+              autoPlay={!reduce}
               muted
               loop
               playsInline
+              preload={reduce ? "none" : "auto"}
+              onPlay={() => setPlaying(true)}
+              onPause={() => setPlaying(false)}
+              onClick={togglePlay}
               aria-label={slot.alt}
-              className="h-full w-full object-cover"
+              className="h-full w-full cursor-pointer object-cover"
             />
           ) : src ? (
             <img
@@ -62,6 +85,16 @@ const ParallaxFrame = ({ slot, speed = 10, className, captionClassName }: Parall
             </div>
           )}
         </motion.div>
+        {src && isVideo && (
+          <button
+            type="button"
+            onClick={togglePlay}
+            aria-label={playing ? "Pause video" : "Play video"}
+            className="absolute bottom-3 right-3 flex size-9 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            {playing ? <Pause className="size-4" /> : <Play className="size-4" />}
+          </button>
+        )}
       </div>
       {slot.caption && (
         <figcaption

@@ -28,29 +28,11 @@ export const media = {
     caption: "Bench",
   },
   portrait: {
-    src: "/assets/musashi.svg",
-    alt: "Ink portrait of Miyamoto Musashi",
+    src: "/media/portrait.jpg",
+    alt: "Joshua Gottus in front of an IEEE banner",
     hint: "Headshot or working portrait, square",
     aspect: "1 / 1",
-    imgClassName: "invert",
-  },
-  flightControl: {
-    alt: "Flight Control Data Bus hardware",
-    hint: "Flight controller board, or a wiring or task diagram. Portrait",
-    aspect: "4 / 5",
-    caption: "Flight Control Data Bus",
-  },
-  secon: {
-    alt: "SoutheastCon 2026 ground robot close-up",
-    hint: "SECON robot close-up or the team at the event. Landscape",
-    aspect: "3 / 2",
-    caption: "SoutheastCon 2026 Ground Robot",
-  },
-  microtransit: {
-    alt: "MicroTransit GPS Tracker board and live map",
-    hint: "Tracker board with modem, or the live map on a screen. Square",
-    aspect: "1 / 1",
-    caption: "MicroTransit GPS Tracker",
+    imgClassName: "grayscale",
   },
   skills: {
     alt: "Oscilloscope trace on the bench",
@@ -69,9 +51,54 @@ export const media = {
   },
 } satisfies Record<string, MediaSlot>;
 
-// Project detail pages use these slots, keyed by project slug.
-export const projectMedia: Record<string, MediaSlot> = {
-  "flight-control-data-bus": media.flightControl,
-  "southeastcon-2026-ground-robot": media.secon,
-  "microtransit-gps-tracker": media.microtransit,
+// Project detail pages, keyed by project slug. The cover runs full width
+// under the title. Gallery items sit in a row further down the page.
+// Projects missing here keep the typographic cover.
+export interface ProjectMedia {
+  cover: MediaSlot;
+  gallery: MediaSlot[];
+}
+
+export const projectMedia: Record<string, ProjectMedia> = {
+  "southeastcon-2026-ground-robot": {
+    cover: {
+      src: "/media/projects/secon-bench.mp4",
+      alt: "The ground robot on the floor next to a laptop showing a firmware build",
+      hint: "SECON robot, landscape",
+      aspect: "16 / 9",
+    },
+    gallery: [
+      {
+        src: "/media/projects/secon-run.mp4",
+        alt: "The robot driving on the SoutheastCon 2026 competition field",
+        hint: "Robot on the field, portrait",
+        aspect: "9 / 16",
+        caption: "Demo Run on the competition field",
+      },
+      {
+        src: "/media/projects/secon-team.jpg",
+        alt: "Some of the Florida Poly team with the robot in front of the IEEE backdrop",
+        hint: "Team photo, landscape",
+        aspect: "16 / 9",
+        caption: "Some of the SoutheastCon 2026 team",
+      },
+    ],
+  },
+  "microtransit-gps-tracker": {
+    cover: {
+      src: "/media/projects/gps-drive.mp4",
+      alt: "The tracker board in a car while a laptop shows its position on a live map",
+      hint: "Tracker on a live map, landscape",
+      aspect: "16 / 9",
+    },
+    gallery: [
+      {
+        src: "/media/projects/gps-board.jpg",
+        alt: "Tracker hardware: modem shield, GPS antenna, and LTE antenna",
+        hint: "Tracker board, portrait",
+        aspect: "9 / 16",
+        caption: "Tracker hardware",
+      },
+    ],
+  },
 };

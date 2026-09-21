@@ -29,3 +29,6 @@ dist-ssr
 .vercel
 .env*
 .superpowers/
+
+# Full-size photo and video originals, kept out of the deployed site
+media-originals/

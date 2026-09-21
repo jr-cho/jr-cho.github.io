@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 const details = [
   { label: "Location", value: "Lakeland, FL" },
-  { label: "Available", value: "Full-time from May 2027" },
+  { label: "Available", value: "Internships now · Full-time from May 2027" },
   { label: "Status", value: "U.S. Citizen · Clearance Eligible" },
 ];
 
@@ -41,8 +41,9 @@ const Contact = () => {
       <div className="space-y-10">
         <h1 className="display text-[clamp(3.5rem,12vw,11rem)]">Contact</h1>
         <p className="max-w-[28ch] font-serif text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.1]">
-          I am looking for embedded software and robotics roles after I
-          graduate in May 2027. Email is the fastest way to reach me.
+          I am open to embedded software and robotics internships now, and
+          full-time roles after I graduate in May 2027. Email is the fastest
+          way to reach me.
         </p>
       </div>
 

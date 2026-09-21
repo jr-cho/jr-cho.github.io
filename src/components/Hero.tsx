@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { motion, useTransform } from "framer-motion";
 import ArrowLink from "./helpers/ArrowLink";
 import ParallaxFrame from "./helpers/ParallaxFrame";
+import ScrollZoom from "./helpers/ScrollZoom";
 import Scene, { useScene } from "./helpers/Scene";
 import ScrollWords from "./helpers/ScrollWords";
 import Drift from "./helpers/Drift";
@@ -21,8 +22,8 @@ const Line = ({ children, className }: { children: ReactNode; className?: string
 );
 
 const claims = [
-  "16th of 84 at IEEE SoutheastCon 2026",
   "Embedded intern at a defense contractor",
+  "Open to work",
   "B.S. Computer Science, May 2027",
 ];
 
@@ -62,8 +63,15 @@ const HeroContent = () => {
           <motion.li
             key={claim}
             variants={itemVariants}
-            className={cn(i === 1 && "md:text-center", i === 2 && "md:text-right")}
+            className={cn(i === 1 && "flex items-center gap-2 md:justify-center", i === 2 && "md:text-right")}
           >
+            {i === 1 && (
+              <span
+                aria-hidden="true"
+                className="h-2 w-2 rounded-full"
+                style={{ backgroundColor: "var(--accent-amber)" }}
+              />
+            )}
             {claim}
           </motion.li>
         ))}
@@ -105,7 +113,9 @@ const AboutContent = () => (
     </div>
 
     <Drift distance={-120} className="md:col-span-4 md:col-start-9">
-      <ParallaxFrame slot={media.portrait} speed={10} />
+      <ScrollZoom from={0.8}>
+        <ParallaxFrame slot={media.portrait} speed={10} />
+      </ScrollZoom>
       <motion.div
         className="mt-3 flex flex-wrap gap-x-4 font-mono text-xs uppercase tracking-wider"
         variants={containerVariants}

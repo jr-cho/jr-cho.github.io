@@ -1,9 +1,16 @@
 import { useEffect, useState, useRef } from "react";
-import { useTheme } from "next-themes";
 import { ActivityCalendar, type Activity } from "react-activity-calendar";
 import { cn } from "@/lib/utils";
 import { shell } from "@/lib/layout";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import {
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
+import Drift from "./helpers/Drift";
 
 type StatsProps = {
   year?: "last" | "all" | number;
@@ -24,30 +31,29 @@ const formatActivityDate = (date: string) => {
   return `${parsed.getDate()} ${monthNames[parsed.getMonth()]} ${parsed.getFullYear()}`;
 };
 
-function AnimatedNumber({ value }: { value: number }) {
-  const motionValue = useMotionValue(0);
-  const spring = useSpring(motionValue, { stiffness: 100, damping: 30 });
-  const [display, setDisplay] = useState(0);
-
-  useEffect(() => {
-    const unsub = spring.on("change", (v) => setDisplay(Math.round(v)));
-    return unsub;
-  }, [spring]);
-
-  useEffect(() => {
-    motionValue.set(value);
-  }, [value, motionValue]);
-
-  return <span>{display.toLocaleString()}</span>;
+// Counts up from zero as `progress` goes from 0 to 1. Only this span
+// re-renders on scroll, not the calendar next to it.
+function ScrollNumber({ value, progress }: { value: number; progress: MotionValue<number> }) {
+  const reduce = useReducedMotion();
+  const [p, setP] = useState(() => progress.get());
+  useMotionValueEvent(progress, "change", setP);
+  // Ease out, so the count slows as it lands on the total.
+  const eased = reduce ? 1 : 1 - (1 - p) ** 3;
+  return <span>{Math.round(value * eased).toLocaleString()}</span>;
 }
 
 const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
-  const { resolvedTheme } = useTheme();
   const [data, setData] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [year, setYear] = useState<StatsProps["year"]>(initialYear);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  // 0 → 1 while the section travels from the viewport bottom to its center.
+  // The count and the calendar both build up along this path.
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "center center"] });
+  const calendarClip = useTransform(scrollYProgress, [0.2, 1], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
   const currentYear = new Date().getFullYear();
   const yearOptions: number[] = Array.from(
     { length: Math.max(currentYear - 2025 + 1, 1) },
@@ -96,13 +102,13 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
   if (error) return null;
 
   return (
-    <div className={cn(shell, "grid grid-cols-1 gap-10 md:grid-cols-12")}>
-      <div className="space-y-6 md:col-span-4">
+    <div ref={sectionRef} className={cn(shell, "grid grid-cols-1 gap-10 md:grid-cols-12")}>
+      <Drift distance={-80} className="space-y-6 md:col-span-4">
         <h2 className="font-serif text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.1]">
           GitHub contributions, {year === currentYear ? "last 12 months" : year}
         </h2>
         <p className="display text-[clamp(3.5rem,7vw,6rem)]">
-          {loading ? "—" : <AnimatedNumber value={total} />}
+          {loading ? "—" : <ScrollNumber value={total} progress={scrollYProgress} />}
         </p>
         <div className="flex items-center gap-4 text-[15px]">
           {yearOptions.map((option) => (
@@ -120,15 +126,11 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
             </button>
           ))}
         </div>
-      </div>
+      </Drift>
 
       <div className="md:col-span-8 md:self-end">
-        <motion.div
-          initial={{ clipPath: "inset(0 100% 0 0)" }}
-          whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-        >
+        {/* The calendar wipes in from the left in step with the count */}
+        <motion.div style={{ clipPath: reduce ? "none" : calendarClip }}>
         <div
           ref={scrollRef}
           data-lenis-prevent="true"
@@ -140,10 +142,9 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
                 data={data}
                 className="bg-transparent"
                 style={{ backgroundColor: "transparent" }}
-                colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
+                colorScheme="light"
                 theme={{
                   light: ["#EDEDED", "#C4C4C4", "#8C8C8C", "#4A4A4A", "#0A0A0A"],
-                  dark: ["#1C1C1C", "#3D3D3D", "#6E6E6E", "#A8A8A8", "#FFFFFF"],
                 }}
                 blockSize={11}
                 blockMargin={3}

@@ -1,6 +1,4 @@
-import { Moon, Sun } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useTheme } from "next-themes";
 import { resumeHref } from "@/data/socials";
 import { cn } from "@/lib/utils";
 
@@ -10,11 +8,9 @@ const navItems = [
 ];
 
 // Top bar: a grey pill with the wordmark and links on the left,
-// a second pill with the resume link and theme toggle on the right.
+// a second pill with the resume link on the right.
 const Dock = () => {
   const location = useLocation();
-  const { resolvedTheme, setTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex items-start justify-between gap-3 p-3 sm:p-4">
@@ -59,14 +55,6 @@ const Dock = () => {
             style={{ backgroundColor: "var(--accent-amber)" }}
           />
         </a>
-        <button
-          type="button"
-          onClick={() => setTheme(isDark ? "light" : "dark")}
-          aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-          className="flex h-10 w-10 items-center justify-center rounded transition-opacity hover:opacity-60"
-        >
-          {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-        </button>
       </div>
     </header>
   );

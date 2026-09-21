@@ -5,6 +5,9 @@ import { Link, useParams } from "react-router-dom";
 import { Reveal } from "@/components/helpers/Reveal";
 import ArrowLink from "@/components/helpers/ArrowLink";
 import ProjectCover from "@/components/helpers/ProjectCover";
+import ParallaxFrame from "@/components/helpers/ParallaxFrame";
+import ScrollZoom from "@/components/helpers/ScrollZoom";
+import { projectMedia } from "@/data/media";
 import { motion } from "framer-motion";
 import { pageDepthVariants } from "@/lib/motionVariants";
 import { shell } from "@/lib/layout";
@@ -17,6 +20,12 @@ const Row = ({ label, children }: { label: string; children: ReactNode }) => (
     <div className="md:col-span-9">{children}</div>
   </Reveal>
 );
+
+// "9 / 16" is portrait, "16 / 9" is landscape.
+const isPortrait = (aspect: string) => {
+  const [w, h] = aspect.split("/").map(Number);
+  return w < h;
+};
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -36,6 +45,7 @@ const ProjectDetail = () => {
 
   const next = projects[(index + 1) % projects.length];
   const meta = [project.period, project.role, project.status].filter(Boolean);
+  const mediaSet = projectMedia[projectSlug(project.name)];
 
   return (
     <motion.main
@@ -69,7 +79,11 @@ const ProjectDetail = () => {
       </div>
 
       <Reveal>
-        {project.imgSrc ? (
+        {mediaSet ? (
+          <ScrollZoom from={0.9}>
+            <ParallaxFrame slot={mediaSet.cover} speed={6} />
+          </ScrollZoom>
+        ) : project.imgSrc ? (
           <img className="w-full rounded-lg" src={project.imgSrc} alt={project.name} loading="lazy" />
         ) : (
           <ProjectCover
@@ -98,6 +112,22 @@ const ProjectDetail = () => {
           ))}
         </ol>
       </Row>
+
+      {mediaSet && mediaSet.gallery.length > 0 && (
+        <Row label="In the field">
+          <div className="grid grid-cols-1 items-end gap-6 sm:grid-cols-12">
+            {mediaSet.gallery.map((slot) => (
+              <ScrollZoom
+                key={slot.src}
+                from={0.9}
+                className={isPortrait(slot.aspect) ? "sm:col-span-4" : "sm:col-span-8"}
+              >
+                <ParallaxFrame slot={slot} speed={6} />
+              </ScrollZoom>
+            ))}
+          </div>
+        </Row>
+      )}
 
       <Row label="Stack">
         <p className="font-mono text-sm uppercase tracking-wider">

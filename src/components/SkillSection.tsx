@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { skillRows } from "@/data/tech";
 import ScrollWords from "./helpers/ScrollWords";
+import TechDrift from "./helpers/TechDrift";
 import { containerVariants, itemVariants } from "@/lib/motionVariants";
 import { shell } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -12,7 +13,7 @@ const SkillSection = () => {
   const [active, setActive] = useState(0);
 
   return (
-    <div className={cn(shell, "space-y-16 sm:space-y-24")}>
+    <div className={cn(shell, "relative space-y-16 sm:space-y-24")}>
       <ScrollWords
         text="I write the software between the sensor and the motor: drivers, control loops, and the tools that test them."
         className="display max-w-[22ch] text-[clamp(2rem,4.6vw,4.25rem)] leading-[0.95]"
@@ -76,6 +77,8 @@ const SkillSection = () => {
           </AnimatePresence>
         </div>
       </div>
+
+      <TechDrift rows={skillRows.map((row) => row.items)} active={active} />
     </div>
   );
 };
