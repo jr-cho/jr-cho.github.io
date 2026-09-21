@@ -12,8 +12,6 @@ import SmoothScroll from "./components/helpers/SmoothScroll.tsx";
 import Footer from "./components/Footer.tsx";
 import AnimatedRoutes from "./components/helpers/AnimatedRoutes.tsx";
 import AmbientBackground from "./components/AmbientBackground.tsx";
-import { IntroProvider } from "./providers/intro-provider.tsx";
-import IntroSequence from "./components/intro/IntroSequence.tsx";
 import { MotionConfig } from "framer-motion";
 
 createRoot(document.getElementById("root")!).render(
@@ -25,11 +23,9 @@ createRoot(document.getElementById("root")!).render(
       disableTransitionOnChange
     >
       <MotionConfig reducedMotion="user">
-      <IntroProvider>
         <SmoothScroll>
           <BrowserRouter>
             <ScrollToTop />
-            <IntroSequence />
             <div className="relative flex flex-col min-h-screen bg-background text-foreground">
               {/* Ambient instrument grid — fixed, behind all content */}
               <AmbientBackground />
@@ -45,7 +41,6 @@ createRoot(document.getElementById("root")!).render(
             </div>
           </BrowserRouter>
         </SmoothScroll>
-      </IntroProvider>
       </MotionConfig>
     </ThemeProvider>
   </StrictMode>,

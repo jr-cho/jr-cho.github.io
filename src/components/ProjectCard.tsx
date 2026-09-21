@@ -4,7 +4,6 @@ import TechIcon from "./helpers/TechIcon";
 import ProjectCover from "./helpers/ProjectCover";
 import { projectSlug, type Project } from "@/data/projects";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
 const ProjectCard = ({
   name,
@@ -19,13 +18,8 @@ const ProjectCard = ({
   githubLink,
 }: Project) => {
   return (
-    <motion.div
-      className="glass-card flex h-full flex-col gap-2 p-3 sm:p-4 w-full"
-      whileHover={{
-        y: -4,
-        boxShadow: "0 12px 40px rgba(28,28,30,0.18)",
-        transition: { type: "spring", stiffness: 200, damping: 24 },
-      }}
+    <div
+      className="glass-card flex h-full flex-col gap-2 p-3 sm:p-4 w-full transition-colors hover:border-foreground/25"
     >
       <div className="group/image rounded-lg overflow-hidden">
         {imgSrc ? (
@@ -33,7 +27,7 @@ const ProjectCard = ({
             src={imgSrc}
             alt={name}
             loading="lazy"
-            className="rounded-lg border border-white/10 w-full object-cover transition-transform duration-500 ease-out group-hover/image:scale-[1.02]"
+            className="rounded-lg border border-white/10 w-full object-cover"
           />
         ) : (
           <ProjectCover
@@ -41,7 +35,6 @@ const ProjectCard = ({
             period={period}
             status={status}
             highlights={highlights}
-            className="transition-transform duration-500 ease-out group-hover/image:scale-[1.02]"
           />
         )}
       </div>
@@ -69,7 +62,7 @@ const ProjectCard = ({
         </div>
       </div>
 
-      <div className="w-full h-px bg-white/10 mt-2 mb-1" />
+      <div className="w-full h-px bg-border mt-2 mb-1" />
 
       <div className="flex items-center justify-between mt-1 px-2 pb-2">
         <div className="flex items-center gap-3">
@@ -102,7 +95,7 @@ const ProjectCard = ({
           <Link to={`/projects/${projectSlug(name)}`}>Details →</Link>
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -32,7 +32,7 @@ const Contact = () => {
         <div className="flex flex-col gap-10 justify-center">
           <Reveal delay={0.1}>
             <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Let's connect
+              Contact
             </h1>
           </Reveal>
           <Reveal delay={0.15}>
@@ -53,7 +53,7 @@ const Contact = () => {
                 rel={
                   social.href.startsWith("mailto") ? undefined : "noreferrer"
                 }
-                className="group glass-card flex items-center justify-between p-4 transition-all hover:shadow-[0_8px_24px_rgba(28,28,30,0.14)]"
+                className="group glass-card flex items-center justify-between p-4 transition-colors hover:border-foreground/25"
               >
                 <div className="flex items-center gap-4">
                   <img

@@ -21,14 +21,14 @@ const App = () => {
       <div className="relative z-10 flex flex-col flex-1">
         <main className="mx-auto flex w-full max-w-3xl flex-col gap-24 px-6 pb-12 sm:gap-32 sm:px-8 sm:pb-28 overflow-x-hidden">
           <Hero />
-          <Reveal>
-            <SkillSection />
-          </Reveal>
           <Suspense fallback={<div className="h-40 animate-pulse bg-white/5 rounded-2xl" />}>
             <Reveal>
               <ProjectSection />
             </Reveal>
           </Suspense>
+          <Reveal>
+            <SkillSection />
+          </Reveal>
           <Reveal>
             <EducationSection />
           </Reveal>

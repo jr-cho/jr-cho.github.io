@@ -1,4 +1,4 @@
-import { BookText, ChevronRight } from "lucide-react";
+import { ArrowUpRight, FileText } from "lucide-react";
 import { Button } from "./ui/button";
 import { socials } from "@/data/socials";
 import SocialIcon from "./helpers/SocialIcon";
@@ -9,106 +9,87 @@ import { containerVariants, itemVariants } from "@/lib/motionVariants";
 
 const Hero = () => {
   return (
-    <section
-      className="flex flex-col justify-center pt-12 pb-10 sm:pt-20 sm:pb-16"
-      id="home"
-    >
+    <section className="flex flex-col justify-center pt-10 sm:pt-16" id="home">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="space-y-5 sm:space-y-10"
+        className="space-y-8 sm:space-y-10"
       >
-        <motion.div
-          variants={itemVariants}
-          className="flex items-center mb-10 gap-[14px] sm:mb-12 sm:gap-[24px]"
-        >
-          <div className="flex shrink-0 items-center justify-center">
-            {/* avatar */}
-            <img
-              src={`${import.meta.env.BASE_URL}assets/musashi.svg`}
-              alt="profile"
-              className="block h-35 w-35 shrink-0 rounded-full border-2 border-border object-cover object-center p-1 shadow-sm sm:h-40 sm:w-40"
-            />
+        <motion.div variants={itemVariants} className="flex items-center gap-4 sm:gap-5">
+          {/* monogram */}
+          <div
+            aria-hidden
+            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-border bg-card font-mono text-lg font-semibold tracking-tight sm:h-16 sm:w-16 sm:text-xl"
+          >
+            JG
           </div>
-          <div className="flex h-full flex-col justify-center gap-2 sm:gap-3">
-            <h1 className="text-2xl font-semibold tracking-tight sm:text-2xl md:text-3xl">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
               Joshua Gottus
             </h1>
             <p className="flex flex-wrap items-center gap-x-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-              @jr-cho
-              <span className="text-muted-foreground/40">·</span>
-              EMBEDDED / ROBOTICS
-              <span className="text-muted-foreground/40">·</span>
               Lakeland, FL
+              <span className="text-muted-foreground/40">·</span>
+              U.S. Citizen
+              <span className="text-muted-foreground/40">·</span>
+              Clearance Eligible
             </p>
-            <div className="flex items-start gap-2.5 sm:gap-3">
-              {socials.map(({ name, icon, darkIcon, href }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={name}
-                  title={name}
-                  className="rounded border-0 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <SocialIcon
-                    icon={icon}
-                    darkIcon={darkIcon}
-                    alt={name}
-                    className="h-6 w-6 rounded p-0.5 sm:h-7 sm:w-7"
-                  />
-                </a>
-              ))}
-            </div>
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="space-y-5 sm:space-y-6">
-          <h1 className="max-w-full text-[1.85rem] font-semibold tracking-tight leading-tight sm:text-[2.4rem] md:text-[2.6rem]">
-            Embedded Software Engineer.{" "}
-            <span className="text-[0.95em] font-light text-muted-foreground sm:text-[0.96em]">
-              Firmware, robotics, and autonomy software that runs on real hardware.
-            </span>
-          </h1>
-          <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+        <motion.div variants={itemVariants} className="space-y-5">
+          <p className="text-[2rem] font-semibold leading-[1.1] tracking-tight sm:text-[2.75rem]">
+            Embedded Software Engineer
+          </p>
+          <p className="max-w-[60ch] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             I write C and C++ for microcontrollers, FreeRTOS, and ROS 2. I most
             recently worked as an embedded software engineering intern at a
             defense contracting company. I study Computer Science with a
-            Cybersecurity concentration at Florida Polytechnic University.
+            Cybersecurity concentration at Florida Polytechnic University,
+            graduating May 2027.
           </p>
-          <p className="flex flex-wrap items-center gap-x-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-            <span
-              className="h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: "var(--accent-amber)" }}
-            />
-            U.S. Citizen
-            <span className="text-muted-foreground/40">·</span>
-            Security Clearance Eligible
-          </p>
+        </motion.div>
 
-          <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
-            <Link to="/contact">
-              <Button size="lg">
-                Get in Touch
-                <ChevronRight strokeWidth={2.25} />
-              </Button>
-            </Link>
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-wrap items-center gap-3 sm:gap-4"
+        >
+          <Button asChild size="lg">
             <a
               href={`${import.meta.env.BASE_URL}global/Joshua-Gottus-Resume.pdf`}
               target="_blank"
               rel="noreferrer"
             >
-              <Button
-                variant="outline"
-                size="lg"
-                className="bg-card text-foreground border-dashed cursor-pointer"
-              >
-                Resume
-                <BookText />
-              </Button>
+              <FileText />
+              Resume
             </a>
+          </Button>
+          <Button asChild variant="outline" size="lg" className="bg-card">
+            <Link to="/contact">
+              Contact
+              <ArrowUpRight />
+            </Link>
+          </Button>
+          <div className="flex items-center gap-2.5 sm:ml-2">
+            {socials.map(({ name, icon, darkIcon, href }) => (
+              <a
+                key={name}
+                href={href}
+                target={href.startsWith("mailto") ? undefined : "_blank"}
+                rel={href.startsWith("mailto") ? undefined : "noreferrer"}
+                aria-label={name}
+                title={name}
+                className="rounded transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <SocialIcon
+                  icon={icon}
+                  darkIcon={darkIcon}
+                  alt={name}
+                  className="h-6 w-6 rounded p-0.5"
+                />
+              </a>
+            ))}
           </div>
         </motion.div>
       </motion.div>

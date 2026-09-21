@@ -94,7 +94,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
 
   return (
     <section id="stats" className="w-full space-y-6">
-      <SectionHeader eyebrow="SOURCE · GITHUB" title="GitHub Activity">
+      <SectionHeader eyebrow="GITHUB · @JR-CHO" title="GitHub Contributions">
         <div className="flex flex-wrap items-center gap-2 text-sm">
           {yearOptions.map((option) => {
             const isActive = year === option;
@@ -129,7 +129,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
                   className="h-1.5 w-1.5 rounded-full"
                   style={{ backgroundColor: "var(--accent-amber)" }}
                 />
-                Activity · Signal
+                Contributions
               </span>
               <span>{year === currentYear ? currentYear : year}</span>
             </div>
@@ -178,7 +178,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
                 <AnimatedNumber value={total} /> contributions ↑{" "}
                 {year === currentYear ? "last 12 mo" : year}
               </span>
-              <span className="hidden sm:inline">swipe to explore →</span>
+              <span className="hidden sm:inline">scroll for earlier weeks</span>
             </div>
           </div>
         )}
