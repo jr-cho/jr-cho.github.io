@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import ArrowLink from "@/components/helpers/ArrowLink";
 import { pageDepthVariants } from "@/lib/motionVariants";
+import { shell } from "@/lib/layout";
+import { cn } from "@/lib/utils";
 
 type NotFoundProps = {
   title?: string;
@@ -18,23 +19,19 @@ const NotFound = ({
 }: NotFoundProps) => {
   return (
     <motion.main
-      className="mx-auto flex min-h-[60vh] w-full max-w-3xl flex-col justify-center gap-4 px-6 sm:px-8"
+      className={cn(shell, "flex min-h-[60vh] flex-col justify-center gap-8 pt-10")}
       variants={pageDepthVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
       <title>{`${title} · Joshua Gottus`}</title>
-      <p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-        404
-      </p>
-      <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
-      <p className="text-base text-muted-foreground sm:text-lg">{message}</p>
-      <div className="pt-2">
-        <Button asChild size="lg">
-          <Link to={backTo}>{backLabel}</Link>
-        </Button>
+      <p className="display text-[clamp(6rem,24vw,20rem)]">404</p>
+      <div className="space-y-2">
+        <h1 className="text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">{title}</h1>
+        <p className="text-[17px] text-muted-foreground">{message}</p>
       </div>
+      <ArrowLink to={backTo}>{backLabel}</ArrowLink>
     </motion.main>
   );
 };

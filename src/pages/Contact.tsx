@@ -1,81 +1,95 @@
+import { useState } from "react";
 import { Reveal } from "@/components/helpers/Reveal";
-import { socials } from "@/data/socials";
-import { useTheme } from "next-themes";
-import { ArrowUpRight, ChevronLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import ArrowLink from "@/components/helpers/ArrowLink";
+import { email, resumeHref, socials } from "@/data/socials";
+import { Check, Copy } from "lucide-react";
 import { motion } from "framer-motion";
 import { pageDepthVariants } from "@/lib/motionVariants";
+import { shell } from "@/lib/layout";
+import { cn } from "@/lib/utils";
+
+const details = [
+  { label: "Location", value: "Lakeland, FL" },
+  { label: "Available", value: "Full-time from May 2027" },
+  { label: "Status", value: "U.S. Citizen · Clearance Eligible" },
+];
 
 const Contact = () => {
-  const { resolvedTheme } = useTheme();
-  const navigate = useNavigate();
+  const [copied, setCopied] = useState(false);
+  const profiles = socials.filter((s) => !s.href.startsWith("mailto"));
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard can be blocked. The address stays visible to select by hand.
+    }
+  };
 
   return (
     <motion.main
-      className="mx-auto flex w-full max-w-3xl flex-col px-6 pb-12 pt-10 sm:px-8 sm:pt-20 sm:pb-24 space-y-8"
+      className={cn(shell, "flex flex-col gap-20 pt-10 sm:gap-28 sm:pt-16")}
       variants={pageDepthVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
       <title>Contact · Joshua Gottus</title>
-      <Reveal>
-        <button
-          onClick={() => navigate("/")}
-          className="flex w-fit items-center gap-3 text-md font-light tracking-tight text-muted-foreground cursor-pointer duration-200 hover:text-foreground"
-        >
-          <ChevronLeft size={20} strokeWidth={2.25} /> Back to Home
-        </button>
+
+      <div className="space-y-10">
+        <h1 className="display text-[clamp(3.5rem,12vw,11rem)]">Contact</h1>
+        <p className="max-w-[28ch] font-serif text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.1]">
+          I am looking for embedded software and robotics roles after I
+          graduate in May 2027. Email is the fastest way to reach me.
+        </p>
+      </div>
+
+      <Reveal className="grid grid-cols-1 gap-10 md:grid-cols-12">
+        <p className="text-[15px] md:col-span-3">Email</p>
+        <div className="flex flex-col gap-4 md:col-span-9">
+          <a
+            href={`mailto:${email}`}
+            className="break-all text-[clamp(1.75rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.04em] underline-offset-[0.15em] hover:underline"
+          >
+            {email}
+          </a>
+          <button
+            type="button"
+            onClick={copyEmail}
+            className="inline-flex min-h-10 w-fit items-center gap-2 text-[15px] transition-opacity hover:opacity-60"
+          >
+            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+            <span aria-live="polite">{copied ? "Copied" : "Copy address"}</span>
+          </button>
+        </div>
       </Reveal>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 pt-4">
-        {/* Left Side: Matter */}
-        <div className="flex flex-col gap-10 justify-center">
-          <Reveal delay={0.1}>
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Contact
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-              I am looking for embedded software and robotics roles after I
-              graduate in May 2027. Email is the fastest way to reach me.
-            </p>
-          </Reveal>
-        </div>
-
-        {/* Right Side: Links */}
-        <div className="flex flex-col gap-3 justify-center">
-          {socials.map((social, index) => (
-            <Reveal key={social.name} delay={0.2 + index * 0.05}>
-              <a
-                href={social.href}
-                target={social.href.startsWith("mailto") ? undefined : "_blank"}
-                rel={
-                  social.href.startsWith("mailto") ? undefined : "noreferrer"
-                }
-                className="group glass-card flex items-center justify-between p-4 transition-colors hover:border-foreground/25"
-              >
-                <div className="flex items-center gap-4">
-                  <img
-                    src={
-                      resolvedTheme === "dark" && social.darkIcon
-                        ? social.darkIcon
-                        : social.icon
-                    }
-                    alt={social.name}
-                    className="h-6 w-6 rounded-sm object-contain"
-                  />
-                  <span className="text-base font-light tracking-tight">
-                    {social.name}
-                  </span>
-                </div>
-                <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
-              </a>
-            </Reveal>
+      <Reveal className="grid grid-cols-1 gap-10 md:grid-cols-12">
+        <p className="text-[15px] md:col-span-3">Details</p>
+        <dl className="md:col-span-9">
+          {details.map(({ label, value }) => (
+            <div
+              key={label}
+              className="grid grid-cols-[8rem_1fr] gap-4 border-t border-border py-4 text-[17px] last:border-b"
+            >
+              <dt className="text-muted-foreground">{label}</dt>
+              <dd>{value}</dd>
+            </div>
           ))}
+        </dl>
+      </Reveal>
+
+      <Reveal className="grid grid-cols-1 gap-10 md:grid-cols-12">
+        <p className="text-[15px] md:col-span-3">Elsewhere</p>
+        <div className="flex flex-wrap gap-x-10 md:col-span-9">
+          {profiles.map(({ name, href }) => (
+            <ArrowLink key={name} href={href}>{name}</ArrowLink>
+          ))}
+          <ArrowLink href={resumeHref}>Resume (PDF)</ArrowLink>
         </div>
-      </div>
+      </Reveal>
     </motion.main>
   );
 };

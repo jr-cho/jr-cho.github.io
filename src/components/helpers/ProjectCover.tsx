@@ -5,32 +5,39 @@ type ProjectCoverProps = Pick<Project, "period" | "status" | "highlights"> & {
   className?: string;
 };
 
-// Stands in for a screenshot: period, status, and key numbers as a short list.
+// Typographic poster in place of a photo: the lead number set huge,
+// the other two numbers small along the bottom.
 const ProjectCover = ({ period, status, highlights, className }: ProjectCoverProps) => {
+  const [lead, ...rest] = highlights;
+
   return (
     <div
       className={cn(
-        "flex h-full w-full flex-col gap-4 rounded-lg border border-border bg-background/60 p-4",
+        "flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-lg bg-card p-5 transition-colors duration-500 group-hover:bg-accent sm:p-7",
         className,
       )}
     >
-      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-        <span className="whitespace-nowrap">{period}</span>
-        {status && (
-          <span className="flex items-center gap-1.5 whitespace-nowrap">
-            <span
-              className="h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: "var(--accent-amber)" }}
-            />
-            {status}
-          </span>
-        )}
+      <div className="flex items-start justify-between gap-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+        <span>{period}</span>
+        {status && <span>{status}</span>}
       </div>
-      <dl className="flex flex-col divide-y divide-border">
-        {highlights.map(({ value, label }) => (
-          <div key={label} className="flex items-baseline justify-between gap-4 py-2 first:pt-0 last:pb-0">
-            <dt className="text-sm text-muted-foreground">{label}</dt>
-            <dd className="text-base font-semibold tracking-tight text-foreground">{value}</dd>
+
+      {lead && (
+        <div>
+          <p className="display text-[clamp(2.75rem,7vw,6.5rem)] transition-transform duration-700 ease-out group-hover:-translate-y-1">
+            {lead.value}
+          </p>
+          <p className="mt-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            {lead.label}
+          </p>
+        </div>
+      )}
+
+      <dl className="grid grid-cols-2 gap-4 border-t border-border pt-4">
+        {rest.map(({ value, label }) => (
+          <div key={label}>
+            <dd className="text-lg font-semibold tracking-[-0.02em]">{value}</dd>
+            <dt className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{label}</dt>
           </div>
         ))}
       </dl>

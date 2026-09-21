@@ -1,44 +1,59 @@
-import { socials } from "@/data/socials";
-import SocialIcon from "./helpers/SocialIcon";
+import { motion } from "framer-motion";
+import { email, resumeHref, socials } from "@/data/socials";
+import { shell } from "@/lib/layout";
+import { cn } from "@/lib/utils";
 
 const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-6 pb-12 sm:pb-14">
-      <footer className="flex flex-col items-center gap-5 border-t border-dashed border-border/80 pt-10 text-sm sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-        <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
-          <span className="text-base text-muted-foreground">
-            &copy; {year}
-          </span>
-          <span className="text-base font-medium tracking-tight text-foreground">
-            Joshua Gottus
-          </span>
-          <span className="text-base text-muted-foreground">· @jr-cho</span>
-        </p>
-
-        <div className="flex items-center gap-3">
-          {socials.map(({ name, icon, darkIcon, href }) => (
-            <a
-              key={name}
-              href={href}
-              target={href.startsWith("mailto") ? undefined : "_blank"}
-              rel={href.startsWith("mailto") ? undefined : "noreferrer"}
-              aria-label={name}
-              title={name}
-              className="rounded transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <SocialIcon
-                icon={icon}
-                darkIcon={darkIcon}
-                alt={name}
-                className="h-5 w-5 rounded p-0.5"
-              />
-            </a>
-          ))}
+    <footer className="sticky bottom-0 z-0 bg-[#0A0A0A] text-white dark:bg-[#171717]">
+      <div className={cn(shell, "flex flex-col gap-16 pt-20 pb-8 sm:pt-28")}>
+        <div className="space-y-6">
+          <p className="font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-white/70">
+            Open to embedded and robotics roles from May 2027.
+          </p>
+          <motion.a
+            href={`mailto:${email}`}
+            initial={{ opacity: 0, y: 60, scale: 0.92 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.6 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="display block w-fit origin-left text-[clamp(3.25rem,11vw,10rem)] transition-opacity hover:opacity-70"
+          >
+            Let’s talk
+          </motion.a>
+          <a
+            href={`mailto:${email}`}
+            className="inline-block text-lg underline-offset-4 hover:underline sm:text-xl"
+          >
+            {email}
+          </a>
         </div>
-      </footer>
-    </div>
+
+        <div className="flex flex-col gap-4 border-t border-white/15 pt-6 text-[15px] sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-white/60">
+            &copy; {year} Joshua Gottus · @jr-cho
+          </p>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {socials
+              .filter((s) => !s.href.startsWith("mailto"))
+              .map(({ name, href }) => (
+                <li key={name}>
+                  <a href={href} target="_blank" rel="noreferrer" className="transition-opacity hover:opacity-60">
+                    {name}
+                  </a>
+                </li>
+              ))}
+            <li>
+              <a href={resumeHref} target="_blank" rel="noreferrer" className="transition-opacity hover:opacity-60">
+                Resume
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   );
 };
 

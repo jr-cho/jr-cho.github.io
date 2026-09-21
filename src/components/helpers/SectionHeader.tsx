@@ -1,30 +1,39 @@
 import type { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { maskLine } from "@/lib/motionVariants";
+import Drift from "./Drift";
 
 type SectionHeaderProps = {
-  eyebrow: string;
   title: string;
+  // Two-tone subline: grey lead-in, then the black part.
+  lead?: string;
+  emphasis?: string;
   children?: ReactNode;
 };
 
-export default function SectionHeader({ eyebrow, title, children }: SectionHeaderProps) {
+// Big centered display title, like a chapter card.
+export default function SectionHeader({ title, lead, emphasis, children }: SectionHeaderProps) {
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-col gap-1.5">
-          <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-            {eyebrow}
-          </span>
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            {title}
-          </h2>
-        </div>
-        {children && <div className="shrink-0">{children}</div>}
-      </div>
-      {/* hairline rule with corner ticks */}
-      <div className="relative h-px w-full bg-border">
-        <span className="absolute -top-1 left-0 h-2 w-px bg-border" />
-        <span className="absolute -top-1 right-0 h-2 w-px bg-border" />
-      </div>
+    <div className="flex flex-col items-center gap-6 text-center">
+      <Drift distance={-70}>
+      <motion.h2
+        className="display overflow-hidden pb-[0.06em] text-[clamp(3rem,9vw,8.5rem)]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+      >
+        <motion.span variants={maskLine} className="block">
+          {title}
+        </motion.span>
+      </motion.h2>
+      </Drift>
+      {(lead || emphasis) && (
+        <p className="text-lg font-semibold tracking-[-0.02em] sm:text-xl">
+          {lead && <span className="text-muted-foreground">{lead} </span>}
+          {emphasis}
+        </p>
+      )}
+      {children}
     </div>
   );
 }

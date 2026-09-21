@@ -2,8 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { useTheme } from "next-themes";
 import { ActivityCalendar, type Activity } from "react-activity-calendar";
 import { cn } from "@/lib/utils";
-import SectionHeader from "./helpers/SectionHeader";
-import { useMotionValue, useSpring } from "framer-motion";
+import { shell } from "@/lib/layout";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 type StatsProps = {
   year?: "last" | "all" | number;
@@ -92,98 +92,81 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
 
   const total = data.reduce((sum, activity) => sum + activity.count, 0);
 
-  return (
-    <section id="stats" className="w-full space-y-6">
-      <SectionHeader eyebrow="GITHUB · @JR-CHO" title="GitHub Contributions">
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          {yearOptions.map((option) => {
-            const isActive = year === option;
-            return (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setYear(option)}
-                className={cn(
-                  "relative px-1.5 pb-1 font-normal tracking-tight text-muted-foreground transition-colors hover:text-foreground",
-                  isActive &&
-                    "text-foreground after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-foreground",
-                )}
-              >
-                {option}
-              </button>
-            );
-          })}
-        </div>
-      </SectionHeader>
+  // The data comes from a third-party API. Hide the section when it fails.
+  if (error) return null;
 
-      <div className="glass-card p-4 pb-3 sm:p-6 sm:pb-4">
-        {loading ? (
-          <p className="text-sm text-muted-foreground">Loading GitHub stats...</p>
-        ) : error ? (
-          <p className="text-sm text-muted-foreground">{error}</p>
-        ) : (
-          <div className="space-y-3">
-            <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <span
-                  className="h-1.5 w-1.5 rounded-full"
-                  style={{ backgroundColor: "var(--accent-amber)" }}
-                />
-                Contributions
-              </span>
-              <span>{year === currentYear ? currentYear : year}</span>
-            </div>
-            <div
-              ref={scrollRef}
-              data-lenis-prevent="true"
-              className="w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+  return (
+    <div className={cn(shell, "grid grid-cols-1 gap-10 md:grid-cols-12")}>
+      <div className="space-y-6 md:col-span-4">
+        <h2 className="font-serif text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.1]">
+          GitHub contributions, {year === currentYear ? "last 12 months" : year}
+        </h2>
+        <p className="display text-[clamp(3.5rem,7vw,6rem)]">
+          {loading ? "—" : <AnimatedNumber value={total} />}
+        </p>
+        <div className="flex items-center gap-4 text-[15px]">
+          {yearOptions.map((option) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => setYear(option)}
+              aria-pressed={year === option}
+              className={cn(
+                "min-h-10 transition-opacity hover:opacity-60",
+                year === option ? "underline decoration-1 underline-offset-4" : "text-muted-foreground",
+              )}
             >
-              <div className="min-w-max">
-                <ActivityCalendar
-                  data={data}
-                  className="bg-transparent"
-                  style={{ backgroundColor: "transparent" }}
-                  colorScheme={
-                    resolvedTheme === "dark"
-                      ? "dark"
-                      : resolvedTheme === "light"
-                        ? "light"
-                        : undefined
-                  }
-                  theme={{
-                    light: ["#E5E2DB", "#F8D38C", "#F7C25A", "#F6B22F", "#F5A623"],
-                    dark: ["#2A2A2E", "#6E4E12", "#A8741C", "#D49323", "#F5A623"],
-                  }}
-                  blockSize={11}
-                  blockMargin={5}
-                  blockRadius={3}
-                  fontSize={12}
-                  showWeekdayLabels
-                  showColorLegend={false}
-                  showTotalCount={false}
-                  tooltips={{
-                    activity: {
-                      placement: "top",
-                      withArrow: true,
-                      offset: { mainAxis: 10 },
-                      text: (activity) =>
-                        `${formatActivityDate(activity.date)} • ${activity.count} contribution${activity.count === 1 ? "" : "s"}`,
-                    },
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-              <span className="text-foreground">
-                <AnimatedNumber value={total} /> contributions ↑{" "}
-                {year === currentYear ? "last 12 mo" : year}
-              </span>
-              <span className="hidden sm:inline">scroll for earlier weeks</span>
-            </div>
-          </div>
-        )}
+              {option}
+            </button>
+          ))}
+        </div>
       </div>
-    </section>
+
+      <div className="md:col-span-8 md:self-end">
+        <motion.div
+          initial={{ clipPath: "inset(0 100% 0 0)" }}
+          whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+        <div
+          ref={scrollRef}
+          data-lenis-prevent="true"
+          className="w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        >
+          <div className="min-w-max">
+            {!loading && (
+              <ActivityCalendar
+                data={data}
+                className="bg-transparent"
+                style={{ backgroundColor: "transparent" }}
+                colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
+                theme={{
+                  light: ["#EDEDED", "#C4C4C4", "#8C8C8C", "#4A4A4A", "#0A0A0A"],
+                  dark: ["#1C1C1C", "#3D3D3D", "#6E6E6E", "#A8A8A8", "#FFFFFF"],
+                }}
+                blockSize={11}
+                blockMargin={3}
+                blockRadius={2}
+                fontSize={12}
+                showColorLegend={false}
+                showTotalCount={false}
+                tooltips={{
+                  activity: {
+                    placement: "top",
+                    withArrow: true,
+                    offset: { mainAxis: 10 },
+                    text: (activity) =>
+                      `${formatActivityDate(activity.date)} • ${activity.count} contribution${activity.count === 1 ? "" : "s"}`,
+                  },
+                }}
+              />
+            )}
+          </div>
+        </div>
+        </motion.div>
+      </div>
+    </div>
   );
 };
 

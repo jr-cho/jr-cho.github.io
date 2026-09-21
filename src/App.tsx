@@ -1,7 +1,7 @@
 import Hero from "./components/Hero";
 import SkillSection from "./components/SkillSection";
 import EducationSection from "./components/EducationSection";
-import { Reveal } from "./components/helpers/Reveal";
+import Scene from "./components/helpers/Scene";
 import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { pageDepthVariants } from "./lib/motionVariants";
@@ -20,24 +20,24 @@ const App = () => {
     >
       <title>Joshua Gottus · Embedded Software Engineer</title>
       <div className="relative z-10 flex flex-col flex-1">
-        <main className="mx-auto flex w-full max-w-3xl flex-col gap-24 px-6 pb-12 sm:gap-32 sm:px-8 sm:pb-28 overflow-x-hidden">
+        <main className="flex w-full flex-col overflow-x-clip">
           <Hero />
-          <Suspense fallback={<div className="h-40 animate-pulse bg-white/5 rounded-2xl" />}>
-            <Reveal>
+          <Scene id="projects" layer={3} className="py-28 sm:py-40">
+            <Suspense fallback={<div className="h-96" />}>
               <ProjectSection />
-            </Reveal>
-          </Suspense>
-          <Reveal>
+            </Suspense>
+          </Scene>
+          <Scene id="skills" layer={4} className="py-28 sm:py-40">
             <SkillSection />
-          </Reveal>
-          <Reveal>
+          </Scene>
+          <Scene id="education" layer={5} className="py-24 sm:py-32">
             <EducationSection />
-          </Reveal>
-          <Suspense fallback={<div className="h-40 animate-pulse bg-white/5 rounded-2xl" />}>
-            <Reveal>
+          </Scene>
+          <Scene id="stats" layer={6} className="pt-24 pb-40 sm:pt-32 sm:pb-52">
+            <Suspense fallback={<div className="h-40" />}>
               <Stats />
-            </Reveal>
-          </Suspense>
+            </Suspense>
+          </Scene>
         </main>
       </div>
     </motion.div>

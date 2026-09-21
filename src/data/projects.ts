@@ -31,14 +31,13 @@ export const projects: Project[] = [
     description:
       "Multi-node flight control firmware in C on FreeRTOS, bridged to ROS 2.",
     highlights: [
+      { value: "2-level", label: "watchdog" },
       { value: "Static", label: "memory only" },
       { value: "Fixed-point", label: "math" },
-      { value: "2-level", label: "watchdog" },
     ],
     about:
-      "Flight control firmware split across several nodes on a shared data bus. Each node runs FreeRTOS and reports to ROS 2 through micro-ROS. The code follows safety-critical rules: static memory only, fixed-point math, and builds with zero warnings.",
+      "Flight control firmware split across several nodes on a shared data bus. Each node runs FreeRTOS and reports to ROS 2 through micro-ROS. The code follows safety-critical coding rules.",
     features: [
-      "Multi-node flight control firmware in C on FreeRTOS",
       "Two-level watchdog: a software task-health monitor gates the hardware watchdog",
       "Static memory allocation only. No heap use after startup.",
       "Fixed-point math in place of floating point",
@@ -60,7 +59,6 @@ export const projects: Project[] = [
     about:
       "Competition ground robot for the IEEE SoutheastCon 2026 hardware contest, built by the Florida Poly IEEE RAS Society. I led the software team: I wrote and assigned GitHub issues and reviewed every PR before merge. The robot software is modular C on Raspberry Pi, with a hardware abstraction layer over an I2C motor driver and IMU.",
     features: [
-      "Led a 9-person software team to 16th of 84 teams",
       "Hardware abstraction layer over an I2C motor driver and IMU",
       "Gyro-based heading correction in the drive loop, in modular C on Raspberry Pi",
       "Traced a failed Raspberry Pi 5 with an oscilloscope to a 5 V signal on a 3.3 V GPIO pin",

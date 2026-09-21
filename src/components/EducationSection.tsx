@@ -1,34 +1,45 @@
-import SectionHeader from "./helpers/SectionHeader";
+import { motion } from "framer-motion";
 import { education } from "@/data/education";
+import { containerVariants, itemVariants } from "@/lib/motionVariants";
+import { shell } from "@/lib/layout";
+import { cn } from "@/lib/utils";
 
 const EducationSection = () => {
   return (
-    <section id="education" className="w-full space-y-8">
-      <SectionHeader eyebrow="B.S. · EXPECTED MAY 2027" title="Education" />
-      <ol className="flex flex-col gap-3">
+    <div className={cn(shell, "grid grid-cols-1 gap-10 md:grid-cols-12")}>
+      <h2 className="font-serif text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.1] md:col-span-4">
+        Education
+      </h2>
+      <motion.ol
+        className="md:col-span-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+      >
         {education.map(({ school, degree, detail, location, date }) => (
-          <li
+          <motion.li
+            variants={itemVariants}
             key={school}
-            className="glass-card flex flex-col gap-1 p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-5"
+            className="grid grid-cols-1 gap-1 border-t border-border py-5 last:border-b sm:grid-cols-[1fr_auto] sm:gap-6"
           >
-            <div className="flex flex-col gap-1">
-              <span className="text-base font-semibold tracking-tight sm:text-lg">
-                {school}
-              </span>
-              <span className="text-sm font-light text-muted-foreground">
+            <div>
+              <p className="text-[17px] font-semibold tracking-[-0.01em]">{school}</p>
+              <p className="text-[15px] text-muted-foreground">
                 {degree}
-                {detail && <> · {detail}</>}
-              </span>
+                {detail && <>, {detail}</>}
+              </p>
             </div>
-            <div className="flex shrink-0 flex-row gap-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground sm:flex-col sm:items-end sm:gap-1 sm:pt-1">
-              <span className="text-foreground/80">{date}</span>
-              <span className="text-muted-foreground/40 sm:hidden">·</span>
-              <span>{location}</span>
-            </div>
-          </li>
+            <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground sm:pt-1 sm:text-right">
+              {date}
+              <br className="hidden sm:block" />
+              <span className="sm:hidden"> · </span>
+              {location}
+            </p>
+          </motion.li>
         ))}
-      </ol>
-    </section>
+      </motion.ol>
+    </div>
   );
 };
 

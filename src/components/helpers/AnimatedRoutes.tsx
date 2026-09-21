@@ -9,8 +9,8 @@ const Contact = lazy(() => import("@/pages/Contact"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const RouteFallback = () => (
-  <div className="mx-auto w-full max-w-3xl px-6 py-12">
-    <div className="h-40 animate-pulse rounded-2xl bg-white/5" />
+  <div className="mx-auto w-full max-w-[1440px] px-4 py-12 sm:px-8 lg:px-20">
+    <div className="h-96" />
   </div>
 );
 
