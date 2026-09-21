@@ -18,6 +18,7 @@ const Contact = () => {
       animate="animate"
       exit="exit"
     >
+      <title>Contact · Joshua Gottus</title>
       <Reveal>
         <button
           onClick={() => navigate("/")}

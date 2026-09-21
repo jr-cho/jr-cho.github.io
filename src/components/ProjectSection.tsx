@@ -7,23 +7,27 @@ import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerGrid, cardReveal } from "@/lib/motionVariants";
 
+// Home page shows this many. The "View all" button appears only when more exist.
+const HOME_PROJECT_COUNT = 3;
+
 const ProjectSection = () => {
   return (
     <section id="projects" className="w-full space-y-8">
       <SectionHeader eyebrow={`${projects.length} PROJECTS`} title="Projects" />
       <motion.div
-        className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-8"
+        className="flex flex-col gap-5"
         variants={staggerGrid}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
       >
-        {projects.map((project) => (
+        {projects.slice(0, HOME_PROJECT_COUNT).map((project) => (
           <motion.div key={project.name} variants={cardReveal}>
             <ProjectCard {...project} />
           </motion.div>
         ))}
       </motion.div>
+      {projects.length > HOME_PROJECT_COUNT && (
       <div className="flex justify-center pt-8">
         <Button asChild size="lg" className="text-base">
           <Link to="/projects">
@@ -32,6 +36,7 @@ const ProjectSection = () => {
           </Link>
         </Button>
       </div>
+      )}
     </section>
   );
 };

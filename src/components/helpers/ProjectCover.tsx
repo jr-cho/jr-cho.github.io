@@ -1,46 +1,36 @@
 import type { Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
-type ProjectCoverProps = Pick<Project, "name" | "period" | "status" | "highlights"> & {
+type ProjectCoverProps = Pick<Project, "period" | "status" | "highlights"> & {
   className?: string;
 };
 
-// Stands in for a screenshot: key numbers on a faint grid, 16:9 like the old images.
-const ProjectCover = ({ name, period, status, highlights, className }: ProjectCoverProps) => {
+// Stands in for a screenshot: period, status, and key numbers as a short list.
+const ProjectCover = ({ period, status, highlights, className }: ProjectCoverProps) => {
   return (
     <div
-      role="img"
-      aria-label={`${name}: ${highlights.map((h) => `${h.value} ${h.label}`).join(", ")}`}
       className={cn(
-        "relative flex aspect-video w-full flex-col justify-between overflow-hidden rounded-lg border border-border/60 bg-card p-4 sm:p-5",
+        "flex h-full w-full flex-col gap-4 rounded-lg border border-border bg-background/60 p-4",
         className,
       )}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.35] [background-image:linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
-      />
-      <div className="relative flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        <span>{period}</span>
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+        <span className="whitespace-nowrap">{period}</span>
         {status && (
-          <span className="flex items-center gap-1.5">
+          <span className="flex items-center gap-1.5 whitespace-nowrap">
             <span
-              className="h-1.5 w-1.5 animate-pulse rounded-full"
+              className="h-1.5 w-1.5 rounded-full"
               style={{ backgroundColor: "var(--accent-amber)" }}
             />
             {status}
           </span>
         )}
       </div>
-      <dl className="relative grid grid-cols-3 gap-3">
+      <dl className="flex flex-col divide-y divide-border">
         {highlights.map(({ value, label }) => (
-          <div key={label} className="flex flex-col gap-1">
-            <dt className="order-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-              {label}
-            </dt>
-            <dd className="order-1 text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
-              {value}
-            </dd>
+          <div key={label} className="flex items-baseline justify-between gap-4 py-2 first:pt-0 last:pb-0">
+            <dt className="text-sm text-muted-foreground">{label}</dt>
+            <dd className="text-base font-semibold tracking-tight text-foreground">{value}</dd>
           </div>
         ))}
       </dl>

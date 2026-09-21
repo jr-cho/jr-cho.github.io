@@ -3,8 +3,7 @@ import { projects, projectSlug } from "@/data/projects";
 import { ChevronLeft } from "lucide-react";
 import { LuGithub } from "react-icons/lu";
 import { BiLink } from "react-icons/bi";
-import TechIcon from "@/components/helpers/TechIcon";
-import ProjectCover from "@/components/helpers/ProjectCover";
+import NotFound from "@/pages/NotFound";
 import { useNavigate, useParams } from "react-router-dom";
 import { Reveal } from "@/components/helpers/Reveal";
 import { motion } from "framer-motion";
@@ -17,15 +16,12 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <motion.div
-        className="flex min-h-screen items-center justify-center text-xl text-muted-foreground"
-        variants={pageDepthVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-      >
-        Project not found
-      </motion.div>
+      <NotFound
+        title="Project not found"
+        message="This project does not exist or has moved."
+        backTo="/projects"
+        backLabel="All projects"
+      />
     );
   }
 
@@ -37,6 +33,7 @@ const ProjectDetail = () => {
       animate="animate"
       exit="exit"
     >
+      <title>{`${project.name} · Joshua Gottus`}</title>
       <Reveal>
         <button
           onClick={() => navigate("/projects")}
@@ -75,7 +72,7 @@ const ProjectDetail = () => {
               <a href={project.githubLink} target="_blank" rel="noreferrer">
                 <Button
                   variant="outline"
-                  className="border border-border border-dashed"
+                  className="border border-border"
                   size="lg"
                 >
                   <LuGithub className="w-4 h-4" />
@@ -94,20 +91,20 @@ const ProjectDetail = () => {
           </div>
         </Reveal>
         <Reveal delay={0.2}>
-          {project.imgSrc ? (
+          <dl className="grid grid-cols-1 divide-y divide-border rounded-lg border border-border bg-card sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {project.highlights.map(({ value, label }) => (
+              <div key={label} className="flex flex-col gap-1 px-4 py-3">
+                <dt className="order-2 text-sm text-muted-foreground">{label}</dt>
+                <dd className="order-1 text-xl font-semibold tracking-tight">{value}</dd>
+              </div>
+            ))}
+          </dl>
+          {project.imgSrc && (
             <img
-              className="rounded-lg border border-border border-dashed"
+              className="mt-6 rounded-lg border border-border"
               src={project.imgSrc}
               alt={project.name}
               loading="lazy"
-            />
-          ) : (
-            <ProjectCover
-              name={project.name}
-              period={project.period}
-              status={project.status}
-              highlights={project.highlights}
-              className="border-dashed"
             />
           )}
         </Reveal>
@@ -119,9 +116,8 @@ const ProjectDetail = () => {
             {project.techStack.map((tech) => (
               <span
                 key={tech.name}
-                className="group bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-1 py-2 text-xs text-foreground sm:px-3.5 sm:text-sm"
+                className="rounded-md border border-border px-2.5 py-1 font-mono text-xs text-muted-foreground sm:text-sm"
               >
-                <TechIcon item={tech} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 {tech.name}
               </span>
             ))}

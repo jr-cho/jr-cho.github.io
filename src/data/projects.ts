@@ -29,11 +29,11 @@ export const projects: Project[] = [
     period: "Sep 2026 – Present",
     status: "In progress",
     description:
-      "Multi-node flight control firmware in C on FreeRTOS, with micro-ROS bridging to ROS 2.",
+      "Multi-node flight control firmware in C on FreeRTOS, bridged to ROS 2.",
     highlights: [
-      { value: "0", label: "heap allocs" },
+      { value: "Static", label: "memory only" },
+      { value: "Fixed-point", label: "math" },
       { value: "2-level", label: "watchdog" },
-      { value: "0", label: "build warnings" },
     ],
     about:
       "Flight control firmware split across several nodes on a shared data bus. Each node runs FreeRTOS and reports to ROS 2 through micro-ROS. The code follows safety-critical rules: static memory only, fixed-point math, and builds with zero warnings.",
@@ -51,10 +51,10 @@ export const projects: Project[] = [
     period: "Jun 2025 – Apr 2026",
     role: "Software Tech Lead & Project Manager",
     description:
-      "Led a 9-person software team to 16th of 84 at IEEE SoutheastCon 2026 with modular C on Raspberry Pi.",
+      "Led a 9-person software team to 16th of 84 at IEEE SoutheastCon 2026.",
     highlights: [
-      { value: "16 / 84", label: "final rank" },
-      { value: "100 Hz", label: "control loop" },
+      { value: "16th / 84", label: "final rank" },
+      { value: "I2C", label: "motor + IMU drivers" },
       { value: "9", label: "engineers led" },
     ],
     about:
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     features: [
       "Led a 9-person software team to 16th of 84 teams",
       "Hardware abstraction layer over an I2C motor driver and IMU",
-      "100 Hz control loop in modular C on Raspberry Pi",
+      "Gyro-based heading correction in the drive loop, in modular C on Raspberry Pi",
       "Traced a failed Raspberry Pi 5 with an oscilloscope to a 5 V signal on a 3.3 V GPIO pin",
       "Planned work through GitHub issues and reviewed team PRs before merge",
     ],
@@ -73,10 +73,10 @@ export const projects: Project[] = [
     name: "MicroTransit GPS Tracker",
     period: "Mar 2026 – May 2026",
     description:
-      "LTE-M vehicle tracker on an Arduino Uno with a FastAPI backend and live Next.js map.",
+      "LTE-M vehicle tracker on an Arduino Uno, with a FastAPI backend and live map.",
     highlights: [
-      { value: "2 KB", label: "SRAM budget" },
-      { value: "46", label: "offline buffer" },
+      { value: "2 KB", label: "SRAM" },
+      { value: "46 entries", label: "offline buffer" },
       { value: "8 s", label: "hw watchdog" },
     ],
     about:

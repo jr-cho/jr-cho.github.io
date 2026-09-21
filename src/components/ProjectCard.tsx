@@ -1,6 +1,5 @@
 import { LuGithub } from "react-icons/lu";
 import { BiLink } from "react-icons/bi";
-import TechIcon from "./helpers/TechIcon";
 import ProjectCover from "./helpers/ProjectCover";
 import { projectSlug, type Project } from "@/data/projects";
 import { Link } from "react-router-dom";
@@ -18,84 +17,72 @@ const ProjectCard = ({
   githubLink,
 }: Project) => {
   return (
-    <div
-      className="glass-card flex h-full flex-col gap-2 p-3 sm:p-4 w-full transition-colors hover:border-foreground/25"
-    >
-      <div className="group/image rounded-lg overflow-hidden">
-        {imgSrc ? (
-          <img
-            src={imgSrc}
-            alt={name}
-            loading="lazy"
-            className="rounded-lg border border-white/10 w-full object-cover"
-          />
-        ) : (
-          <ProjectCover
-            name={name}
-            period={period}
-            status={status}
-            highlights={highlights}
-          />
-        )}
-      </div>
+    <article className="glass-card grid w-full gap-5 p-4 transition-colors hover:border-foreground/25 sm:grid-cols-[15rem_1fr] sm:gap-6 sm:p-5">
+      {imgSrc ? (
+        <img
+          src={imgSrc}
+          alt={name}
+          loading="lazy"
+          className="aspect-video w-full rounded-lg border border-border object-cover sm:aspect-auto sm:h-full"
+        />
+      ) : (
+        <ProjectCover period={period} status={status} highlights={highlights} />
+      )}
 
-      <div className="px-2 mt-4">
-        <div className="text-lg font-semibold tracking-tight">{name}</div>
+      <div className="flex flex-col">
+        <h3 className="text-lg font-semibold tracking-tight">{name}</h3>
         {role && (
-          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/80">
-            {role}
-          </p>
+          <p className="mt-0.5 text-sm text-muted-foreground">{role}</p>
         )}
-        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-          {description}
-        </p>
-      </div>
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p>
 
-      <div className="flex items-center gap-3 px-2 mt-auto pt-4">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">
-          stack
-        </span>
-        <div className="flex flex-wrap items-center gap-3">
+        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Technologies">
           {techStack.map((tech) => (
-            <TechIcon key={tech.name} item={tech} className="w-5 h-5" />
+            <li
+              key={tech.name}
+              className="rounded-md border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground"
+            >
+              {tech.name}
+            </li>
           ))}
+        </ul>
+
+        <div className="mt-auto flex items-center justify-between pt-5">
+          <div className="flex items-center gap-1">
+            {liveLink && (
+              <a
+                href={liveLink}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${name}: live site`}
+                title="Live site"
+                className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <BiLink className="h-4 w-4" />
+              </a>
+            )}
+            {githubLink && (
+              <a
+                href={githubLink}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${name}: source on GitHub`}
+                title="Source code"
+                className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <LuGithub className="h-4 w-4" />
+              </a>
+            )}
+          </div>
+          <Link
+            to={`/projects/${projectSlug(name)}`}
+            className="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Read more →
+          </Link>
         </div>
       </div>
-
-      <div className="w-full h-px bg-border mt-2 mb-1" />
-
-      <div className="flex items-center justify-between mt-1 px-2 pb-2">
-        <div className="flex items-center gap-3">
-          {liveLink && (
-            <a
-              href={liveLink}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${name} — live site`}
-              title="Live site"
-              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <BiLink className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-            </a>
-          )}
-          {githubLink && (
-            <a
-              href={githubLink}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${name} — source on GitHub`}
-              title="Source code"
-              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <LuGithub className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-            </a>
-          )}
-        </div>
-        <p className="text-xs font-mono text-muted-foreground hover:text-foreground cursor-pointer transition-colors uppercase tracking-widest">
-          <Link to={`/projects/${projectSlug(name)}`}>Details →</Link>
-        </p>
-      </div>
-    </div>
+    </article>
   );
 };
 

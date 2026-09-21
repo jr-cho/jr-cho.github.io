@@ -6,6 +6,7 @@ import App from "@/App";
 const Projects = lazy(() => import("@/pages/Projects"));
 const ProjectDetail = lazy(() => import("@/pages/ProjectDetail"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const RouteFallback = () => (
   <div className="mx-auto w-full max-w-3xl px-6 py-12">
@@ -24,6 +25,7 @@ export default function AnimatedRoutes() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </AnimatePresence>

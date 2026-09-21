@@ -60,9 +60,10 @@ const Hero = () => {
               href={`${import.meta.env.BASE_URL}global/Joshua-Gottus-Resume.pdf`}
               target="_blank"
               rel="noreferrer"
+              type="application/pdf"
             >
               <FileText />
-              Resume
+              Resume (PDF)
             </a>
           </Button>
           <Button asChild variant="outline" size="lg" className="bg-card">

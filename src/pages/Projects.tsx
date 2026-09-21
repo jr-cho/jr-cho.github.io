@@ -17,6 +17,7 @@ const Projects = () => {
       animate="animate"
       exit="exit"
     >
+      <title>Projects · Joshua Gottus</title>
       <Reveal>
         <button
           onClick={() => navigate("/")}
@@ -34,7 +35,7 @@ const Projects = () => {
         </p>
       </Reveal>
       <motion.div
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8"
+        className="flex flex-col gap-5"
         variants={staggerGrid}
         initial="hidden"
         whileInView="visible"
