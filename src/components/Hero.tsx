@@ -96,7 +96,7 @@ const Hero = () => {
               </Button>
             </Link>
             <a
-              href="https://drive.google.com/file/d/1AF0owusJPd1yf1vRwCJcaex04pnEVL_H/view?usp=sharing"
+              href={`${import.meta.env.BASE_URL}global/Joshua-Gottus-Resume.pdf`}
               target="_blank"
               rel="noreferrer"
             >
