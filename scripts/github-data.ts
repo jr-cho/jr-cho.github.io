@@ -2,12 +2,20 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { Plugin } from "vite";
 import type { GithubData } from "../src/data/github";
+import { repoDescriptions } from "../src/data/repo-descriptions";
 
 const USER = "jr-cho";
 
 // Repos kept off the site: editor and shell configs, the profile README,
-// and this website itself.
-const HIDDEN = new Set(["nvim", "tmux-and-neovim-config", "vimtex-config", "jr-cho", "jr-cho.github.io"]);
+// this website itself, and repos with no code yet.
+const HIDDEN = new Set([
+  "nvim",
+  "tmux-and-neovim-config",
+  "vimtex-config",
+  "jr-cho",
+  "jr-cho.github.io",
+  "ml-network-anomaly-detection",
+]);
 
 // How many recently updated repos to show.
 const RECENT = 6;
@@ -114,7 +122,15 @@ export function githubData(): Plugin {
     async load(loadId) {
       if (loadId !== resolved) return null;
       data ??= load(dev);
-      return `export default ${JSON.stringify(await data)};`;
+      const raw = await data;
+      // Hide repos and apply site descriptions here, so cached data gets them too.
+      const served: GithubData = {
+        ...raw,
+        repos: raw.repos
+          .filter((r) => !HIDDEN.has(r.name))
+          .map((r) => ({ ...r, description: repoDescriptions[r.name] ?? r.description })),
+      };
+      return `export default ${JSON.stringify(served)};`;
     },
   };
 }
