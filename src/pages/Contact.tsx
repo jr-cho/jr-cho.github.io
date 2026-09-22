@@ -8,9 +8,12 @@ import { pageDepthVariants } from "@/lib/motionVariants";
 import { shell } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
+const roles = ["Embedded software engineering", "Firmware engineering", "Robotics and autonomy"];
+
 const details = [
-  { label: "Location", value: "Lakeland, FL" },
-  { label: "Available", value: "Internships now · Full-time from May 2027" },
+  { label: "Location", value: "Lakeland, FL · On-site in Lakeland, Tampa, or Orlando, or remote" },
+  { label: "Available", value: "Now · Full-time from May 2027" },
+  { label: "Replies", value: "Within 24 hours of your email" },
   { label: "Status", value: "U.S. Citizen · Clearance Eligible" },
 ];
 
@@ -41,9 +44,8 @@ const Contact = () => {
       <div className="space-y-10">
         <h1 className="display text-[clamp(3.5rem,12vw,11rem)]">Contact</h1>
         <p className="max-w-[28ch] font-serif text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.1]">
-          I am open to embedded software and robotics internships now, and
-          full-time roles after I graduate in May 2027. Email is the fastest
-          way to reach me.
+          I am looking for embedded software, firmware, and robotics work,
+          starting now. Email me and I will reply within 24 hours.
         </p>
       </div>
 
@@ -65,6 +67,23 @@ const Contact = () => {
             <span aria-live="polite">{copied ? "Copied" : "Copy address"}</span>
           </button>
         </div>
+      </Reveal>
+
+      <Reveal className="grid grid-cols-1 gap-10 md:grid-cols-12">
+        <p className="text-[15px] md:col-span-3">Looking for</p>
+        <ul className="md:col-span-9">
+          {roles.map((role, i) => (
+            <li
+              key={role}
+              className="grid grid-cols-[2.5rem_1fr] border-t border-border py-4 text-[clamp(1.25rem,2.2vw,1.75rem)] font-semibold tracking-[-0.03em] last:border-b"
+            >
+              <span className="pt-1.5 font-mono text-xs font-normal tracking-normal text-muted-foreground tabular-nums">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              {role}
+            </li>
+          ))}
+        </ul>
       </Reveal>
 
       <Reveal className="grid grid-cols-1 gap-10 md:grid-cols-12">

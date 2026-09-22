@@ -50,7 +50,7 @@ export const projects: Project[] = [
       "Gyro-based heading correction in the drive loop, in modular C on Raspberry Pi",
       "Planned work through GitHub issues and reviewed team PRs before merge",
     ],
-    techStack: [tech.c, tech.linux, tech.raspberrypi],
+    techStack: [tech.c, tech.linux, tech.raspberrypi, tech.git],
     githubLink: "https://github.com/Florida-Poly-IEEE-RAS-Society/SECON26",
   },
   {
@@ -80,7 +80,7 @@ export const projects: Project[] = [
       "FastAPI backend: MQTT ingest, Kalman-filtered GPS, SQLite, WebSocket",
       "Next.js live map, deployed with Docker Compose",
     ],
-    techStack: [tech.cpp, tech.arduino, tech.python, tech.fastapi, tech.mqtt, tech.typescript, tech.nextjs, tech.docker],
+    techStack: [tech.cpp, tech.arduino, tech.python, tech.fastapi, tech.mqtt, tech.typescript, tech.nextjs, tech.docker, tech.git],
   },
   {
     name: "Flight Control Data Bus",
@@ -101,6 +101,6 @@ export const projects: Project[] = [
       "Fixed-point math in place of floating point",
       "Zero-warning builds enforced",
     ],
-    techStack: [tech.c, tech.freertos, tech.ros2],
+    techStack: [tech.c, tech.freertos, tech.ros2, tech.git],
   },
 ];

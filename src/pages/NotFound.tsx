@@ -26,7 +26,10 @@ const NotFound = ({
       exit="exit"
     >
       <title>{`${title} · Joshua Gottus`}</title>
-      <p className="display text-[clamp(6rem,24vw,20rem)]">404</p>
+      <div>
+        <p className="display text-[clamp(6rem,24vw,20rem)]">404</p>
+        <p className="mt-4 font-serif text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.1]">Segfaults don't reach here.</p>
+      </div>
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">{title}</h1>
         <p className="text-[17px] text-muted-foreground">{message}</p>

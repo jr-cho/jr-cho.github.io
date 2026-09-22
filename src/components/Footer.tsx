@@ -11,7 +11,7 @@ const Footer = () => {
       <div className={cn(shell, "flex flex-col gap-16 pt-20 pb-8 sm:pt-28")}>
         <div className="space-y-6">
           <p className="font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-white/70">
-            Open to embedded and robotics internships now, full-time from May 2027.
+            Open to embedded, firmware, and robotics roles now, full-time from May 2027.
           </p>
           <motion.a
             href={`mailto:${email}`}

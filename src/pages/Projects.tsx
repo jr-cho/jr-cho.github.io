@@ -2,6 +2,7 @@ import { projects } from "@/data/projects";
 import { motion } from "framer-motion";
 import SectionHeader from "@/components/helpers/SectionHeader";
 import ProjectList from "@/components/ProjectList";
+import RepoIndex from "@/components/RepoIndex";
 import { pageDepthVariants } from "@/lib/motionVariants";
 import { shell } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -18,6 +19,7 @@ const Projects = () => {
       <title>Work · Joshua Gottus</title>
       <SectionHeader title="Work" lead="Firmware, robotics, and embedded systems," emphasis="2025 to now." />
       <ProjectList projects={projects} />
+      <RepoIndex className="pb-8" />
     </motion.main>
   );
 };

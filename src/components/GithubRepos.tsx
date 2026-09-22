@@ -1,13 +1,12 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
-import raw from "virtual:github-data";
-import type { GithubData, LanguageShare, RepoSummary } from "@/data/github";
+import type { LanguageShare, RepoSummary } from "@/data/github";
+import { github } from "@/lib/githubData";
 import { cn } from "@/lib/utils";
 
 // Same grey steps as the contribution calendar, darkest first.
 const SHADES = ["#0A0A0A", "#4A4A4A", "#8C8C8C", "#B0B0B0", "#D4D4D4", "#E9E9E9"];
 
-const github = raw as GithubData;
 
 const monthYear = (iso: string) =>
   new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
@@ -60,7 +59,7 @@ const Segment = ({ lang, shade, index, count, progress }: SegmentProps) => {
 };
 
 // One repo: divider draws across, then the row slides in, tied to scroll.
-const RepoRow = ({ repo }: { repo: RepoSummary }) => {
+export const RepoRow = ({ repo }: { repo: RepoSummary }) => {
   const ref = useRef<HTMLLIElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.75"] });

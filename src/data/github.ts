@@ -16,6 +16,9 @@ export interface LanguageShare {
 }
 
 export interface GithubData {
+  // The most recently updated shown repos, for the home page.
   repos: RepoSummary[];
+  // Every shown repo, newest first, for the Work page.
+  all: RepoSummary[];
   languages: LanguageShare[];
 }

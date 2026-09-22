@@ -3,6 +3,15 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { Link } from "react-router-dom";
 import Drift from "./helpers/Drift";
 import { projectSlug, type Project } from "@/data/projects";
+import { projectMedia } from "@/data/media";
+import { cn } from "@/lib/utils";
+
+// Still frame for a project's hover photo: the cover's poster (clip.mp4 → clip.jpg).
+const hoverPhoto = (project: Project) => {
+  const src = projectMedia[projectSlug(project.name)]?.cover.src;
+  if (!src) return undefined;
+  return `${import.meta.env.BASE_URL}${src.replace(/^\//, "").replace(/\.(mp4|webm)$/, ".jpg")}`;
+};
 
 // One row: the divider draws across, then the row slides in from the right.
 // Both are tied to scroll position, so they play forward and back.
@@ -14,6 +23,7 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
   const x = useTransform(scrollYProgress, [0.1, 1], [reduce ? 0 : 90, 0]);
   const opacity = useTransform(scrollYProgress, [0.1, 0.9], [reduce ? 1 : 0, 1]);
   const lead = project.highlights[0];
+  const photo = hoverPhoto(project);
 
   return (
     <li ref={ref} className="relative">
@@ -25,8 +35,26 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
       <motion.div style={{ x, opacity }}>
         <Link
           to={`/projects/${projectSlug(project.name)}`}
-          className="group -mx-4 grid grid-cols-1 gap-x-8 gap-y-4 rounded-lg px-4 py-8 transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:py-10 md:grid-cols-12"
+          className={cn(
+            "group relative isolate -mx-4 grid grid-cols-1 gap-x-8 gap-y-4 overflow-hidden rounded-lg px-4 py-8 transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:py-10 md:grid-cols-12",
+            photo && "photo-row",
+          )}
         >
+          {/* Project photo that wipes across the row on hover (mouse only) */}
+          {photo && (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 -z-10 [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:[clip-path:inset(0_0_0_0)] group-focus-visible:[clip-path:inset(0_0_0_0)] pointer-coarse:hidden motion-reduce:transition-none"
+            >
+              <img
+                src={photo}
+                alt=""
+                loading="lazy"
+                className="h-full w-full scale-110 object-cover transition-transform duration-1000 ease-out group-hover:scale-100 motion-reduce:transition-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/45" />
+            </div>
+          )}
           <div className="flex gap-4 md:col-span-5">
             <span className="pt-1.5 font-mono text-xs text-muted-foreground tabular-nums sm:pt-2.5">
               {String(index + 1).padStart(2, "0")}

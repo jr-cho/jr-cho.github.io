@@ -111,6 +111,9 @@ const SkillPanel = ({ category, summary, items, index, pinned, onJump }: PanelPr
   const visualScale = useTransform(enter, [0, 1], [reduce ? 1 : 1.12, 1]);
   const sink = useTransform(exit, [0, 1], [1, still || last ? 1 : 0.92]);
   const dim = useTransform(exit, [0, 1], [1, still || last ? 1 : 0.6]);
+  // Once the next panel fully covers this one, stop drawing it. Otherwise
+  // its edges peek out past the covering panel as a flickering line.
+  const visibility = useTransform(exit, (v) => (pinned && !last && v >= 0.999 ? "hidden" : "visible"));
   // The code starts typing halfway through the slide-in and finishes during the hold.
   const typing = useTransform([enter, hold], ([e, h]: number[]) =>
     pinned ? Math.max(0, (e - 0.5) / 0.5) * 0.35 + h * 0.65 : e,
@@ -168,11 +171,11 @@ const SkillPanel = ({ category, summary, items, index, pinned, onJump }: PanelPr
 
   return (
     <>
-      <section
+      <motion.section
         ref={panelRef}
         id={`skill-${index}`}
         aria-labelledby={`skill-${index}-title`}
-        style={{ zIndex: index + 1 }}
+        style={{ zIndex: index + 1, visibility }}
         className={cn(
           "overflow-hidden border-t",
           pinned && "sticky top-0 h-svh",
@@ -278,7 +281,7 @@ const SkillPanel = ({ category, summary, items, index, pinned, onJump }: PanelPr
             {visual}
           </motion.div>
         </motion.div>
-      </section>
+      </motion.section>
       <div ref={dwellRef} id={`skill-${index}-hold`} aria-hidden="true" style={{ height: pinned ? DWELL[index] : 0 }} />
     </>
   );

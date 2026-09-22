@@ -25,7 +25,7 @@ const RECENT = 6;
 const CACHE_MS = 6 * 60 * 60 * 1000;
 const CACHE_FILE = path.resolve("node_modules/.cache/github-data.json");
 
-const EMPTY: GithubData = { repos: [], languages: [] };
+const EMPTY: GithubData = { repos: [], all: [], languages: [] };
 
 type ApiRepo = {
   name: string;
@@ -69,7 +69,7 @@ async function fetchData(): Promise<GithubData> {
   const rest = ranked.slice(5).reduce((a, [, bytes]) => a + bytes, 0);
   const languages = rest > 0 ? [...top, { name: "Other", share: Math.round((rest / sum) * 1000) / 10 }] : top;
 
-  const repos = shown.slice(0, RECENT).map((r) => ({
+  const summaries = shown.map((r) => ({
     name: r.name,
     description: r.description,
     language: r.language,
@@ -77,7 +77,7 @@ async function fetchData(): Promise<GithubData> {
     pushedAt: r.pushed_at,
   }));
 
-  return { repos, languages };
+  return { repos: summaries.slice(0, RECENT), all: summaries, languages };
 }
 
 async function readCache(): Promise<{ at: number; data: GithubData } | null> {
@@ -124,12 +124,12 @@ export function githubData(): Plugin {
       data ??= load(dev);
       const raw = await data;
       // Hide repos and apply site descriptions here, so cached data gets them too.
-      const served: GithubData = {
-        ...raw,
-        repos: raw.repos
+      const tidy = (list: GithubData["repos"] = []) =>
+        list
           .filter((r) => !HIDDEN.has(r.name))
-          .map((r) => ({ ...r, description: repoDescriptions[r.name] ?? r.description })),
-      };
+          .map((r) => ({ ...r, description: repoDescriptions[r.name] ?? r.description }));
+      // Older caches have no `all` list; fall back to the recent ones.
+      const served: GithubData = { ...raw, repos: tidy(raw.repos), all: tidy(raw.all ?? raw.repos) };
       return `export default ${JSON.stringify(served)};`;
     },
   };

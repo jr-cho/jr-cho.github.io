@@ -245,3 +245,20 @@
     display: none;
   }
 }
+
+/* Project rows with a hover photo: the row's text turns white over the
+   photo. Mouse only, since touch screens never show the photo. */
+@media (hover: hover) and (pointer: fine) {
+  .photo-row {
+    transition: color 0.5s;
+  }
+  .photo-row:hover,
+  .photo-row:focus-visible {
+    color: #fff;
+  }
+  .photo-row:hover .text-muted-foreground,
+  .photo-row:focus-visible .text-muted-foreground {
+    color: rgb(255 255 255 / 0.75);
+    transition: color 0.5s;
+  }
+}

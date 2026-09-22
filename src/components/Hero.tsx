@@ -46,20 +46,35 @@ const HeroContent = () => {
       animate="visible"
       className={cn(shell, "flex min-h-[calc(100svh-6rem)] flex-col justify-between gap-10 pt-4 pb-10 sm:pt-6")}
     >
-      <h1 className="display grid grid-cols-1 gap-x-8 gap-y-[0.12em] text-[clamp(3rem,7vw,7.5rem)] md:grid-cols-2">
-        <span className="sr-only">Joshua Gottus, </span>
-        <motion.span style={{ x: leftX }}>
-          <Line>Embedded</Line>
-          <Line>Software</Line>
-        </motion.span>
-        <motion.span style={{ x: rightX }} className="text-right">
-          <Line>For real</Line>
-          <Line>hardware</Line>
-        </motion.span>
+      {/* One sentence set across staggered lines: three on wide screens,
+          four on phones. Screen readers get the sentence once. */}
+      <h1 className="display">
+        <span className="sr-only">Joshua Gottus, embedded software engineer. Firmware is just software with consequences.</span>
+        <span aria-hidden="true" className="hidden text-[clamp(3rem,8.4vw,7.75rem)] md:block">
+          <motion.span style={{ x: leftX }} className="block">
+            <Line>Firmware is just</Line>
+          </motion.span>
+          <motion.span style={{ x: rightX }} className="block pl-[14%]">
+            <Line>software with</Line>
+          </motion.span>
+          <motion.span style={{ x: leftX }} className="block text-right">
+            <Line>consequences.</Line>
+          </motion.span>
+        </span>
+        <span aria-hidden="true" className="block text-[11vw] md:hidden">
+          <motion.span style={{ x: leftX }} className="block">
+            <Line>Firmware is</Line>
+            <Line>just software</Line>
+          </motion.span>
+          <motion.span style={{ x: rightX }} className="block text-right">
+            <Line>with</Line>
+            <Line>consequences.</Line>
+          </motion.span>
+        </span>
       </h1>
 
       <div className="relative min-h-[220px] flex-1">
-        <SignalTrace className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 [mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)]" />
+        <SignalTrace className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]" />
       </div>
 
       <motion.ul
