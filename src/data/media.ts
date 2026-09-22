@@ -17,18 +17,6 @@ export interface MediaSlot {
 }
 
 export const media = {
-  heroWide: {
-    alt: "The SoutheastCon 2026 robot on the competition field",
-    hint: "SECON robot on the field, landscape",
-    aspect: "16 / 10",
-    caption: "SoutheastCon 2026",
-  },
-  heroTall: {
-    alt: "Working at the bench",
-    hint: "You at the bench: board, scope, or soldering. Portrait",
-    aspect: "4 / 5",
-    caption: "Bench",
-  },
   portrait: {
     src: "/media/portrait.jpg",
     alt: "Joshua Gottus in front of an IEEE banner",
@@ -36,21 +24,6 @@ export const media = {
     aspect: "1 / 1",
     imgClassName: "grayscale pointer-fine:grayscale-0",
     colorSpot: true,
-  },
-  skills: {
-    alt: "Oscilloscope trace on the bench",
-    hint: "Oscilloscope trace, logic analyzer, or bench setup. Portrait",
-    aspect: "3 / 4",
-  },
-  education: {
-    alt: "Florida Polytechnic University campus",
-    hint: "Florida Poly campus or lab. Landscape",
-    aspect: "4 / 3",
-  },
-  closing: {
-    alt: "The robot driving on the competition field",
-    hint: "Short video loop (MP4, 5 to 15 s) of the robot driving, or a wide photo",
-    aspect: "21 / 9",
   },
 } satisfies Record<string, MediaSlot>;
 
@@ -76,7 +49,7 @@ export const projectMedia: Record<string, ProjectMedia> = {
         alt: "The robot driving on the SoutheastCon 2026 competition field",
         hint: "Robot on the field, portrait",
         aspect: "9 / 16",
-        caption: "Demo Run on the competition field",
+        caption: "Demo run on the competition field",
       },
       {
         src: "/media/projects/secon-team.jpg",

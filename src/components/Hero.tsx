@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { motion, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
 import ArrowLink from "./helpers/ArrowLink";
 import ParallaxFrame from "./helpers/ParallaxFrame";
 import ScrollZoom from "./helpers/ScrollZoom";
@@ -71,14 +72,30 @@ const HeroContent = () => {
             variants={itemVariants}
             className={cn(i === 1 && "flex items-center gap-2 md:justify-center", i === 2 && "md:text-right")}
           >
-            {i === 1 && (
-              <span
-                aria-hidden="true"
-                className="h-2 w-2 rounded-full"
-                style={{ backgroundColor: "var(--accent-amber)" }}
-              />
+            {i === 1 ? (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: "var(--accent-amber)" }}
+                />
+                {/* The first screen's call to action: reach out, or read the resume */}
+                <Link to="/contact" className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60">
+                  {claim}
+                </Link>
+                <span aria-hidden="true" className="text-muted-foreground">·</span>
+                <a
+                  href={resumeHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+                >
+                  Resume
+                </a>
+              </>
+            ) : (
+              claim
             )}
-            {claim}
           </motion.li>
         ))}
       </motion.ul>

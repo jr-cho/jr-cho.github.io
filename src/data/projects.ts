@@ -1,4 +1,4 @@
-import { tech, type TechItem } from "@/data/tech";
+import { tech, type TechItem } from "./tech";
 
 export interface ProjectHighlight {
   value: string;

@@ -35,15 +35,30 @@ const ScrubVideo = ({ src, poster, alt, progress, className }: ScrubVideoProps) 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    // Some mobile browsers only load a video once it has played. Play and
-    // pause at once so seeking works, then jump to the current position.
-    video
-      .play()
-      .then(() => video.pause())
-      .catch(() => {});
     const sync = () => seek(progress.get());
     video.addEventListener("loadedmetadata", sync);
+
+    // Download the clip only once it is about a screen away, so it does
+    // not compete with what loads first.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        video.preload = "auto";
+        video.load();
+        // Some mobile browsers only allow seeking once a video has played.
+        // Play and pause at once, then jump to the current position.
+        video
+          .play()
+          .then(() => video.pause())
+          .catch(() => {});
+      },
+      { rootMargin: "100% 0px" },
+    );
+    observer.observe(video);
+
     return () => {
+      observer.disconnect();
       video.removeEventListener("loadedmetadata", sync);
       cancelAnimationFrame(frame.current);
     };
@@ -61,7 +76,7 @@ const ScrubVideo = ({ src, poster, alt, progress, className }: ScrubVideoProps) 
       poster={poster}
       muted
       playsInline
-      preload="auto"
+      preload="none"
       aria-label={alt}
       className={cn("h-full w-full object-cover", className)}
     />
