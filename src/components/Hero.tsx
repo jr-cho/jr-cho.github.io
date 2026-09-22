@@ -74,11 +74,14 @@ const HeroContent = () => {
           >
             {i === 1 ? (
               <>
-                <span
-                  aria-hidden="true"
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: "var(--accent-amber)" }}
-                />
+                {/* Status light: a solid dot with a slow ring pulsing out of it */}
+                <span aria-hidden="true" className="relative flex size-2">
+                  <span
+                    className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60 motion-reduce:hidden"
+                    style={{ backgroundColor: "var(--accent-amber)", animationDuration: "2s" }}
+                  />
+                  <span className="relative inline-flex size-2 rounded-full" style={{ backgroundColor: "var(--accent-amber)" }} />
+                </span>
                 {/* The first screen's call to action. Resume lives in the top bar. */}
                 <Link to="/contact" className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60">
                   {claim}

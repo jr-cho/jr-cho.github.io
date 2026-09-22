@@ -211,7 +211,17 @@ const SkillPanel = ({ category, summary, items, index, pinned, onJump }: PanelPr
               {summary}
             </p>
 
-            <ul className="mt-6 flex flex-wrap gap-2">
+            {/* Solid chips are tools used in a project listed below; outlined chips are not. */}
+            {proof.length > 0 && (
+              <p className={cn("mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider", muted)}>
+                <span
+                  aria-hidden="true"
+                  className={cn("inline-block h-3 w-5 rounded-full", dark ? "bg-white" : "bg-foreground")}
+                />
+                Used in a project below
+              </p>
+            )}
+            <ul className={cn("flex flex-wrap gap-2", proof.length > 0 ? "mt-3" : "mt-6")}>
               {items.map((tool) => {
                 const used = proof.some(({ tools }) => tools.includes(tool));
                 return (
@@ -219,18 +229,18 @@ const SkillPanel = ({ category, summary, items, index, pinned, onJump }: PanelPr
                     key={tool.name}
                     className={cn(
                       "flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[13px]",
-                      dark ? "border-white/15" : "border-border",
+                      used
+                        ? dark
+                          ? "border-white bg-white text-[#0A0A0A]"
+                          : "border-foreground bg-foreground text-background"
+                        : dark
+                          ? "border-white/15"
+                          : "border-border",
                     )}
                   >
                     <ToolIcon tool={tool} className="size-3.5" />
                     {tool.name}
-                    {used && (
-                      <span
-                        aria-label="used in a project below"
-                        className="ml-0.5 size-1.5 rounded-full"
-                        style={{ backgroundColor: "var(--accent-amber)" }}
-                      />
-                    )}
+                    {used && <span className="sr-only">, used in a project below</span>}
                   </li>
                 );
               })}

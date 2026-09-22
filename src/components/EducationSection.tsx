@@ -30,9 +30,11 @@ const SchoolRow = ({ school, degree, detail, location, date, image, activities }
         style={{ scaleX: line }}
         className="absolute inset-x-0 top-0 h-px origin-left bg-border"
       />
+      {/* The whole block (name, degree, activities) is one hover target,
+          and the campus photo fills all of it. */}
       <motion.div
         style={{ x, opacity }}
-        className="group relative -mx-4 grid grid-cols-1 gap-1 overflow-hidden rounded-lg px-4 py-6 sm:grid-cols-[1fr_auto] sm:gap-6"
+        className="group relative -mx-4 overflow-hidden rounded-lg px-4 py-6"
       >
         {image && (
           <div
@@ -49,7 +51,8 @@ const SchoolRow = ({ school, degree, detail, location, date, image, activities }
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/40" />
           </div>
         )}
-        <div className="relative">
+        <div className="relative grid grid-cols-1 gap-1 sm:grid-cols-[1fr_auto] sm:gap-6">
+        <div>
           <p className={cn("text-[17px] font-semibold tracking-[-0.01em]", onPhoto)}>{school}</p>
           <p className={cn("text-[15px]", onPhotoMuted)}>
             {degree}
@@ -62,21 +65,21 @@ const SchoolRow = ({ school, degree, detail, location, date, image, activities }
           <span className="sm:hidden"> · </span>
           {location}
         </p>
-      </motion.div>
+        </div>
       {activities && activities.length > 0 && (
-        <motion.ul style={{ x, opacity }} className="-mt-2 space-y-1.5 pb-6">
+        <ul className="relative mt-4 space-y-1.5">
           {activities.map(({ role, group, to }) => {
             const text = (
               <>
-                <span className="font-medium">{role}</span>
-                <span className="text-muted-foreground">, {group}</span>
+                <span className={cn("font-medium", onPhoto)}>{role}</span>
+                <span className={onPhotoMuted}>, {group}</span>
               </>
             );
             return (
               <li key={group} className="grid grid-cols-[1.25rem_1fr] text-[15px] leading-[1.45]">
-                <span aria-hidden="true" className="text-muted-foreground">–</span>
+                <span aria-hidden="true" className={onPhotoMuted}>–</span>
                 {to ? (
-                  <Link to={to} className="underline-offset-4 hover:underline">
+                  <Link to={to} className={cn("underline-offset-4 hover:underline", onPhoto)}>
                     {text}
                     <span aria-hidden="true"> →</span>
                   </Link>
@@ -86,8 +89,9 @@ const SchoolRow = ({ school, degree, detail, location, date, image, activities }
               </li>
             );
           })}
-        </motion.ul>
+        </ul>
       )}
+      </motion.div>
     </li>
   );
 };

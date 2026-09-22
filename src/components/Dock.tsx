@@ -46,14 +46,9 @@ const Dock = () => {
           href={resumeHref}
           target="_blank"
           rel="noreferrer"
-          className="relative flex h-10 items-center px-2 text-[15px] transition-opacity hover:opacity-60"
+          className="flex h-10 items-center px-2 text-[15px] transition-opacity hover:opacity-60"
         >
           Resume
-          <span
-            aria-hidden="true"
-            className="absolute right-0 top-1.5 h-1.5 w-1.5 rounded-full"
-            style={{ backgroundColor: "var(--accent-amber)" }}
-          />
         </a>
       </div>
     </header>
