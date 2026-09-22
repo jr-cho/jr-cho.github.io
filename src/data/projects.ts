@@ -61,25 +61,26 @@ export const projects: Project[] = [
     highlights: [
       { value: "2 KB", label: "SRAM" },
       { value: "46 entries", label: "offline buffer" },
-      { value: "8 s", label: "hw watchdog" },
+      { value: "8 s", label: "watchdog, reset tested" },
     ],
     story: {
       problem:
         "The tracker had to report positions over LTE-M from an Arduino Uno with 2 KB of SRAM, on a modem that drops its connection.",
       approach:
-        "Positions go into a 46-entry EEPROM buffer while the modem is offline. A layered reconnect brings the link back, and an 8 s hardware watchdog resets the board if the firmware hangs.",
-      result: "Up to 46 positions wait in the buffer until the link returns.",
+        "Positions go into a 46-entry circular buffer in EEPROM while the modem is offline. A layered reconnect restores the network, the data link, and the MQTT session in turn, then flushes the buffer oldest first.",
+      result:
+        "In testing we cut the cellular link mid-transmission. Every buffered position reached the database in order after reconnect, which we confirmed by timestamp.",
     },
     about:
       "A GPS tracker for microtransit vehicles. I co-wrote the C++ firmware with an electrical engineering teammate for an Arduino Uno and SIM7000A LTE-M modem. I built the backend and live map, and taught the teammate each layer of the stack.",
     features: [
       "C++ firmware on an Arduino Uno with 2 KB of SRAM and a SIM7000A modem",
       "46-entry EEPROM buffer holds positions while the modem is offline",
-      "Layered auto-reconnect and an 8 s hardware watchdog",
+      "Layered auto-reconnect, plus an 8 s hardware watchdog that reset and reconnected the board in a forced-hang test",
       "FastAPI backend: MQTT ingest, Kalman-filtered GPS, SQLite, WebSocket",
       "Next.js live map, deployed with Docker Compose",
     ],
-    techStack: [tech.cpp, tech.arduino, tech.mqtt, tech.fastapi, tech.nextjs, tech.docker],
+    techStack: [tech.cpp, tech.arduino, tech.python, tech.fastapi, tech.mqtt, tech.typescript, tech.nextjs, tech.docker],
   },
   {
     name: "Flight Control Data Bus",
