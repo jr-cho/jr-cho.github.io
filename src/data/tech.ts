@@ -57,13 +57,17 @@ export const tech = {
   sqlite: { name: "SQLite", icon: siSqlite },
 } satisfies Record<string, TechItem>;
 
-export const skillRows: { category: string; items: TechItem[] }[] = [
+export const skillRows: { category: string; summary: string; items: TechItem[] }[] = [
   {
     category: "Languages",
+    summary:
+      "C for firmware and drivers, C++ on microcontrollers, Python for test scripts and tools, and TypeScript for dashboards.",
     items: [tech.c, tech.cpp, tech.python, tech.typescript],
   },
   {
     category: "Embedded & Robotics",
+    summary:
+      "Firmware on STM32, ESP32, and Arduino, with FreeRTOS for real-time tasks. Higher-level control runs on ROS 2 on a Raspberry Pi or Jetson Orin.",
     items: [
       tech.freertos,
       tech.ros2,
@@ -78,6 +82,8 @@ export const skillRows: { category: string; items: TechItem[] }[] = [
   },
   {
     category: "Tools",
+    summary:
+      "Linux day to day. Builds use CMake and Docker, and CI runs on GitLab CI/CD or GitHub Actions.",
     items: [
       tech.linux,
       tech.git,

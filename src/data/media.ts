@@ -12,6 +12,8 @@ export interface MediaSlot {
   aspect: string;
   caption?: string;
   imgClassName?: string;
+  // Show in black and white, with true color in a small circle around the cursor.
+  colorSpot?: boolean;
 }
 
 export const media = {
@@ -32,7 +34,8 @@ export const media = {
     alt: "Joshua Gottus in front of an IEEE banner",
     hint: "Headshot or working portrait, square",
     aspect: "1 / 1",
-    imgClassName: "grayscale",
+    imgClassName: "grayscale pointer-fine:grayscale-0",
+    colorSpot: true,
   },
   skills: {
     alt: "Oscilloscope trace on the bench",

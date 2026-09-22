@@ -212,3 +212,36 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Color spotlight on photos and videos. A grey layer covers the picture,
+   with a soft round hole at the cursor that shows the true color.
+   Registered so the radius can transition when the cursor enters or leaves. */
+@property --spot-r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+.color-spot {
+  --spot-x: 50%;
+  --spot-y: 50%;
+  transition: --spot-r 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.color-spot:hover {
+  --spot-r: 120px;
+}
+
+.color-spot-layer {
+  -webkit-backdrop-filter: grayscale(1);
+  backdrop-filter: grayscale(1);
+  -webkit-mask-image: radial-gradient(circle var(--spot-r) at var(--spot-x) var(--spot-y), transparent 55%, #000 100%);
+  mask-image: radial-gradient(circle var(--spot-r) at var(--spot-x) var(--spot-y), transparent 55%, #000 100%);
+}
+
+/* No cursor on touch screens, so no spotlight. Pictures keep their own look. */
+@media not ((hover: hover) and (pointer: fine)) {
+  .color-spot-layer {
+    display: none;
+  }
+}

@@ -50,8 +50,8 @@ const DriftRow = ({
 
 // Faint rows of tool icons behind a section, one row per category.
 // Scrolling slides each row sideways, alternating direction.
-// The active category's row brightens a little.
-const TechDrift = ({ rows, active }: { rows: TechItem[][]; active: number }) => {
+// The active category's row brightens a little. Pass -1 for none.
+const TechDrift = ({ rows, active = -1 }: { rows: TechItem[][]; active?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 

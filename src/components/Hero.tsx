@@ -6,6 +6,7 @@ import ScrollZoom from "./helpers/ScrollZoom";
 import Scene, { useScene } from "./helpers/Scene";
 import ScrollWords from "./helpers/ScrollWords";
 import Drift from "./helpers/Drift";
+import SignalTrace from "./helpers/SignalTrace";
 import { media } from "@/data/media";
 import { resumeHref, socials } from "@/data/socials";
 import { containerVariants, itemVariants, maskLine } from "@/lib/motionVariants";
@@ -28,6 +29,7 @@ const claims = [
 ];
 
 // Headline halves pull apart and the claims drop away as the scene leaves.
+// Between them a signal trace runs the full width.
 const HeroContent = () => {
   const { exit, reduce } = useScene();
   const pull = reduce ? 0 : 1;
@@ -41,7 +43,7 @@ const HeroContent = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className={cn(shell, "flex min-h-[calc(100svh-6rem)] flex-col justify-between gap-16 pt-4 pb-10 sm:pt-6")}
+      className={cn(shell, "flex min-h-[calc(100svh-6rem)] flex-col justify-between gap-10 pt-4 pb-10 sm:pt-6")}
     >
       <h1 className="display grid grid-cols-1 gap-x-8 gap-y-[0.12em] text-[clamp(3rem,7vw,7.5rem)] md:grid-cols-2">
         <span className="sr-only">Joshua Gottus, </span>
@@ -54,6 +56,10 @@ const HeroContent = () => {
           <Line>hardware</Line>
         </motion.span>
       </h1>
+
+      <div className="relative min-h-[220px] flex-1">
+        <SignalTrace className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 [mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)]" />
+      </div>
 
       <motion.ul
         style={{ y: claimsY, opacity: claimsOpacity }}

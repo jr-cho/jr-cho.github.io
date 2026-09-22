@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { Pause, Play } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { MediaSlot } from "@/data/media";
@@ -32,6 +32,13 @@ const ParallaxFrame = ({ slot, speed = 10, className, captionClassName }: Parall
     if (reduce) videoRef.current?.pause();
   }, [reduce]);
 
+  // Move the color spotlight to the cursor.
+  const moveSpot = (e: PointerEvent<HTMLDivElement>) => {
+    const box = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--spot-x", `${e.clientX - box.left}px`);
+    e.currentTarget.style.setProperty("--spot-y", `${e.clientY - box.top}px`);
+  };
+
   const togglePlay = () => {
     const video = videoRef.current;
     if (!video) return;
@@ -43,7 +50,8 @@ const ParallaxFrame = ({ slot, speed = 10, className, captionClassName }: Parall
     <figure className={className}>
       <div
         ref={ref}
-        className="relative w-full overflow-hidden rounded-lg bg-card"
+        onPointerMove={slot.colorSpot ? moveSpot : undefined}
+        className={cn("relative w-full overflow-hidden rounded-lg bg-card", slot.colorSpot && "color-spot")}
         style={{ aspectRatio: slot.aspect }}
       >
         <motion.div
@@ -85,6 +93,7 @@ const ParallaxFrame = ({ slot, speed = 10, className, captionClassName }: Parall
             </div>
           )}
         </motion.div>
+        {slot.colorSpot && <div aria-hidden="true" className="color-spot-layer pointer-events-none absolute inset-0" />}
         {src && isVideo && (
           <button
             type="button"

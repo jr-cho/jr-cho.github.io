@@ -1,6 +1,7 @@
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { useEffect } from "react";
+import { lenisRef } from "@/lib/lenis";
 
 export default function SmoothScroll({
   children,
@@ -12,6 +13,7 @@ export default function SmoothScroll({
       lerp: 0.15,
       wheelMultiplier: 1.2,
     });
+    lenisRef.current = lenis;
 
     function raf(time: number) {
       lenis.raf(time);
@@ -21,6 +23,7 @@ export default function SmoothScroll({
     requestAnimationFrame(raf);
 
     return () => {
+      lenisRef.current = null;
       lenis.destroy();
     };
   }, []);
