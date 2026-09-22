@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useMotionValueEvent, useReducedMotion, type MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -28,12 +28,43 @@ const kindClass: Record<Token["kind"], string> = {
 };
 
 // Types `code` out as `progress` runs from 0 to 1. Untyped characters stay
-// in the layout but invisible, so the block never changes size.
+// in the layout but invisible, so the block never changes size. On short
+// screens the block scales down to fit its container instead of clipping.
 const CodeType = ({ code, progress, className }: { code: string; progress: MotionValue<number>; className?: string }) => {
   const reduce = useReducedMotion();
   const [typed, setTyped] = useState(() => Math.round(progress.get() * code.length));
   useMotionValueEvent(progress, "change", (v) => setTyped(Math.round(Math.min(Math.max(v, 0), 1) * code.length)));
   const shown = reduce ? code.length : typed;
+
+  const boxRef = useRef<HTMLDivElement>(null);
+  const preRef = useRef<HTMLPreElement>(null);
+  const [fit, setFit] = useState(1);
+  useEffect(() => {
+    const box = boxRef.current;
+    const pre = preRef.current;
+    if (!box || !pre) return;
+    const measure = () => {
+      // Measure at natural size. Height must always fit. Width may shrink
+      // the text to 80% at most, and anything wider scrolls sideways.
+      const current = pre.style.zoom;
+      pre.style.zoom = "1";
+      const byHeight = box.clientHeight / pre.offsetHeight;
+      const byWidth = Math.max(0.8, box.clientWidth / pre.offsetWidth);
+      pre.style.zoom = current;
+      setFit(Math.min(1, byHeight, byWidth));
+    };
+    // Re-measure when the box resizes, and once web fonts load, since the
+    // font changes the text's natural width.
+    const observer = new ResizeObserver(measure);
+    observer.observe(box);
+    measure();
+    let alive = true;
+    document.fonts?.ready.then(() => alive && measure());
+    return () => {
+      alive = false;
+      observer.disconnect();
+    };
+  }, []);
 
   const tokens = useMemo(() => tokenize(code), [code]);
   const parts = tokens.map((token, i) => {
@@ -47,10 +78,16 @@ const CodeType = ({ code, progress, className }: { code: string; progress: Motio
   });
 
   return (
-    <pre className={cn("relative overflow-x-auto overflow-y-hidden font-mono text-[11px] leading-[1.5] [font-variant-ligatures:none] sm:text-[12px] 2xl:text-[13px]", className)}>
-      <span className="sr-only">{code}</span>
-      <code aria-hidden="true">{parts}</code>
-    </pre>
+    <div ref={boxRef} className="h-full overflow-x-auto overflow-y-hidden">
+      <pre
+        ref={preRef}
+        style={fit < 1 ? { zoom: fit } : undefined}
+        className={cn("relative w-max font-mono text-[11px] leading-[1.5] [font-variant-ligatures:none] sm:text-[12px] 2xl:text-[13px]", className)}
+      >
+        <span className="sr-only">{code}</span>
+        <code aria-hidden="true">{parts}</code>
+      </pre>
+    </div>
   );
 };
 

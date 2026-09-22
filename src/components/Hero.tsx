@@ -79,19 +79,10 @@ const HeroContent = () => {
                   className="h-2 w-2 rounded-full"
                   style={{ backgroundColor: "var(--accent-amber)" }}
                 />
-                {/* The first screen's call to action: reach out, or read the resume */}
+                {/* The first screen's call to action. Resume lives in the top bar. */}
                 <Link to="/contact" className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60">
                   {claim}
                 </Link>
-                <span aria-hidden="true" className="text-muted-foreground">·</span>
-                <a
-                  href={resumeHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
-                >
-                  Resume
-                </a>
               </>
             ) : (
               claim

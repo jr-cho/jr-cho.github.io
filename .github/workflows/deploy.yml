@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Rebuild daily so the GitHub repo list and language bar stay current.
+  schedule:
+    - cron: "0 9 * * *"
   workflow_dispatch:
 
 permissions:
@@ -30,6 +33,9 @@ jobs:
       - uses: actions/configure-pages@v4
 
       - run: npm run build
+        env:
+          # Raises GitHub's API limit for the repo data fetched at build time.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Copy index.html to 404.html for SPA routing
         run: cp dist/index.html dist/404.html

@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin } from "vite";
 import { projects, projectSlug } from "./src/data/projects";
+import { githubData } from "./scripts/github-data";
 
 const SITE = "https://www.jr-cho.com";
 
@@ -26,7 +27,7 @@ function sitemap(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), sitemap()],
+  plugins: [react(), tailwindcss(), sitemap(), githubData()],
   server: {
     port: 5173,
     proxy: {

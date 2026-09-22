@@ -11,6 +11,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import Drift from "./helpers/Drift";
+import GithubRepos from "./GithubRepos";
 
 type StatsProps = {
   year?: "last" | "all" | number;
@@ -98,11 +99,12 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
 
   const total = data.reduce((sum, activity) => sum + activity.count, 0);
 
-  // The data comes from a third-party API. Hide the section when it fails.
-  if (error) return null;
-
+  // The calendar comes from a third-party API. Hide it when that fails;
+  // the repo list below comes from the build and still shows.
   return (
-    <div ref={sectionRef} className={cn(shell, "grid grid-cols-1 gap-10 md:grid-cols-12")}>
+    <div className={cn(shell, "space-y-20")}>
+    {!error && (
+    <div ref={sectionRef} className="grid grid-cols-1 gap-10 md:grid-cols-12">
       <Drift distance={-80} className="space-y-6 md:col-span-4">
         <h2 className="font-serif text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.1]">
           GitHub contributions, {year === currentYear ? "last 12 months" : year}
@@ -167,6 +169,9 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
         </div>
         </motion.div>
       </div>
+    </div>
+    )}
+    <GithubRepos className="md:ml-[calc(33.333%+0.833rem)]" />
     </div>
   );
 };

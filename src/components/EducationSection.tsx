@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
 import { education, type EducationEntry } from "@/data/education";
 import Drift from "./helpers/Drift";
 import { shell } from "@/lib/layout";
@@ -14,7 +15,7 @@ const onPhotoMuted =
 // One school: the divider draws across, then the row slides in from the right.
 // Both follow scroll position, so they play forward and back. Hovering the
 // row wipes the school's campus photo across it.
-const SchoolRow = ({ school, degree, detail, location, date, image }: EducationEntry) => {
+const SchoolRow = ({ school, degree, detail, location, date, image, activities }: EducationEntry) => {
   const ref = useRef<HTMLLIElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.7"] });
@@ -62,6 +63,31 @@ const SchoolRow = ({ school, degree, detail, location, date, image }: EducationE
           {location}
         </p>
       </motion.div>
+      {activities && activities.length > 0 && (
+        <motion.ul style={{ x, opacity }} className="-mt-2 space-y-1.5 pb-6">
+          {activities.map(({ role, group, to }) => {
+            const text = (
+              <>
+                <span className="font-medium">{role}</span>
+                <span className="text-muted-foreground">, {group}</span>
+              </>
+            );
+            return (
+              <li key={group} className="grid grid-cols-[1.25rem_1fr] text-[15px] leading-[1.45]">
+                <span aria-hidden="true" className="text-muted-foreground">–</span>
+                {to ? (
+                  <Link to={to} className="underline-offset-4 hover:underline">
+                    {text}
+                    <span aria-hidden="true"> →</span>
+                  </Link>
+                ) : (
+                  <span>{text}</span>
+                )}
+              </li>
+            );
+          })}
+        </motion.ul>
+      )}
     </li>
   );
 };

@@ -99,6 +99,27 @@ const ProjectDetail = () => {
         <p className="max-w-[60ch] text-[19px] leading-[1.5]">{project.about}</p>
       </Row>
 
+      {project.story && (
+        <Row label="The hard part">
+          <dl className="max-w-[60ch] space-y-5">
+            {(
+              [
+                ["Problem", project.story.problem],
+                ["Approach", project.story.approach],
+                ["Result", project.story.result],
+              ] as const
+            )
+              .filter(([, text]) => text)
+              .map(([label, text]) => (
+                <div key={label} className="grid grid-cols-1 gap-1 sm:grid-cols-[7rem_1fr] sm:gap-6">
+                  <dt className="pt-1 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">{label}</dt>
+                  <dd className="text-[17px] leading-[1.5]">{text}</dd>
+                </div>
+              ))}
+          </dl>
+        </Row>
+      )}
+
       <Row label="What I built">
         <ol className="max-w-[60ch]">
           {project.features.map((feature, i) => (
